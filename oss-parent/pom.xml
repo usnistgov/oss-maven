@@ -12,6 +12,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
+	    <version.project.oss-build-support>2</version.project.oss-build-support>
 		<!-- plugin dependencies -->
 		<version.plugin.assembly>2.6</version.plugin.assembly>
 		<version.plugin.build-helper>1.12</version.plugin.build-helper>
@@ -194,7 +195,7 @@
 						<dependency>
 							<groupId>gov.nist</groupId>
 							<artifactId>oss-build-support</artifactId>
-							<version>${project.version}</version>
+							<version>${version.project.oss-build-support}</version>
 						</dependency>
 					</dependencies>
 					<executions>
@@ -341,7 +342,7 @@
 					<dependency>
 						<groupId>gov.nist</groupId>
 						<artifactId>oss-build-support</artifactId>
-						<version>${project.version}</version>
+						<version>${version.project.oss-build-support}</version>
 					</dependency>
 					<dependency>
 						<groupId>com.puppycrawl.tools</groupId>
