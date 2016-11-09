@@ -1,0 +1,83 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>gov.nist</groupId>
+	<artifactId>oss-maven</artifactId>
+	<version>2</version>
+
+	<packaging>pom</packaging>
+
+
+	<url>https://subversion.nist.gov/external1/NVD/assembly-swid-generator/trunk</url>
+
+	<scm>
+		<connection>scm:svn:https://subversion.nist.gov/external1/NVD/oss-maven-parent/trunk</connection>
+		<developerConnection>scm:svn:https://subversion.nist.gov/external1/NVD/oss-maven-parent/trunk</developerConnection>
+		<url>https://subversion.nist.gov/external1/NVD/oss-maven-parent/trunk</url>
+	</scm>
+
+	<developers>
+		<developer>
+			<id>david.waltermire@nist.gov</id>
+			<name>David Waltermire</name>
+			<email>david.waltermire@nist.gov</email>
+			<organization>National Institute of Standards and Technology</organization>
+			<roles>
+				<role>maintainer</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<prerequisites>
+		<maven>3.0</maven>
+	</prerequisites>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<!-- Java compiler properties -->
+		<javac.src.version>1.8</javac.src.version>
+		<javac.target.version>1.8</javac.target.version>
+		<javac.debuglevel>lines,source,vars</javac.debuglevel>
+
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.12</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+		
+	</dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.5.1</version>
+                    <configuration>
+                        <source>${javac.src.version}</source>
+                        <target>${javac.target.version}</target>
+                        <showDeprecation>true</showDeprecation>
+                        <showWarnings>true</showWarnings>
+                        <debug>true</debug>
+                        <debuglevel>${javac.debuglevel}</debuglevel>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+	<modules>
+		<module>build-support</module>
+		<module>oss-parent</module>
+	</modules>
+</project>
