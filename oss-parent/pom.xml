@@ -184,7 +184,7 @@
 						<dependency>
 							<groupId>gov.nist.secauto</groupId>
 							<artifactId>oss-build-support</artifactId>
-							<version>${project.version}</version>
+							<version>4-SNAPSHOT</version>
 						</dependency>
 					</dependencies>
 					<executions>
@@ -331,7 +331,7 @@
 					<dependency>
 						<groupId>gov.nist.secauto</groupId>
 						<artifactId>oss-build-support</artifactId>
-						<version>${project.version}</version>
+						<version>4-SNAPSHOT</version>
 					</dependency>
 					<dependency>
 						<groupId>com.puppycrawl.tools</groupId>
