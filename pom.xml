@@ -1,20 +1,33 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>gov.nist</groupId>
+	<groupId>gov.nist.secauto</groupId>
 	<artifactId>oss-maven</artifactId>
-	<version>2</version>
+	<version>3</version>
 
 	<packaging>pom</packaging>
 
+    <description>A common build root for all NIST projects related to Security Automation.</description>
+	<url>https://github.com/usnistgov/oss-maven</url>
 
-	<url>https://subversion.nist.gov/external1/NVD/assembly-swid-generator/trunk</url>
+    <issueManagement>
+        <url>https://github.com/usnistgov/oss-maven/issues</url>
+        <system>GitHub Issues</system>
+    </issueManagement>
 
 	<scm>
-		<connection>scm:svn:https://subversion.nist.gov/external1/NVD/oss-maven-parent/trunk</connection>
-		<developerConnection>scm:svn:https://subversion.nist.gov/external1/NVD/oss-maven-parent/trunk</developerConnection>
-		<url>https://subversion.nist.gov/external1/NVD/oss-maven-parent/trunk</url>
+        <url>https://github.com/usnistgov/oss-maven</url>
+		<connection>scm:git:https://github.com/usnistgov/oss-maven.git</connection>
+		<developerConnection>scm:git:https://github.com/usnistgov/oss-maven.git</developerConnection>
 	</scm>
+
+    <licenses>
+        <license>
+            <name>NIST License</name>
+            <url>https://www.nist.gov/director/licensing</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
 	<developers>
 		<developer>
@@ -43,6 +56,19 @@
 		<javac.debuglevel>lines,source,vars</javac.debuglevel>
 
 	</properties>
+
+    <distributionManagement>
+        <repository>
+            <id>nvd_nexus_release</id>
+            <name>NVD nexus repository for release artifacts</name>
+            <url>${nexus_release_url}</url>
+        </repository>
+        <snapshotRepository>
+            <id>nvd_nexus_snapshot</id>
+            <name>NVD nexus repository for snapshot artifacts</name>
+            <url>${nexus_snapshot_url}</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 	<dependencyManagement>
 		<dependencies>

@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>gov.nist</groupId>
 		<artifactId>oss-maven</artifactId>
-		<version>2</version>
+		<version>3</version>
 	</parent>
 
 	<artifactId>oss-parent</artifactId>
@@ -12,7 +12,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
-	    <version.project.oss-build-support>2</version.project.oss-build-support>
+		<version.project.oss-build-support>2</version.project.oss-build-support>
 		<!-- plugin dependencies -->
 		<version.plugin.assembly>2.6</version.plugin.assembly>
 		<version.plugin.build-helper>1.12</version.plugin.build-helper>
@@ -39,19 +39,6 @@
 		<version.plugin.surefire-report>2.19.1</version.plugin.surefire-report>
 		<version.plugin.taglist>2.4</version.plugin.taglist>
 	</properties>
-
-	<!-- <distributionManagement> -->
-	<!-- <repository> -->
-	<!-- <id>nvd_nexus_release</id> -->
-	<!-- <name>NVD nexus repository for release artifacts</name> -->
-	<!-- <url>${nexus_release_url}</url> -->
-	<!-- </repository> -->
-	<!-- <snapshotRepository> -->
-	<!-- <id>nvd_nexus_snapshot</id> -->
-	<!-- <name>NVD nexus repository for snapshot artifacts</name> -->
-	<!-- <url>${nexus_snapshot_url}</url> -->
-	<!-- </snapshotRepository> -->
-	<!-- </distributionManagement> -->
 
 	<build>
 		<pluginManagement>
@@ -109,9 +96,13 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-scm-plugin</artifactId>
 					<version>${version.plugin.scm}</version>
-					<!-- <dependencies> <dependency> <groupId>org.apache.maven.scm</groupId> 
-						<artifactId>maven-scm-provider-gitexe</artifactId> <version>1.9.1</version> 
-						</dependency> </dependencies> -->
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.maven.scm</groupId>
+							<artifactId>maven-scm-provider-gitexe</artifactId>
+							<version>1.9.5</version>
+						</dependency>
+					</dependencies>
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
