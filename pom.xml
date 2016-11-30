@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>gov.nist.secauto</groupId>
 	<artifactId>oss-maven</artifactId>
@@ -18,25 +19,25 @@
 		<url>https://github.com/usnistgov/oss-maven</url>
 		<connection>scm:git:https://github.com/usnistgov/oss-maven.git</connection>
 		<developerConnection>scm:git:https://github.com/usnistgov/oss-maven.git</developerConnection>
-	  <tag>HEAD</tag>
-  </scm>
+		<tag>HEAD</tag>
+	</scm>
 
-    <distributionManagement>
-        <repository>
-            <id>nvd_nexus_release</id>
-            <name>NVD nexus repository for release artifacts</name>
-            <url>${nexus_release_url}</url>
-        </repository>
-        <snapshotRepository>
-            <id>nvd_nexus_snapshot</id>
-            <name>NVD nexus repository for snapshot artifacts</name>
-            <url>${nexus_snapshot_url}</url>
-        </snapshotRepository>
-        <site>
-            <id>my.git.server</id>
-            <url>scm:git:https://github.com/usnistgov/oss-maven.git</url>
-        </site>
-    </distributionManagement>
+	<distributionManagement>
+		<repository>
+			<id>nvd_nexus_release</id>
+			<name>NVD nexus repository for release artifacts</name>
+			<url>${nexus_release_url}</url>
+		</repository>
+		<snapshotRepository>
+			<id>nvd_nexus_snapshot</id>
+			<name>NVD nexus repository for snapshot artifacts</name>
+			<url>${nexus_snapshot_url}</url>
+		</snapshotRepository>
+		<site>
+			<id>my.git.server</id>
+			<url>scm:git:https://github.com/usnistgov/oss-maven.git</url>
+		</site>
+	</distributionManagement>
 
 	<licenses>
 		<license>
@@ -72,7 +73,9 @@
 		<javac.target.version>1.8</javac.target.version>
 		<javac.debuglevel>lines,source,vars</javac.debuglevel>
 		<version.scmprovider.gitexe>1.9.5</version.scmprovider.gitexe>
+		<version.plugin.javadoc>2.10.3</version.plugin.javadoc>
 		<version.plugin.release>2.5.3</version.plugin.release>
+		<version.plugin.source>3.0.1</version.plugin.source>
 	</properties>
 
 	<dependencyManagement>
@@ -130,7 +133,7 @@
 					<configuration>
 						<!-- TODO: remove skip once site is working -->
 						<skip>true</skip>
-                        <scmBranch>gh-pages</scmBranch>
+						<scmBranch>gh-pages</scmBranch>
 					</configuration>
 				</plugin>
 			</plugins>
@@ -141,4 +144,100 @@
 		<module>build-support</module>
 		<module>oss-parent</module>
 	</modules>
+
+	<profiles>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>${version.plugin.source}</version>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+								<configuration>
+									<archive>
+										<manifest>
+											<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+											<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+										</manifest>
+										<manifestEntries>
+											<Implementation-Build-Date>${maven.build.timestamp}</Implementation-Build-Date>
+											<X-Compile-Source-JDK>${javac.src.version}</X-Compile-Source-JDK>
+											<X-Compile-Target-JDK>${javac.target.version}</X-Compile-Target-JDK>
+										</manifestEntries>
+									</archive>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>${version.plugin.javadoc}</version>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<bootclasspath>${sun.boot.class.path}</bootclasspath>
+							<doclet>com.google.doclava.Doclava</doclet>
+							<useStandardDocletOptions>false</useStandardDocletOptions>
+							<additionalJOption>-J-Xmx1024m</additionalJOption>
+							<maxmemory>${javadoc.maxmemory}</maxmemory>
+							<links>
+								<link>http://docs.oracle.com/javase/8/docs/api/</link>
+							</links>
+							<docletArtifact>
+								<groupId>com.google.doclava</groupId>
+								<artifactId>doclava</artifactId>
+								<version>1.0.3</version>
+							</docletArtifact>
+							<additionalparam>
+								-hdf project.name "${project.name}"
+								-d
+								${project.reporting.outputDirectory}/apidocs
+							</additionalparam>
+							<archive>
+								<manifest>
+									<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+									<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+								</manifest>
+								<manifestEntries>
+									<Implementation-Build-Date>${maven.build.timestamp}</Implementation-Build-Date>
+									<X-Compile-Source-JDK>${javac.src.version}</X-Compile-Source-JDK>
+									<X-Compile-Target-JDK>${javac.target.version}</X-Compile-Target-JDK>
+								</manifestEntries>
+							</archive>
+						</configuration>
+					</plugin>
+
+					<!-- <plugin> -->
+					<!-- <groupId>org.apache.maven.plugins</groupId> -->
+					<!-- <artifactId>maven-gpg-plugin</artifactId> -->
+					<!-- <version>1.4</version> -->
+					<!-- <executions> -->
+					<!-- <execution> -->
+					<!-- <id>sign-artifacts</id> -->
+					<!-- <phase>verify</phase> -->
+					<!-- <goals> -->
+					<!-- <goal>sign</goal> -->
+					<!-- </goals> -->
+					<!-- </execution> -->
+					<!-- </executions> -->
+					<!-- </plugin> -->
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
