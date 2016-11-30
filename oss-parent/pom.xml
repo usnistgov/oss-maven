@@ -184,7 +184,7 @@
 					</configuration>
 					<dependencies>
 						<dependency>
-							<groupId>gov.nist</groupId>
+							<groupId>gov.nist.secauto</groupId>
 							<artifactId>oss-build-support</artifactId>
 							<version>${version.project.oss-build-support}</version>
 						</dependency>
@@ -331,7 +331,7 @@
 				</executions>
 				<dependencies>
 					<dependency>
-						<groupId>gov.nist</groupId>
+						<groupId>gov.nist.secauto</groupId>
 						<artifactId>oss-build-support</artifactId>
 						<version>${version.project.oss-build-support}</version>
 					</dependency>
