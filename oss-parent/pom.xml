@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>gov.nist</groupId>
+		<groupId>gov.nist.secauto</groupId>
 		<artifactId>oss-maven</artifactId>
 		<version>3</version>
 	</parent>
@@ -100,7 +100,7 @@
 						<dependency>
 							<groupId>org.apache.maven.scm</groupId>
 							<artifactId>maven-scm-provider-gitexe</artifactId>
-							<version>1.9.5</version>
+							<version>${version.scmprovider.gitexe}</version>
 						</dependency>
 					</dependencies>
 				</plugin>

@@ -7,27 +7,44 @@
 
 	<packaging>pom</packaging>
 
-    <description>A common build root for all NIST projects related to Security Automation.</description>
+	<description>A common build root for all NIST projects related to Security Automation.</description>
 	<url>https://github.com/usnistgov/oss-maven</url>
 
-    <issueManagement>
-        <url>https://github.com/usnistgov/oss-maven/issues</url>
-        <system>GitHub Issues</system>
-    </issueManagement>
+	<issueManagement>
+		<url>https://github.com/usnistgov/oss-maven/issues</url>
+		<system>GitHub Issues</system>
+	</issueManagement>
 
 	<scm>
-        <url>https://github.com/usnistgov/oss-maven</url>
+		<url>https://github.com/usnistgov/oss-maven</url>
 		<connection>scm:git:https://github.com/usnistgov/oss-maven.git</connection>
 		<developerConnection>scm:git:https://github.com/usnistgov/oss-maven.git</developerConnection>
 	</scm>
 
-    <licenses>
-        <license>
-            <name>NIST License</name>
-            <url>https://www.nist.gov/director/licensing</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
+    <distributionManagement>
+        <repository>
+            <id>nvd_nexus_release</id>
+            <name>NVD nexus repository for release artifacts</name>
+            <url>${nexus_release_url}</url>
+        </repository>
+        <snapshotRepository>
+            <id>nvd_nexus_snapshot</id>
+            <name>NVD nexus repository for snapshot artifacts</name>
+            <url>${nexus_snapshot_url}</url>
+        </snapshotRepository>
+        <site>
+            <id>my.git.server</id>
+            <url>scm:git:https://github.com/usnistgov/oss-maven.git</url>
+        </site>
+    </distributionManagement>
+
+	<licenses>
+		<license>
+			<name>NIST License</name>
+			<url>https://www.nist.gov/director/licensing</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
 	<developers>
 		<developer>
@@ -54,21 +71,8 @@
 		<javac.src.version>1.8</javac.src.version>
 		<javac.target.version>1.8</javac.target.version>
 		<javac.debuglevel>lines,source,vars</javac.debuglevel>
-
+		<version.scmprovider.gitexe>1.9.5</version.scmprovider.gitexe>
 	</properties>
-
-    <distributionManagement>
-        <repository>
-            <id>nvd_nexus_release</id>
-            <name>NVD nexus repository for release artifacts</name>
-            <url>${nexus_release_url}</url>
-        </repository>
-        <snapshotRepository>
-            <id>nvd_nexus_snapshot</id>
-            <name>NVD nexus repository for snapshot artifacts</name>
-            <url>${nexus_snapshot_url}</url>
-        </snapshotRepository>
-    </distributionManagement>
 
 	<dependencyManagement>
 		<dependencies>
@@ -79,28 +83,51 @@
 				<scope>test</scope>
 			</dependency>
 		</dependencies>
-		
 	</dependencyManagement>
 
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.5.1</version>
-                    <configuration>
-                        <source>${javac.src.version}</source>
-                        <target>${javac.target.version}</target>
-                        <showDeprecation>true</showDeprecation>
-                        <showWarnings>true</showWarnings>
-                        <debug>true</debug>
-                        <debuglevel>${javac.debuglevel}</debuglevel>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
+	<build>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-scm</artifactId>
+				<version>2.10</version>
+			</extension>
+			<extension>
+				<groupId>org.apache.maven.scm</groupId>
+				<artifactId>maven-scm-manager-plexus</artifactId>
+				<version>1.9.5</version>
+			</extension>
+			<extension>
+				<groupId>org.apache.maven.scm</groupId>
+				<artifactId>maven-scm-provider-gitexe</artifactId>
+				<version>${version.scmprovider.gitexe}</version>
+			</extension>
+		</extensions>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.5.1</version>
+					<configuration>
+						<source>${javac.src.version}</source>
+						<target>${javac.target.version}</target>
+						<showDeprecation>true</showDeprecation>
+						<showWarnings>true</showWarnings>
+						<debug>true</debug>
+						<debuglevel>${javac.debuglevel}</debuglevel>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<configuration>
+                        <scmBranch>gh-pages</scmBranch>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 
 	<modules>
 		<module>build-support</module>
