@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>gov.nist.secauto</groupId>
 		<artifactId>oss-maven</artifactId>
-		<version>3</version>
+		<version>3-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>oss-parent</artifactId>
@@ -12,7 +12,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<version.project.oss-build-support>3</version.project.oss-build-support>
+		<version.project.oss-build-support>3-SNAPSHOT</version.project.oss-build-support>
 		<!-- plugin dependencies -->
 		<version.plugin.assembly>2.6</version.plugin.assembly>
 		<version.plugin.build-helper>1.12</version.plugin.build-helper>
