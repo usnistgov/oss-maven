@@ -204,8 +204,6 @@
 							</docletArtifact>
 							<additionalparam>
 								-hdf project.name "${project.name}"
-								-d
-								${project.reporting.outputDirectory}/apidocs
 							</additionalparam>
 							<archive>
 								<manifest>
