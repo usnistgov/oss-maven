@@ -128,6 +128,8 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-site-plugin</artifactId>
 					<configuration>
+						<!-- TODO: remove skip once site is working -->
+						<skip>true</skip>
                         <scmBranch>gh-pages</scmBranch>
 					</configuration>
 				</plugin>
