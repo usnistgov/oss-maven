@@ -26,7 +26,7 @@
             <id>nvd_nexus_release</id>
             <name>NVD nexus repository for release artifacts</name>
             <url>${nexus_release_url}</url>
-        </repository>lu
+        </repository>
         <snapshotRepository>
             <id>nvd_nexus_snapshot</id>
             <name>NVD nexus repository for snapshot artifacts</name>
