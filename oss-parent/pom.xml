@@ -28,8 +28,8 @@
 		<version.plugin.license>3.0</version.plugin.license>
 		<version.plugin.pmd>3.6</version.plugin.pmd>
 		<version.plugin.project-info-reports>2.9</version.plugin.project-info-reports>
-		<version.plugin.release>2.5.3</version.plugin.release>
 		<version.plugin.replacer>1.5.2</version.plugin.replacer>
+		<!-- maven release plugin version is in the parent pom -->
 		<version.plugin.resources>3.0.1</version.plugin.resources>
 		<version.plugin.scm>1.9.5</version.plugin.scm>
 		<version.plugin.shade>2.4.3</version.plugin.shade>
