@@ -1,0 +1,110 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>gov.nist.secauto</groupId>
+		<artifactId>oss-maven</artifactId>
+		<version>6-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>nist-pages-skin</artifactId>
+
+	<properties>
+		<version.bootstrap>3.3.7</version.bootstrap>
+		<version.jquery>3.1.1</version.jquery>
+	</properties>
+
+	<build>
+		<resources>
+			<!-- exclude css and js since will include the minified version -->
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+				<excludes>
+					<exclude>css/**</exclude>
+					<exclude>js/**</exclude>
+				</excludes>
+				<filtering>true</filtering> <!-- add skin-info -->
+			</resource>
+			<!-- include minified only -->
+			<resource>
+				<directory>${project.build.directory}/generated-resources/minified</directory>
+				<includes>
+					<include>css/nist-pages-${project.version}.min.css</include>
+					<include>js/nist-pages-${project.version}.min.js</include>
+				</includes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>com.samaxes.maven</groupId>
+				<artifactId>minify-maven-plugin</artifactId>
+				<version>1.7.6</version>
+				<executions>
+					<execution>
+						<id>default-minify</id>
+						<phase>generate-resources</phase>
+						<configuration>
+							<webappSourceDir>${basedir}/src/main/resources</webappSourceDir>
+							<webappTargetDir>${project.build.directory}/generated-resources/minified</webappTargetDir>
+							<cssSourceDir>css</cssSourceDir>
+							<cssSourceFiles>
+								<cssSourceFile>bootstrap-${version.bootstrap}.css</cssSourceFile>
+								<cssSourceFile>bootstrap-theme-${version.bootstrap}.css</cssSourceFile>
+								<!-- <cssSourceFile>maven-base.css</cssSourceFile> -->
+								<cssSourceFile>maven-theme.css</cssSourceFile>
+								<!-- <cssSourceFile>nist-style.css</cssSourceFile> -->
+							</cssSourceFiles>
+							<cssFinalFile>nist-pages-${project.version}.css</cssFinalFile>
+							<jsEngine>CLOSURE</jsEngine>
+							<jsSourceDir>js</jsSourceDir>
+							<jsSourceFiles>
+								<jsSourceFile>jquery-${version.jquery}.js</jsSourceFile>
+								<jsSourceFile>bootstrap-${version.bootstrap}.js</jsSourceFile>
+							</jsSourceFiles>
+							<jsFinalFile>nist-pages-${project.version}.js</jsFinalFile>
+						</configuration>
+						<goals>
+							<goal>minify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											com.samaxes.maven
+										</groupId>
+										<artifactId>
+											maven-minify-plugin
+										</artifactId>
+										<versionRange>
+											[1.3.5,)
+										</versionRange>
+										<goals>
+											<goal>minify</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
