@@ -21,7 +21,7 @@
 		<version.plugin.deploy>2.8.2</version.plugin.deploy>
 		<version.plugin.enforcer>1.4.1</version.plugin.enforcer>
 		<version.plugin.install>2.5.2</version.plugin.install>
-		<version.plugin.jacoco>0.7.7.201606060606</version.plugin.jacoco>
+		<version.plugin.jacoco>0.7.9</version.plugin.jacoco>
 		<version.plugin.jar>2.6</version.plugin.jar>
 		<version.plugin.jdepend>2.0</version.plugin.jdepend>
 		<version.plugin.jxr>2.5</version.plugin.jxr>
