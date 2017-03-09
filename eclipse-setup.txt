@@ -1,0 +1,27 @@
+Formatting Code with OSS-Parent
+
+Before you start:
+1. Install the latest version of Eclipse
+2. Install the Java Cryptographic Extension
+3. Install the m2e-code-quality plugin
+
+Once done:
+1. Import OSS-Maven project into eclipse.
+2. Add OSS-Parent as the parent in the project pom.xml
+3. Maven Update the project
+4. Window->preferences->Checkstyle
+5. Select “New”,  select ‘External Configuration File” in the type dropdown box.
+6. Type a name (e.g. “OSS-Maven”)
+7. Select browse to the right of location and navigate to oss-maven/build-support/src/main/resources/checkstyle/checkstyle.xml and hit ok
+8. Select the new configuration from the list and press ‘Set as default” to the right.
+9. Right click project -> Checkstyle -> generate formatter profile
+10. Window->preferences->java->code style->formatter
+11. In the formatter window, In the “active profile” drop-down box, select “eclipse-cs {project-name}”
+12. Select “Edit”, select the “Blank Lines” Tab.
+13. Change “Before Package Declaration” from 0 to 1.
+14. Window->preferences->java->code style->organize imports
+15. In the organize imports window select “Import”
+16. Import the file located in the oss-maven/build-support/src/main/resources/checkstyle/eclipse/checkstyle.importorder and select ok
+
+The eclipse “Format” and “Organize Imports” functions will now reflect checkstyle requirements.
+
