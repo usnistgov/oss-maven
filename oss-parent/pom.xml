@@ -37,6 +37,7 @@
 		<version.plugin.surefire>2.19.1</version.plugin.surefire>
 		<version.plugin.surefire-report>2.19.1</version.plugin.surefire-report>
 		<version.plugin.taglist>2.4</version.plugin.taglist>
+		<version.plugin.war>3.0.0</version.plugin.taglist>
 	</properties>
 
 	<build>
@@ -208,6 +209,11 @@
 					<artifactId>maven-checkstyle-plugin</artifactId>
 					<version>2.17</version>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>${version.plugin.war}</version>
+				</plugin>
 				<!-- for the m2e peeps -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
@@ -333,7 +339,7 @@
 							<goal>check</goal>
 						</goals>
 						<configuration>
-						    <haltOnFailure>false</haltOnFailure>
+							<haltOnFailure>false</haltOnFailure>
 							<rules><!-- implementation is needed only for Maven 2 -->
 								<rule implementation="org.jacoco.maven.RuleConfiguration">
 									<element>BUNDLE</element>
@@ -354,10 +360,10 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 			</plugin>
-<!-- 			<plugin> -->
-<!-- 				<groupId>org.jacoco</groupId> -->
-<!-- 				<artifactId>jacoco-maven-plugin</artifactId> -->
-<!-- 			</plugin> -->
+			<!-- <plugin> -->
+			<!-- <groupId>org.jacoco</groupId> -->
+			<!-- <artifactId>jacoco-maven-plugin</artifactId> -->
+			<!-- </plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
@@ -436,18 +442,18 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<reportSets>
-					<reportSet>
-						<id>default</id>
-						<reports>
-							<report>javadoc</report>
-						</reports>
-					</reportSet>
-				</reportSets>
-			</plugin>
+			<!-- <plugin> -->
+			<!-- <groupId>org.apache.maven.plugins</groupId> -->
+			<!-- <artifactId>maven-javadoc-plugin</artifactId> -->
+			<!-- <reportSets> -->
+			<!-- <reportSet> -->
+			<!-- <id>default</id> -->
+			<!-- <reports> -->
+			<!-- <report>javadoc</report> -->
+			<!-- </reports> -->
+			<!-- </reportSet> -->
+			<!-- </reportSets> -->
+			<!-- </plugin> -->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -472,6 +478,8 @@
 			<!-- <groupId>org.codehaus.mojo</groupId> -->
 			<!-- <artifactId>cobertura-maven-plugin</artifactId> -->
 			<!-- </plugin> -->
+
+
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>

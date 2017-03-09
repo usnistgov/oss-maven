@@ -148,7 +148,6 @@
 	<modules>
 		<module>build-support</module>
 		<module>oss-parent</module>
-		<module>nist-site-skin</module>
 	</modules>
 
 	<profiles>
