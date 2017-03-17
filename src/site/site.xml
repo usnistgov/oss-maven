@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/DECORATION/1.6.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/DECORATION/1.7.0 http://maven.apache.org/xsd/decoration-1.7.0.xsd"
+	name="NIST Open Source Maven Parent">
+	<!-- Reflow Maven Skin, but with "Reflow" highlighted -->
+	<!-- <bannerLeft> -->
+	<!-- <name><![CDATA[ -->
+	<!-- <span class="nist-logo" title="Go to nist.gov">National Institute of -->
+	<!-- Standards and Technology</span> -->
+	<!-- ]]> -->
+	<!-- </name> -->
+	<!-- <href>http://www.nist.gov/</href> -->
+	<!-- </bannerLeft> -->
+	<publishDate position="bottom" format="yyyy-MM-dd" />
+	<version position="left" />
+
+	<skin>
+		<groupId>lt.velykis.maven.skins</groupId>
+		<artifactId>reflow-maven-skin</artifactId>
+		<version>1.1.1</version>
+	</skin>
+	<custom>
+		<reflowSkin>
+			<theme>bootswatch-cosmo</theme>
+			<highlightJs>true</highlightJs>
+			<skinAttribution>false</skinAttribution>
+			<brand>
+				<name>
+	        <![CDATA[
+	        <img src="images/nist_logo.png" alt="National Institute of
+            Standards and Technology" title="Go to nist.gov">
+	        ]]>
+				</name>
+				<href>http://www.nist.gov/</href>
+			</brand>
+			<titleTemplate>%2$s | %1$s</titleTemplate>
+			<toc>top</toc>
+			<topNav>Download|Modules|NIST</topNav>
+			<bottomNav maxSpan="9">
+				<column>Main|modules|Download</column>
+				<column>reports</column>
+			</bottomNav>
+			<bottomDescription>
+			<![CDATA[
+				<div><span class="color-highlight">oss-maven</span> provides default Maven build
+				settings for a number of NIST projects. This allows the site to be delpoyed when the
+				code is also deployed, and ensures that basic development requirements are met. This
+				includes running PMD to identify
+				any serious coding issues, code style checking, and verification that the NIST
+				license notice has been included in all source files. Code coverage and complexity
+				reports are also generated as part of the site production.</div>
+		    ]]>
+		    </bottomDescription>
+			<pages>
+				<index project="oss-maven">
+					<shortTitle>Welcome</shortTitle>
+					<breadcrumbs>false</breadcrumbs>
+					<toc>false</toc>
+					<sections>
+						<body />
+					</sections>
+				</index>
+				<index>
+					<!-- no ToC on the main index page -->
+					<toc>false</toc>
+					<markPageHeader>false</markPageHeader>
+					<sections>
+						<body />
+					</sections>
+				</index>
+				<contribute>
+					<breadcrumbs>false</breadcrumbs>
+				</contribute>
+				<!-- Disable source highlighting for Maven reports -->
+				<source-repository>
+					<highlightJs>false</highlightJs>
+				</source-repository>
+				<issue-tracking>
+					<highlightJs>false</highlightJs>
+					<toc>false</toc>
+				</issue-tracking>
+				<license>
+					<highlightJs>false</highlightJs>
+					<toc>false</toc>
+				</license>
+				<!-- Disable ToC for some Maven reports -->
+				<project-info>
+					<toc>false</toc>
+				</project-info>
+				<github-report>
+					<toc>false</toc>
+				</github-report>
+				<dependencies>
+					<tocTopMax>4</tocTopMax>
+				</dependencies>
+			</pages>
+		</reflowSkin>
+	</custom>
+	<body>
+
+		<links>
+			<!-- <item name="Download" href="oss-parent/index.html#Usage" /> -->
+			<item name="GitHub project" href="http://github.com/usnistgov/oss-maven" />
+		</links>
+
+		<breadcrumbs>
+			<item name="oss-maven" href="/" />
+		</breadcrumbs>
+
+		<menu name="Overview">
+			<item name="Introduction" href="index.html" />
+		</menu>
+		<menu name="Modules" ref="modules" />
+		<menu name="NIST">
+			<item name="NIST Website" href="http://www.nist.gov/" />
+			<item name="About NIST" href="https://www.nist.gov/about-nist" />
+		</menu>
+		<menu name="Main" inherit="top">
+			<item name="Home" href="./" />
+			<item name="Source" href="source-repository.html" />
+			<item name="Issue Tracker" href="issue-tracking.html" />
+		</menu>
+		<!-- <menu name="Download" inherit="top"> -->
+		<!-- <item name="Download" href="oss-parent/index.html#Usage" /> -->
+		<!-- <item name="License" href="license.html" /> -->
+		<!-- </menu> -->
+		<menu name="Maven Documentation" ref="reports" />
+		
+		<footer>
+		<![CDATA[
+		  <div><a target="_blank" href="http://www.nist.gov/public_affairs/privacy.cfm#privpolicy">Privacy Policy</a> &#124; <a target="_blank" href="http://www.nist.gov/public_affairs/privacy.cfm#secnot">Security Notice</a> &#124; <a href="http://www.nist.gov/public_affairs/privacy.cfm#accesstate">Accessibility Statement</a> &#124; <a target="_blank" href="mailto:scap@nist.gov?subject=Feedback%20on%20${project.artifactid}">Send feedback</a></div>
+		]]>
+		</footer>
+	</body>
+</project>

@@ -1,0 +1,70 @@
+# Maven build support for NIST Java projects
+
+This project provides a common build root for all NIST Security Automation projects built using 
+[Apache Maven]
+(https://maven.apache.org/). Two sub-modules provide the actual build support. The first sub-module, [oss-parent]
+(oss-parent/), is the actual project to use as the build parent. The second sub-module, [build-support]
+(build-support/), provides a set of common build support files that must be made available on the
+classpath.
+
+## Usage
+
+To use this project as a Maven build parent for your project, add the following to your project's
+POM:
+
+```xml
+<parent>
+  <groupId>${project.groupId}</groupId>
+  <artifactId>oss-parent</artifactId>
+  <version>${project.version}</version>
+</parent>
+```
+
+## Configured Features
+
+The following build features are configured by the [oss-parent](oss-parent/) project when used as
+the parent of another project:
+
+*   Use of the [Maven Release Plugin](http://maven.apache.org/maven-release/maven-release-plugin/)
+    supporting automated releases of project revisions. Use of this feature requires configuration
+    of the &lt;scm&gt;/&lt;developerConnection&gt; element in the project POM. A release can be performed using
+    the command:
+  
+    > mvn -Prelease release:clean release:prepare release:perform
+
+    The profile "release" triggers building javadoc documentation, which is omitted during the
+    regular build process to save build time.
+
+*   Configuration of the site plugin with Markdown support to produce Bootstrap documentation pages like this one. The
+    site can be built using the Maven command:
+  
+    > mvn -Prelease site site:deploy
+
+*   [Jacoco](http://www.eclemma.org/jacoco/trunk/doc/maven.html) is used to perform code coverage analysis based on JUnit tests. A site report will be
+    produced containing coverage information.
+
+*   Use of the [Maven PMD plugin] (https://maven.apache.org/plugins/maven-pmd-plugin/) to perform
+    code analysis. Issues found at [levels 1 and 2]
+    (https://pmd.github.io/pmd-5.3.3/customizing/rule-guidelines.html) will fail the build.
+
+*   The [Tag List Maven plugin] (http://www.mojohaus.org/taglist-maven-plugin/) is used to generate
+    a report of all comments marked "TODO".
+
+*   The Maven [Checkstyle plugin] (https://maven.apache.org/plugins/maven-checkstyle-plugin/) is
+    used to check code for code style issues. The style checked is configured to use the [checkstyle rules]
+    (https://github.com/usnistgov/oss-maven/blob/master/build-support/src/main/resources/license/nist/license.txt)
+    provided by the [build-support] (build-support/) project.
+
+*   Building of Javadoc documentation will occur if the profile "release" is chosen using:
+
+    > mvn -Prelease
+
+*   The [license Maven plugin] (http://code.mycila.com/license-maven-plugin/) is used to check that
+    the appropriate NIST software license is used. All source files are checked to ensure that the [required license content]
+    (https://github.com/usnistgov/oss-maven/blob/master/build-support/src/main/resources/license/nist/license.txt),
+    provided by the [build-support] (build-support/) project, is included in all java source files.
+    The build is failed if a license is missing.
+    
+*   The [Maven enforcer plugin] (http://maven.apache.org/enforcer/maven-enforcer-plugin/) is used to
+    check that Java 1.7 or later is used, that the Maven version is 3.0 or higher, and that plugins
+    are properly versioned.

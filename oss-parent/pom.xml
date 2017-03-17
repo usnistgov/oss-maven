@@ -11,6 +11,9 @@
 
 	<packaging>pom</packaging>
 
+	<name>Maven Build Parent for NIST Open Source Projects</name>
+	<description>A Common Maven Build Parent for NIST Open Source Projects, that provides for centralized management of plugin versions, code style, and other code quality checks.</description>
+
 	<properties>
 		<!-- plugin dependencies -->
 		<version.plugin.assembly>2.6</version.plugin.assembly>
@@ -113,12 +116,25 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-site-plugin</artifactId>
 					<version>${version.plugin.site}</version>
+					<dependencies>
+						<dependency>
+							<groupId>lt.velykis.maven.skins</groupId>
+							<artifactId>reflow-velocity-tools</artifactId>
+							<version>1.1.1</version>
+						</dependency>
+						<!-- Reflow skin requires Velocity >= 1.7 -->
+						<dependency>
+							<groupId>org.apache.velocity</groupId>
+							<artifactId>velocity</artifactId>
+							<version>1.7</version>
+						</dependency>
+					</dependencies>
 				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>${version.plugin.javadoc}</version>
-				</plugin>
+				<!-- <plugin> -->
+				<!-- <groupId>org.apache.maven.plugins</groupId> -->
+				<!-- <artifactId>maven-javadoc-plugin</artifactId> -->
+				<!-- <version>${version.plugin.javadoc}</version> -->
+				<!-- </plugin> -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-project-info-reports-plugin</artifactId>
@@ -246,37 +262,7 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.10</version>
-				<executions>
-					<!-- Used to pull site customization files from the JAR -->
-					<execution>
-						<id>unpack-site-files</id>
-						<!-- Using the initialize phase because it is before the generate sources 
-							phase -->
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>unpack</goal>
-						</goals>
-						<configuration>
-							<artifactItems>
-								<artifactItem>
-									<!-- Artifact that has the site files -->
-									<groupId>gov.nist.secauto</groupId>
-									<artifactId>oss-build-support</artifactId>
-									<version>6-SNAPSHOT</version>
-									<type>jar</type>
-								</artifactItem>
-							</artifactItems>
-							<includes>site/*.vm</includes>
-							<outputDirectory>${project.basedir}/target/site-files</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
 				<executions>
 					<execution>
@@ -302,7 +288,7 @@
 									<banLatest>true</banLatest>
 									<banRelease>true</banRelease>
 									<banSnapshots>true</banSnapshots>
-									<phases>clean,deploy,site</phases>
+									<phases>clean,install,deploy,site</phases>
 									<message>[ERROR] Best Practice is to always define plugin
 										versions!</message>
 								</requirePluginVersions>
@@ -384,6 +370,7 @@
 						</goals>
 					</execution>
 				</executions>
+
 			</plugin>
 
 			<plugin>
@@ -442,18 +429,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
 			</plugin>
-			<!-- <plugin> -->
-			<!-- <groupId>org.apache.maven.plugins</groupId> -->
-			<!-- <artifactId>maven-javadoc-plugin</artifactId> -->
-			<!-- <reportSets> -->
-			<!-- <reportSet> -->
-			<!-- <id>default</id> -->
-			<!-- <reports> -->
-			<!-- <report>javadoc</report> -->
-			<!-- </reports> -->
-			<!-- </reportSet> -->
-			<!-- </reportSets> -->
-			<!-- </plugin> -->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -464,7 +439,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jxr-plugin</artifactId>
 			</plugin>
-
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jdepend-maven-plugin</artifactId>

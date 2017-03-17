@@ -9,4 +9,7 @@
 	<artifactId>oss-build-support</artifactId>
 
 	<packaging>jar</packaging>
+
+    <name>Common Build Files</name>
+    <description>A shared resource providing common build dependencies used in maven builds for code style, and other code quality checks.</description>
 </project>
