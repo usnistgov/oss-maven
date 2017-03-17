@@ -65,6 +65,10 @@ the parent of another project:
     provided by the [build-support] (build-support/) project, is included in all java source files.
     The build is failed if a license is missing.
     
+    To apply licenses to all source files use:
+    
+    > mvn license:format
+    
 *   The [Maven enforcer plugin] (http://maven.apache.org/enforcer/maven-enforcer-plugin/) is used to
     check that Java 1.7 or later is used, that the Maven version is 3.0 or higher, and that plugins
     are properly versioned.
