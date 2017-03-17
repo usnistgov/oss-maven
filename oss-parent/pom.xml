@@ -40,7 +40,7 @@
 		<version.plugin.surefire>2.19.1</version.plugin.surefire>
 		<version.plugin.surefire-report>2.19.1</version.plugin.surefire-report>
 		<version.plugin.taglist>2.4</version.plugin.taglist>
-		<version.plugin.war>3.0.0</version.plugin.taglist>
+		<version.plugin.war>3.0.0</version.plugin.war>
 	</properties>
 
 	<build>
