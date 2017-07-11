@@ -21,23 +21,6 @@
 		<tag>HEAD</tag>
 	</scm>
 
-	<distributionManagement>
-		<repository>
-			<id>nvd_nexus_release</id>
-			<name>NVD nexus repository for release artifacts</name>
-			<url>${nexus_release_url}</url>
-		</repository>
-		<snapshotRepository>
-			<id>nvd_nexus_snapshot</id>
-			<name>NVD nexus repository for snapshot artifacts</name>
-			<url>${nexus_snapshot_url}</url>
-		</snapshotRepository>
-		<site>
-			<id>my.git.server</id>
-			<url>scm:git:https://github.com/usnistgov/oss-maven.git</url>
-		</site>
-	</distributionManagement>
-
 	<licenses>
 		<license>
 			<name>NIST License</name>
