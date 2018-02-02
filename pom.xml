@@ -52,12 +52,13 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<!-- Java compiler properties -->
-		<javac.src.version>1.8</javac.src.version>
-		<javac.target.version>1.8</javac.target.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
 		<javac.debuglevel>lines,source,vars</javac.debuglevel>
 		<version.scmprovider.gitexe>1.9.5</version.scmprovider.gitexe>
 		<version.plugin.javadoc>2.10.3</version.plugin.javadoc>
 		<version.plugin.release>2.5.3</version.plugin.release>
+        <version.plugin.site>3.6</version.plugin.site>
 		<version.plugin.source>3.0.1</version.plugin.source>
 	</properties>
 
@@ -97,8 +98,6 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.5.1</version>
 					<configuration>
-						<source>${javac.src.version}</source>
-						<target>${javac.target.version}</target>
 						<showDeprecation>true</showDeprecation>
 						<showWarnings>true</showWarnings>
 						<debug>true</debug>
@@ -118,6 +117,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-site-plugin</artifactId>
+					<version>${version.plugin.site}</version>
 					<configuration>
 						<scmBranch>gh-pages</scmBranch>
 						<!-- <templateDirectory>${project.basedir}/target/site-files/site</templateDirectory> -->
@@ -169,8 +169,8 @@
 										</manifest>
 										<manifestEntries>
 											<Implementation-Build-Date>${maven.build.timestamp}</Implementation-Build-Date>
-											<X-Compile-Source-JDK>${javac.src.version}</X-Compile-Source-JDK>
-											<X-Compile-Target-JDK>${javac.target.version}</X-Compile-Target-JDK>
+											<X-Compile-Source-JDK>${maven.compiler.source}</X-Compile-Source-JDK>
+											<X-Compile-Target-JDK>${maven.compiler.target}</X-Compile-Target-JDK>
 										</manifestEntries>
 									</archive>
 								</configuration>
@@ -204,8 +204,8 @@
 								</manifest>
 								<manifestEntries>
 									<Implementation-Build-Date>${maven.build.timestamp}</Implementation-Build-Date>
-									<X-Compile-Source-JDK>${javac.src.version}</X-Compile-Source-JDK>
-									<X-Compile-Target-JDK>${javac.target.version}</X-Compile-Target-JDK>
+									<X-Compile-Source-JDK>${maven.compiler.source}</X-Compile-Source-JDK>
+									<X-Compile-Target-JDK>${maven.compiler.target}</X-Compile-Target-JDK>
 								</manifestEntries>
 							</archive>
 						</configuration>

@@ -15,31 +15,34 @@
 
 	<properties>
 		<!-- plugin dependencies -->
-		<version.plugin.assembly>2.6</version.plugin.assembly>
+		<version.plugin.assembly>3.0.0</version.plugin.assembly>
 		<version.plugin.build-helper>1.12</version.plugin.build-helper>
+		<version.plugin.checkstyle>3.0.0</version.plugin.checkstyle>
 		<version.plugin.clean>3.0.0</version.plugin.clean>
 		<version.plugin.cobertura>2.7</version.plugin.cobertura>
 		<version.plugin.compile>3.5.1</version.plugin.compile>
 		<version.plugin.deploy>2.8.2</version.plugin.deploy>
 		<version.plugin.enforcer>1.4.1</version.plugin.enforcer>
 		<version.plugin.install>2.5.2</version.plugin.install>
-		<version.plugin.jacoco>0.7.9</version.plugin.jacoco>
+		<version.plugin.jacoco>0.8.0</version.plugin.jacoco>
 		<version.plugin.jar>2.6</version.plugin.jar>
+        <!-- maven-javadoc-plugin version is in the parent pom -->
 		<version.plugin.jdepend>2.0</version.plugin.jdepend>
 		<version.plugin.jxr>2.5</version.plugin.jxr>
 		<version.plugin.license>3.0</version.plugin.license>
-		<version.plugin.pmd>3.6</version.plugin.pmd>
+		<version.plugin.pmd>3.9.0</version.plugin.pmd>
 		<version.plugin.project-info-reports>2.9</version.plugin.project-info-reports>
 		<version.plugin.replacer>1.5.2</version.plugin.replacer>
-		<!-- maven release plugin version is in the parent pom -->
+		<!-- maven-release-plugin version is in the parent pom -->
 		<version.plugin.resources>3.0.1</version.plugin.resources>
 		<version.plugin.scm>1.9.5</version.plugin.scm>
 		<version.plugin.shade>2.4.3</version.plugin.shade>
-		<version.plugin.site>3.6</version.plugin.site>
+        <!-- maven-site-plugin version is in the parent pom -->
+        <!-- maven-source-plugin version is in the parent pom -->
 		<version.plugin.surefire>2.19.1</version.plugin.surefire>
 		<version.plugin.surefire-report>2.19.1</version.plugin.surefire-report>
 		<version.plugin.taglist>2.4</version.plugin.taglist>
-		<version.plugin.war>3.0.0</version.plugin.war>
+		<version.plugin.war>3.2.0</version.plugin.war>
 	</properties>
 
 	<build>
@@ -222,7 +225,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-checkstyle-plugin</artifactId>
-					<version>2.17</version>
+					<version>${version.plugin.checkstyle}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
