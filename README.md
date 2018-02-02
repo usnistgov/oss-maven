@@ -25,7 +25,7 @@ This project implements the following features:
  
 To use this project, you must configure it as the parent in your Maven pom.xml file.
 
-```Maven POM
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -34,7 +34,7 @@ To use this project, you must configure it as the parent in your Maven pom.xml f
     <parent>
         <groupId>gov.nist.secauto</groupId>
         <artifactId>oss-parent</artifactId>
-        <version>... version of this project ...7</version>
+        <version>... version of this project ...</version>
     </parent>
 
     ... additional configuration
