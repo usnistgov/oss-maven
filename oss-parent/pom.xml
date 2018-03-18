@@ -178,6 +178,7 @@
 					<configuration>
 						<targetJdk>${javac.target.version}</targetJdk>
 						<failurePriority>2</failurePriority>
+						<analysisCache>true</analysisCache>
 					</configuration>
 					<executions>
 						<execution>
