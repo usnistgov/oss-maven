@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <profiles version="2">
-<profile kind="CleanUpProfile" name="eclipse-cs swidval" version="2">
+<profile kind="CleanUpProfile" name="SecAuto Checksyle" version="2">
 <setting id="cleanup.format_source_code" value="true"/>
 <setting id="cleanup.convert_functional_interfaces" value="false"/>
 <setting id="cleanup.add_missing_annotations" value="true"/>

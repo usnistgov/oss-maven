@@ -20,6 +20,7 @@ This project implements the following features:
 
 * An Oracle Java 1.8 or higher compatible runtime environment
 * An [installation](https://maven.apache.org/install.html) of Apache Maven version 3.0 or higher.
+* Install the maven-formatter-plugin [m2e connector](https://github.com/velo/maven-formatter-plugin) using the update site.
 
 ## Usage
  
