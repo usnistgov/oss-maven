@@ -24,7 +24,7 @@
 		<version.plugin.compile>3.5.1</version.plugin.compile>
 		<version.plugin.deploy>2.8.2</version.plugin.deploy>
 		<version.plugin.enforcer>1.4.1</version.plugin.enforcer>
-		<version.plugin.formatter>2.6.0</version.plugin.formatter>
+		<version.plugin.formatter>2.7.4</version.plugin.formatter>
 		<version.plugin.install>2.5.2</version.plugin.install>
 		<version.plugin.jacoco>0.8.0</version.plugin.jacoco>
 		<version.plugin.jar>2.6</version.plugin.jar>
@@ -306,6 +306,19 @@
 							</pluginExecutions>
 						</lifecycleMappingMetadata>
 					</configuration>
+				</plugin>
+				                    <plugin>
+                        <groupId>net.revelc.code.formatter</groupId>
+                        <artifactId>formatter-maven-plugin</artifactId>
+                        <version>${version.plugin.formatter}</version>
+                        <configuration>
+                            <compilerSource>${maven.compiler.source}</compilerSource>
+                            <compilerCompliance>${maven.compiler.source}</compilerCompliance>
+                            <compilerTargetPlatform>${maven.compiler.target}</compilerTargetPlatform>
+                            <lineEnding>CRLF</lineEnding>
+                            <encoding>${project.build.sourceEncoding}</encoding>
+                            <configFile>checkstyle/eclipse/eclipse-formatter.xml</configFile>
+                        </configuration>
 				</plugin>
 			</plugins>
 
