@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>gov.nist.secauto</groupId>
 		<artifactId>oss-maven</artifactId>
-		<version>8</version>
+		<version>9-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>oss-parent</artifactId>
@@ -211,7 +211,7 @@
 						<dependency>
 							<groupId>gov.nist.secauto</groupId>
 							<artifactId>oss-build-support</artifactId>
-							<version>8</version>
+							<version>9-SNAPSHOT</version>
 						</dependency>
 					</dependencies>
 					<executions>
@@ -248,7 +248,7 @@
 						<dependency>
 							<groupId>gov.nist.secauto</groupId>
 							<artifactId>oss-build-support</artifactId>
-							<version>8</version>
+							<version>9-SNAPSHOT</version>
 						</dependency>
 						<dependency>
 							<groupId>com.puppycrawl.tools</groupId>
@@ -646,7 +646,7 @@
 							<dependency>
 								<groupId>gov.nist.secauto</groupId>
 								<artifactId>oss-build-support</artifactId>
-								<version>8</version>
+								<version>9-SNAPSHOT</version>
 							</dependency>
 						</dependencies>
 					</plugin>
