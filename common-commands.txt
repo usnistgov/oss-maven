@@ -20,4 +20,4 @@ mvn checkstyle:check
 
 To perform a release:
 
-mvn -Prelease release:clean release:prepare release:perform 
+mvn -Prelease release:clean release:prepare release:perform
