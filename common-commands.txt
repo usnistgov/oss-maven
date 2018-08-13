@@ -17,3 +17,7 @@ mvn formatter:format
 To check for other source issues (e.g., Javadoc):
 
 mvn checkstyle:check
+
+To perform a release:
+
+mvn -Prelease release:clean release:prepare release:perform
