@@ -630,7 +630,7 @@
 							<dependency>
 								<groupId>gov.nist.secauto</groupId>
 								<artifactId>oss-build-support</artifactId>
-								<version>8</version>
+								<version>10-SNAPSHOT</version>
 							</dependency>
 							<dependency>
 								<groupId>com.puppycrawl.tools</groupId>

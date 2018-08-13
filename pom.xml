@@ -47,6 +47,11 @@
 	</prerequisites>
 
 	<properties>
+        <!-- various encodings -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
 		<version.scmprovider.gitexe>1.9.5</version.scmprovider.gitexe>
 		<version.plugin.release>2.5.3</version.plugin.release>
         <version.plugin.site>3.6</version.plugin.site>
