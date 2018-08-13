@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>gov.nist.secauto</groupId>
@@ -14,6 +16,16 @@
 	<description>A Common Maven Build Parent for NIST Open Source Projects, that provides for centralized management of plugin versions, code style, and other code quality checks.</description>
 
 	<properties>
+		<!-- various encodings -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<!-- Java compiler properties -->
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<javac.debuglevel>lines,source,vars</javac.debuglevel>
+
 		<!-- plugin dependencies -->
 		<version.plugin.assembly>3.0.0</version.plugin.assembly>
 		<version.plugin.build-helper>1.12</version.plugin.build-helper>
@@ -27,7 +39,7 @@
 		<version.plugin.install>2.5.2</version.plugin.install>
 		<version.plugin.jacoco>0.8.0</version.plugin.jacoco>
 		<version.plugin.jar>2.6</version.plugin.jar>
-		<!-- maven-javadoc-plugin version is in the parent pom -->
+		<version.plugin.javadoc>2.10.3</version.plugin.javadoc>
 		<version.plugin.jdepend>2.0</version.plugin.jdepend>
 		<version.plugin.jxr>2.5</version.plugin.jxr>
 		<version.plugin.license>3.0</version.plugin.license>
@@ -39,7 +51,7 @@
 		<version.plugin.scm>1.9.5</version.plugin.scm>
 		<version.plugin.shade>2.4.3</version.plugin.shade>
 		<!-- maven-site-plugin version is in the parent pom -->
-		<!-- maven-source-plugin version is in the parent pom -->
+		<version.plugin.source>3.0.1</version.plugin.source>
 		<version.plugin.surefire>2.19.1</version.plugin.surefire>
 		<version.plugin.surefire-report>2.19.1</version.plugin.surefire-report>
 		<version.plugin.taglist>2.4</version.plugin.taglist>
@@ -57,6 +69,22 @@
 				<plugin>
 					<artifactId>maven-resources-plugin</artifactId>
 					<version>${version.plugin.resources}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>${version.plugin.source}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.5.1</version>
+					<configuration>
+						<showDeprecation>true</showDeprecation>
+						<showWarnings>true</showWarnings>
+						<debug>true</debug>
+						<debuglevel>${javac.debuglevel}</debuglevel>
+					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -96,6 +124,7 @@
 						<mavenExecutorId>forked-path</mavenExecutorId>
 						<useReleaseProfile>false</useReleaseProfile>
 						<arguments>-Prelease</arguments>
+						<tagNameFormat>v@{project.version}</tagNameFormat>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -115,24 +144,24 @@
 					<artifactId>build-helper-maven-plugin</artifactId>
 					<version>${version.plugin.build-helper}</version>
 				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-site-plugin</artifactId>
-					<version>${version.plugin.site}</version>
-					<dependencies>
-						<dependency>
-							<groupId>lt.velykis.maven.skins</groupId>
-							<artifactId>reflow-velocity-tools</artifactId>
-							<version>1.1.1</version>
-						</dependency>
-						<!-- Reflow skin requires Velocity >= 1.7 -->
-						<dependency>
-							<groupId>org.apache.velocity</groupId>
-							<artifactId>velocity</artifactId>
-							<version>1.7</version>
-						</dependency>
-					</dependencies>
-				</plugin>
+				<!-- <plugin> -->
+				<!-- <groupId>org.apache.maven.plugins</groupId> -->
+				<!-- <artifactId>maven-site-plugin</artifactId> -->
+				<!-- <version>${version.plugin.site}</version> -->
+				<!-- <dependencies> -->
+				<!-- <dependency> -->
+				<!-- <groupId>lt.velykis.maven.skins</groupId> -->
+				<!-- <artifactId>reflow-velocity-tools</artifactId> -->
+				<!-- <version>1.1.1</version> -->
+				<!-- </dependency> -->
+				<!-- Reflow skin requires Velocity >= 1.7 -->
+				<!-- <dependency> -->
+				<!-- <groupId>org.apache.velocity</groupId> -->
+				<!-- <artifactId>velocity</artifactId> -->
+				<!-- <version>1.7</version> -->
+				<!-- </dependency> -->
+				<!-- </dependencies> -->
+				<!-- </plugin> -->
 				<!-- <plugin> -->
 				<!-- <groupId>org.apache.maven.plugins</groupId> -->
 				<!-- <artifactId>maven-javadoc-plugin</artifactId> -->
@@ -228,17 +257,17 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-checkstyle-plugin</artifactId>
 					<version>${version.plugin.checkstyle}</version>
+					<configuration>
+						<configLocation>checkstyle/checkstyle.xml</configLocation>
+						<encoding>UTF-8</encoding>
+						<consoleOutput>true</consoleOutput>
+						<failsOnError>true</failsOnError>
+						<linkXRef>false</linkXRef>
+					</configuration>
 					<executions>
 						<execution>
 							<id>validate</id>
 							<phase>validate</phase>
-							<configuration>
-								<configLocation>checkstyle/checkstyle.xml</configLocation>
-								<encoding>UTF-8</encoding>
-								<consoleOutput>true</consoleOutput>
-								<failsOnError>true</failsOnError>
-								<linkXRef>false</linkXRef>
-							</configuration>
 							<goals>
 								<goal>check</goal>
 							</goals>
@@ -258,69 +287,31 @@
 					</dependencies>
 				</plugin>
 				<plugin>
+					<groupId>net.revelc.code.formatter</groupId>
+					<artifactId>formatter-maven-plugin</artifactId>
+					<version>${version.plugin.formatter}</version>
+					<configuration>
+						<compilerSource>${maven.compiler.source}</compilerSource>
+						<compilerCompliance>${maven.compiler.source}</compilerCompliance>
+						<compilerTargetPlatform>${maven.compiler.target}</compilerTargetPlatform>
+						<lineEnding>CRLF</lineEnding>
+						<encoding>${project.build.sourceEncoding}</encoding>
+						<configFile>checkstyle/eclipse/eclipse-formatter.xml</configFile>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>gov.nist.secauto</groupId>
+							<artifactId>oss-build-support</artifactId>
+							<version>9-SNAPSHOT</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
 					<version>${version.plugin.war}</version>
 				</plugin>
-				<!-- for the m2e peeps -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.apache.maven.plugins</groupId>
-										<artifactId>maven-enforcer-plugin</artifactId>
-										<versionRange>[1.0.0,)</versionRange>
-										<goals>
-											<goal>enforce</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											net.revelc.code.formatter
-										</groupId>
-										<artifactId>
-											formatter-maven-plugin
-										</artifactId>
-										<versionRange>
-											[2.6.0,)
-										</versionRange>
-										<goals>
-											<goal>validate</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-				                    <plugin>
-                        <groupId>net.revelc.code.formatter</groupId>
-                        <artifactId>formatter-maven-plugin</artifactId>
-                        <version>${version.plugin.formatter}</version>
-                        <configuration>
-                            <compilerSource>${maven.compiler.source}</compilerSource>
-                            <compilerCompliance>${maven.compiler.source}</compilerCompliance>
-                            <compilerTargetPlatform>${maven.compiler.target}</compilerTargetPlatform>
-                            <lineEnding>CRLF</lineEnding>
-                            <encoding>${project.build.sourceEncoding}</encoding>
-                            <configFile>checkstyle/eclipse/eclipse-formatter.xml</configFile>
-                        </configuration>
-				</plugin>
 			</plugins>
-
 		</pluginManagement>
 
 		<plugins>
@@ -337,9 +328,9 @@
 						<configuration>
 							<rules>
 								<requireJavaVersion>
-									<version>[1.7,)</version>
+									<version>[1.8,)</version>
 									<message>[ERROR] The currently minimally supported version of
-										Java is 1.7
+										Java is 1.8
 										or higher</message>
 								</requireJavaVersion>
 								<requireMavenVersion>
@@ -360,7 +351,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -433,7 +423,6 @@
 						</goals>
 					</execution>
 				</executions>
-
 			</plugin>
 
 			<plugin>
@@ -618,10 +607,39 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-checkstyle-plugin</artifactId>
+						<version>${version.plugin.checkstyle}</version>
 						<configuration>
 							<!-- fail on validation for release -->
 							<failOnViolation>true</failOnViolation>
 						</configuration>
+						<executions>
+							<execution>
+								<id>validate</id>
+								<phase>validate</phase>
+								<configuration>
+									<configLocation>checkstyle/checkstyle.xml</configLocation>
+									<encoding>UTF-8</encoding>
+									<consoleOutput>true</consoleOutput>
+									<failsOnError>true</failsOnError>
+									<linkXRef>false</linkXRef>
+								</configuration>
+								<goals>
+									<goal>check</goal>
+								</goals>
+							</execution>
+						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>gov.nist.secauto</groupId>
+								<artifactId>oss-build-support</artifactId>
+								<version>8</version>
+							</dependency>
+							<dependency>
+								<groupId>com.puppycrawl.tools</groupId>
+								<artifactId>checkstyle</artifactId>
+								<version>7.3</version>
+							</dependency>
+						</dependencies>
 					</plugin>
 					<plugin>
 						<groupId>net.revelc.code.formatter</groupId>
@@ -681,6 +699,64 @@
 					</plugin>
 				</plugins>
 			</reporting>
+		</profile>
+		<profile>
+			<id>only-eclipse</id>
+			<activation>
+				<property>
+					<name>m2e.version</name>
+				</property>
+			</activation>
+			<build>
+				<pluginManagement>
+					<plugins>
+						<!-- for the m2e peeps -->
+						<plugin>
+							<groupId>org.eclipse.m2e</groupId>
+							<artifactId>lifecycle-mapping</artifactId>
+							<version>1.0.0</version>
+							<configuration>
+								<lifecycleMappingMetadata>
+									<pluginExecutions>
+										<pluginExecution>
+											<pluginExecutionFilter>
+												<groupId>org.apache.maven.plugins</groupId>
+												<artifactId>maven-enforcer-plugin</artifactId>
+												<versionRange>[1.0.0,)</versionRange>
+												<goals>
+													<goal>enforce</goal>
+												</goals>
+											</pluginExecutionFilter>
+											<action>
+												<ignore />
+											</action>
+										</pluginExecution>
+										<pluginExecution>
+											<pluginExecutionFilter>
+												<groupId>
+													net.revelc.code.formatter
+												</groupId>
+												<artifactId>
+													formatter-maven-plugin
+												</artifactId>
+												<versionRange>
+													[2.6.0,)
+												</versionRange>
+												<goals>
+													<goal>validate</goal>
+												</goals>
+											</pluginExecutionFilter>
+											<action>
+												<ignore />
+											</action>
+										</pluginExecution>
+									</pluginExecutions>
+								</lifecycleMappingMetadata>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
 		</profile>
 	</profiles>
 </project>

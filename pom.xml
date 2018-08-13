@@ -47,19 +47,9 @@
 	</prerequisites>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-		<!-- Java compiler properties -->
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-		<javac.debuglevel>lines,source,vars</javac.debuglevel>
 		<version.scmprovider.gitexe>1.9.5</version.scmprovider.gitexe>
-		<version.plugin.javadoc>2.10.3</version.plugin.javadoc>
 		<version.plugin.release>2.5.3</version.plugin.release>
         <version.plugin.site>3.6</version.plugin.site>
-		<version.plugin.source>3.0.1</version.plugin.source>
 	</properties>
 
 	<dependencyManagement>
@@ -95,24 +85,13 @@
 			<plugins>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.5.1</version>
-					<configuration>
-						<showDeprecation>true</showDeprecation>
-						<showWarnings>true</showWarnings>
-						<debug>true</debug>
-						<debuglevel>${javac.debuglevel}</debuglevel>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-source-plugin</artifactId>
-					<version>${version.plugin.source}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-release-plugin</artifactId>
 					<version>${version.plugin.release}</version>
+					<configuration>
+                        <mavenExecutorId>forked-path</mavenExecutorId>
+                        <useReleaseProfile>false</useReleaseProfile>
+                        <tagNameFormat>v@{project.version}</tagNameFormat>
+                    </configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>

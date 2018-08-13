@@ -1,0 +1,19 @@
+To check NIST license is included in all source files:
+
+mvn license:check
+
+To add the NIST license to all source files:
+
+mvn license:format
+
+To check source formatting:
+
+mvn formatter:validate
+
+To reformat all Java sources:
+
+mvn formatter:format
+
+To check for other source issues (e.g., Javadoc):
+
+mvn checkstyle:check
