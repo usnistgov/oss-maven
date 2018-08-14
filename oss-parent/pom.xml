@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>gov.nist.secauto</groupId>
@@ -72,6 +74,43 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
 					<version>${version.plugin.source}</version>
+					<configuration>
+						<archive>
+							<manifest>
+								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+							</manifest>
+							<manifestEntries>
+								<Implementation-Build-Date>${maven.build.timestamp}</Implementation-Build-Date>
+								<X-Compile-Source-JDK>${maven.compiler.source}</X-Compile-Source-JDK>
+								<X-Compile-Target-JDK>${maven.compiler.target}</X-Compile-Target-JDK>
+							</manifestEntries>
+						</archive>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>${version.plugin.javadoc}</version>
+					<configuration>
+						<bootclasspath>${sun.boot.class.path}</bootclasspath>
+						<additionalJOption>-J-Xmx1024m</additionalJOption>
+						<maxmemory>${javadoc.maxmemory}</maxmemory>
+						<links>
+							<link>http://docs.oracle.com/javase/8/docs/api/</link>
+						</links>
+						<archive>
+							<manifest>
+								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+							</manifest>
+							<manifestEntries>
+								<Implementation-Build-Date>${maven.build.timestamp}</Implementation-Build-Date>
+								<X-Compile-Source-JDK>${maven.compiler.source}</X-Compile-Source-JDK>
+								<X-Compile-Target-JDK>${maven.compiler.target}</X-Compile-Target-JDK>
+							</manifestEntries>
+						</archive>
+					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -411,17 +450,17 @@
 				<artifactId>maven-jar-plugin</artifactId>
 			</plugin>
 
-			<plugin>
-				<artifactId>maven-site-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-descriptor</id>
-						<goals>
-							<goal>attach-descriptor</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+<!-- 			<plugin> -->
+<!-- 				<artifactId>maven-site-plugin</artifactId> -->
+<!-- 				<executions> -->
+<!-- 					<execution> -->
+<!-- 						<id>attach-descriptor</id> -->
+<!-- 						<goals> -->
+<!-- 							<goal>attach-descriptor</goal> -->
+<!-- 						</goals> -->
+<!-- 					</execution> -->
+<!-- 				</executions> -->
+<!-- 			</plugin> -->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -553,23 +592,9 @@
 								<goals>
 									<goal>jar-no-fork</goal>
 								</goals>
-								<configuration>
-									<archive>
-										<manifest>
-											<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-											<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-										</manifest>
-										<manifestEntries>
-											<Implementation-Build-Date>${maven.build.timestamp}</Implementation-Build-Date>
-											<X-Compile-Source-JDK>${maven.compiler.source}</X-Compile-Source-JDK>
-											<X-Compile-Target-JDK>${maven.compiler.target}</X-Compile-Target-JDK>
-										</manifestEntries>
-									</archive>
-								</configuration>
 							</execution>
 						</executions>
 					</plugin>
-
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-javadoc-plugin</artifactId>
@@ -582,25 +607,6 @@
 								</goals>
 							</execution>
 						</executions>
-						<configuration>
-							<bootclasspath>${sun.boot.class.path}</bootclasspath>
-							<additionalJOption>-J-Xmx1024m</additionalJOption>
-							<maxmemory>${javadoc.maxmemory}</maxmemory>
-							<links>
-								<link>http://docs.oracle.com/javase/8/docs/api/</link>
-							</links>
-							<archive>
-								<manifest>
-									<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-									<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-								</manifest>
-								<manifestEntries>
-									<Implementation-Build-Date>${maven.build.timestamp}</Implementation-Build-Date>
-									<X-Compile-Source-JDK>${maven.compiler.source}</X-Compile-Source-JDK>
-									<X-Compile-Target-JDK>${maven.compiler.target}</X-Compile-Target-JDK>
-								</manifestEntries>
-							</archive>
-						</configuration>
 					</plugin>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
