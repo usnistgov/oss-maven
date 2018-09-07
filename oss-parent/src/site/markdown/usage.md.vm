@@ -1,0 +1,12 @@
+#[[#]]# Usage
+
+To use this project as a Maven build parent for your project, add the following to your project's
+POM:
+
+```xml
+<parent>
+  <groupId>${project.groupId}</groupId>
+  <artifactId>oss-parent</artifactId>
+  <version>${project.version}</version>
+</parent>
+```
