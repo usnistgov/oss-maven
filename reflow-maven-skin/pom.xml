@@ -2,19 +2,19 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>gov.nist.secauto</groupId>
+		<artifactId>oss-maven</artifactId>
+		<version>11-SNAPSHOT</version>
+	</parent>
 	<!-- <parent> -->
-	<!-- <groupId>gov.nist.secauto</groupId> -->
-	<!-- <artifactId>oss-maven</artifactId> -->
-	<!-- <version>11-SNAPSHOT</version> -->
+	<!-- <groupId>io.github.devacfr.maven.skins</groupId> -->
+	<!-- <artifactId>reflow-parent</artifactId> -->
+	<!-- <version>1.3.10</version> -->
 	<!-- </parent> -->
-    <parent>
-	    <groupId>io.github.devacfr.maven.skins</groupId>
-	    <artifactId>reflow-parent</artifactId>
-	    <version>1.3.10</version>
-    </parent>
 
-    <groupId>gov.nist.secauto</groupId>
 	<artifactId>reflow-maven-skin</artifactId>
+
 	<packaging>jar</packaging>
 
 	<name>Customized Reflow Skin</name>
@@ -50,18 +50,37 @@
 								<artifactItem>
 									<groupId>io.github.devacfr.maven.skins</groupId>
 									<artifactId>reflow-maven-skin</artifactId>
-									<version>${project.version}</version>
+									<version>${version.mavenReflowSkin}</version>
+									<type>jar</type>
 									<overWrite>true</overWrite>
 									<outputDirectory>${project.build.outputDirectory}</outputDirectory>
 								</artifactItem>
 							</artifactItems>
-							<excludes>
-								**/MANIFEST.MF,
-								**/META-INF/maven/lt.velykis.maven.skins/**,
-							</excludes>
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.google.code.maven-replacer-plugin</groupId>
+				<artifactId>replacer</artifactId>
+				<version>1.5.2</version>
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<file>${project.build.outputDirectory}/META-INF/maven/site.vm</file>
+					<replacements>
+						<replacement>
+							<token>(.*Copyright.*)</token>
+							<value></value>
+						</replacement>
+					</replacements>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
