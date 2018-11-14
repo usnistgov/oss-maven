@@ -1,10 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>gov.nist.secauto</groupId>
 	<artifactId>oss-maven</artifactId>
-	<version>11-SNAPSHOT</version>
+	<version>11</version>
 
 	<packaging>pom</packaging>
 
@@ -21,7 +19,7 @@
 		<url>https://github.com/usnistgov/oss-maven</url>
 		<connection>scm:git:https://github.com/usnistgov/oss-maven.git</connection>
 		<developerConnection>scm:git:https://github.com/usnistgov/oss-maven.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>v11</tag>
 	</scm>
 
 	<distributionManagement>
