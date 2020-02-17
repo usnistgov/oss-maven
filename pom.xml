@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>gov.nist.secauto</groupId>
 	<artifactId>oss-maven</artifactId>
@@ -23,10 +25,14 @@
 	</scm>
 
 	<distributionManagement>
-		<site>
-			<id>pages.nist.gov_oss-maven</id>
-			<url>https://pages.nist.gov/oss-maven/</url>
-		</site>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
 	</distributionManagement>
 
 	<licenses>
@@ -34,7 +40,7 @@
 			<name>NIST License</name>
 			<url>https://www.nist.gov/director/licensing</url>
 			<distribution>repo</distribution>
-			<comments>Licensing NIST software</comments>
+			<comments>NIST software License</comments>
 		</license>
 	</licenses>
 
@@ -50,9 +56,9 @@
 		</developer>
 	</developers>
 
-	<!-- <prerequisites> -->
-	<!-- <maven>3.0</maven> -->
-	<!-- </prerequisites> -->
+	<prerequisites>
+		<maven>3.0</maven>
+	</prerequisites>
 
 	<properties>
 		<!-- various encodings -->
@@ -64,6 +70,8 @@
 		<version.plugin.release>2.5.3</version.plugin.release>
 		<version.plugin.site>3.7.1</version.plugin.site>
 		<version.plugin.maven-project-info-reports>3.0.0</version.plugin.maven-project-info-reports>
+		<version.plugin.deploy>3.0.0-M1</version.plugin.deploy>
+		<version.plugin.nexus-staging>1.6.7</version.plugin.nexus-staging>
 
 		<version.mavenReflowSkin>1.4.2</version.mavenReflowSkin>
 		<version.maven-velocity>1.7</version.maven-velocity>
@@ -138,6 +146,18 @@
 					<artifactId>maven-project-info-reports-plugin</artifactId>
 					<version>${version.plugin.maven-project-info-reports}</version>
 				</plugin>
+
+				<plugin>
+					<groupId>org.sonatype.plugins</groupId>
+					<artifactId>nexus-staging-maven-plugin</artifactId>
+					<version>${version.plugin.nexus-staging}</version>
+					<extensions>true</extensions>
+					<configuration>
+						<serverId>ossrh</serverId>
+						<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+						<autoReleaseAfterClose>false</autoReleaseAfterClose>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -180,6 +200,35 @@
 		</plugins>
 	</reporting>
 
+	<profiles>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>${version.plugin.gpg}</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+								<configuration>
+									<gpgArguments>
+										<arg>--pinentry-mode</arg>
+										<arg>loopback</arg>
+									</gpgArguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 	<modules>
 		<module>oss-build-support</module>
 		<module>oss-parent</module>

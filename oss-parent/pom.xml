@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>gov.nist.secauto</groupId>
@@ -34,6 +36,7 @@
 		<version.plugin.deploy>2.8.2</version.plugin.deploy>
 		<version.plugin.enforcer>1.4.1</version.plugin.enforcer>
 		<version.plugin.formatter>2.7.4</version.plugin.formatter>
+		<version.plugin.gpg>1.6</version.plugin.gpg>
 		<version.plugin.install>2.5.2</version.plugin.install>
 		<version.plugin.jacoco>0.8.0</version.plugin.jacoco>
 		<version.plugin.jar>2.6</version.plugin.jar>
@@ -113,13 +116,27 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.5.1</version>
+					<version>${version.plugin.compile}</version>
 					<configuration>
 						<showDeprecation>true</showDeprecation>
 						<showWarnings>true</showWarnings>
 						<debug>true</debug>
 						<debuglevel>${javac.debuglevel}</debuglevel>
 					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>${version.plugin.gpg}</version>
+					<executions>
+						<execution>
+							<id>sign-artifacts</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>sign</goal>
+							</goals>
+						</execution>
+					</executions>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -448,17 +465,17 @@
 				<artifactId>maven-jar-plugin</artifactId>
 			</plugin>
 
-<!-- 			<plugin> -->
-<!-- 				<artifactId>maven-site-plugin</artifactId> -->
-<!-- 				<executions> -->
-<!-- 					<execution> -->
-<!-- 						<id>attach-descriptor</id> -->
-<!-- 						<goals> -->
-<!-- 							<goal>attach-descriptor</goal> -->
-<!-- 						</goals> -->
-<!-- 					</execution> -->
-<!-- 				</executions> -->
-<!-- 			</plugin> -->
+			<!-- <plugin> -->
+			<!-- <artifactId>maven-site-plugin</artifactId> -->
+			<!-- <executions> -->
+			<!-- <execution> -->
+			<!-- <id>attach-descriptor</id> -->
+			<!-- <goals> -->
+			<!-- <goal>attach-descriptor</goal> -->
+			<!-- </goals> -->
+			<!-- </execution> -->
+			<!-- </executions> -->
+			<!-- </plugin> -->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -670,20 +687,26 @@
 							</dependency>
 						</dependencies>
 					</plugin>
-					<!-- <plugin> -->
-					<!-- <groupId>org.apache.maven.plugins</groupId> -->
-					<!-- <artifactId>maven-gpg-plugin</artifactId> -->
-					<!-- <version>1.4</version> -->
-					<!-- <executions> -->
-					<!-- <execution> -->
-					<!-- <id>sign-artifacts</id> -->
-					<!-- <phase>verify</phase> -->
-					<!-- <goals> -->
-					<!-- <goal>sign</goal> -->
-					<!-- </goals> -->
-					<!-- </execution> -->
-					<!-- </executions> -->
-					<!-- </plugin> -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>${version.plugin.gpg}</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+								<configuration>
+									<gpgArguments>
+										<arg>--pinentry-mode</arg>
+										<arg>loopback</arg>
+									</gpgArguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
 				</plugins>
 			</build>
 			<reporting>
