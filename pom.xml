@@ -19,8 +19,8 @@
 
 	<scm>
 		<url>https://github.com/usnistgov/oss-maven</url>
-		<connection>scm:git:https://github.com/usnistgov/oss-maven.git</connection>
-		<developerConnection>scm:git:https://github.com/usnistgov/oss-maven.git</developerConnection>
+		<connection>scm:git:[fetch=]https://github.com/usnistgov/oss-maven.git[push=]ssh://git@gitgub.com:usnistgov/oss-maven.git</connection>
+		<developerConnection>scm:git:[fetch=]https://github.com/usnistgov/oss-maven.git[push=]ssh://git@gitgub.com:usnistgov/oss-maven.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 
