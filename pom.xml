@@ -19,8 +19,8 @@
 
 	<scm>
 		<url>https://github.com/usnistgov/oss-maven</url>
-		<connection>scm:git:[fetch=]https://github.com/usnistgov/oss-maven.git[push=]ssh://git@gitgub.com:usnistgov/oss-maven.git</connection>
-		<developerConnection>scm:git:[fetch=]https://github.com/usnistgov/oss-maven.git[push=]ssh://git@gitgub.com:usnistgov/oss-maven.git</developerConnection>
+		<connection>scm:git:ssh://git@github.com:usnistgov/oss-maven.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:usnistgov/oss-maven.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 
@@ -66,12 +66,13 @@
 		<project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<version.scmprovider.gitexe>1.9.5</version.scmprovider.gitexe>
-		<version.plugin.release>2.5.3</version.plugin.release>
+		<version.scmprovider.gitexe>1.11.2</version.scmprovider.gitexe>
+		<version.plugin.release>2.5.2</version.plugin.release>
 		<version.plugin.site>3.7.1</version.plugin.site>
 		<version.plugin.maven-project-info-reports>3.0.0</version.plugin.maven-project-info-reports>
 		<version.plugin.deploy>3.0.0-M1</version.plugin.deploy>
 		<version.plugin.nexus-staging>1.6.7</version.plugin.nexus-staging>
+		<version.plugin.gpg>1.6</version.plugin.gpg>
 
 		<version.mavenReflowSkin>1.4.2</version.mavenReflowSkin>
 		<version.maven-velocity>1.7</version.maven-velocity>
