@@ -29,7 +29,7 @@
 		<!-- plugin dependencies -->
 		<version.plugin.assembly>3.0.0</version.plugin.assembly>
 		<version.plugin.build-helper>1.12</version.plugin.build-helper>
-		<version.plugin.checkstyle>3.0.0</version.plugin.checkstyle>
+		<version.plugin.checkstyle>3.1.1</version.plugin.checkstyle>
 		<version.plugin.clean>3.0.0</version.plugin.clean>
 		<version.plugin.cobertura>2.7</version.plugin.cobertura>
 		<version.plugin.compile>3.5.1</version.plugin.compile>
@@ -329,11 +329,6 @@
 							<groupId>gov.nist.secauto</groupId>
 							<artifactId>oss-build-support</artifactId>
 							<version>12-SNAPSHOT</version>
-						</dependency>
-						<dependency>
-							<groupId>com.puppycrawl.tools</groupId>
-							<artifactId>checkstyle</artifactId>
-							<version>7.3</version>
 						</dependency>
 					</dependencies>
 				</plugin>
