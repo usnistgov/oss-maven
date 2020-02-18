@@ -11,6 +11,7 @@ jobs:
       - checkout
       - restore_cache:
           key: maven-m2-{{ checksum "pom.xml" }}
+      - configure-gpg
       - run:
           command: mvn -s .circleci/maven-release-settings.xml -Prelease verify
       - persist_to_workspace:
