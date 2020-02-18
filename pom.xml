@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>gov.nist.secauto</groupId>
 	<artifactId>oss-maven</artifactId>
-	<version>13-SNAPSHOT</version>
+	<version>13</version>
 
 	<packaging>pom</packaging>
 
@@ -19,7 +19,7 @@
 		<url>https://github.com/usnistgov/oss-maven</url>
 		<connection>scm:git:ssh://git@github.com/usnistgov/oss-maven.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/usnistgov/oss-maven.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>v13</tag>
 	</scm>
 
 	<distributionManagement>
