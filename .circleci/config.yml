@@ -50,6 +50,7 @@ commands:
           name: Release new version to Maven Central
           command: |
             mvn -s .circleci/maven-release-settings.xml -Prelease deploy
+            mvn -s .circleci/maven-release-settings.xml -Prelease nexus-staging:close -DstagingDescription="closing to release"
       - save_cache:
           paths:
             - ~/.m2
