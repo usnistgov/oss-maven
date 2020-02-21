@@ -5,7 +5,6 @@
 	<groupId>gov.nist.secauto</groupId>
 	<artifactId>oss-maven</artifactId>
 	<version>14-SNAPSHOT</version>
-
 	<packaging>pom</packaging>
 
 	<name>Build Root</name>
@@ -90,6 +89,7 @@
 		<version.plugin.jxr>3.0.0</version.plugin.jxr>
 		<version.plugin.license>3.0</version.plugin.license>
 		<version.plugin.maven-project-info-reports>3.0.0</version.plugin.maven-project-info-reports>
+		<version.plugin.plugin>3.6.0</version.plugin.plugin>
 		<version.plugin.nexus-staging>1.6.8</version.plugin.nexus-staging>
 		<version.plugin.pmd>3.13.0</version.plugin.pmd>
 		<version.plugin.project-info-reports>2.9</version.plugin.project-info-reports>
@@ -226,7 +226,7 @@
 						<tagNameFormat>v@{project.version}</tagNameFormat>
 					</configuration>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-site-plugin</artifactId>
@@ -347,6 +347,7 @@
 					<configuration>
 						<targetJdk>${maven.compiler.target}</targetJdk>
 						<failurePriority>2</failurePriority>
+						<failOnViolation>true</failOnViolation>
 						<analysisCache>true</analysisCache>
 					</configuration>
 					<executions>
@@ -462,6 +463,18 @@
 						<autoReleaseAfterClose>false</autoReleaseAfterClose>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-plugin-plugin</artifactId>
+					<version>${version.plugin.plugin}</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.maven.plugin-tools</groupId>
+							<artifactId>maven-plugin-annotations</artifactId>
+							<version>${version.plugin.plugin}</version>
+						</dependency>
+					</dependencies>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -469,7 +482,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
 			</plugin>
-						<plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
 				<executions>
@@ -480,6 +493,7 @@
 							<goal>enforce</goal>
 						</goals>
 						<configuration>
+							<fail>false</fail>
 							<rules>
 								<requireJavaVersion>
 									<version>[1.8,)</version>
@@ -490,7 +504,7 @@
 								<requireMavenVersion>
 									<version>[3.3.9,)</version>
 									<message>[ERROR] The currently supported version of Maven is
-										3.0 or higher</message>
+										3.3.9 or higher</message>
 								</requireMavenVersion>
 								<requirePluginVersions>
 									<banLatest>true</banLatest>
@@ -505,7 +519,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 		</plugins>
 	</build>
 	<reporting>
@@ -546,6 +560,22 @@
 			<id>release</id>
 			<build>
 				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-enforcer-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>enforce-java</id>
+								<phase>validate</phase>
+								<goals>
+									<goal>enforce</goal>
+								</goals>
+								<configuration>
+									<fail>true</fail>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-gpg-plugin</artifactId>
