@@ -1,4 +1,5 @@
 # Maven Build Support for NIST Security Automation Open-Source Software (OSS) Projects
+[![CircleCI](https://circleci.com/gh/usnistgov/oss-maven/tree/master.svg?style=svg)](https://circleci.com/gh/usnistgov/oss-maven/tree/master) [![Gitter](https://img.shields.io/gitter/room/oss-maven/community.svg?style=flat-square)](https://gitter.im/oss-maven/community)
 
 This project provides support for using the Apache [Maven](https://maven.apache.org/) build system.
 
