@@ -21,3 +21,8 @@ mvn checkstyle:check
 To perform a release:
 
 mvn -Prelease release:clean release:prepare release:perform
+
+To build the site:
+
+mvn -Preporting site site:stage
+mvn scm-publish:publish-scm

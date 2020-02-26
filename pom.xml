@@ -32,6 +32,11 @@
 			<id>ossrh</id>
 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
+		<site>
+			<id>site_scm</id>
+			<url>scm:git:ssh://git@github.com:usnistgov/oss-maven.git</url>
+		</site>
+
 	</distributionManagement>
 
 	<licenses>
@@ -99,6 +104,7 @@
 		<version.plugin.replacer>1.5.2</version.plugin.replacer>
 		<version.plugin.resources>3.1.0</version.plugin.resources>
 		<version.plugin.scm>1.11.2</version.plugin.scm>
+		<version.plugin.scm-publish>3.0.0</version.plugin.scm-publish>
 		<version.plugin.shade>2.4.3</version.plugin.shade>
 		<version.plugin.site>3.8.2</version.plugin.site>
 		<version.plugin.source>3.2.1</version.plugin.source>
@@ -234,7 +240,8 @@
 					<artifactId>maven-site-plugin</artifactId>
 					<version>${version.plugin.site}</version>
 					<configuration>
-						<scmBranch>gh-pages</scmBranch>
+						<skipDeploy>true</skipDeploy>
+						<scmBranch>nist-pages</scmBranch>
 						<!-- <templateDirectory>${project.basedir}/target/site-files/site</templateDirectory> -->
 						<!-- <template>site.vm</template> -->
 					</configuration>
@@ -251,6 +258,11 @@
 							<version>${version.maven-velocity}</version>
 						</dependency>
 					</dependencies>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-scm-publish-plugin</artifactId>
+					<version>${version.plugin.scm-publish}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -404,6 +416,36 @@
 					</executions>
 				</plugin>
 				<plugin>
+					<groupId>net.revelc.code.formatter</groupId>
+					<artifactId>formatter-maven-plugin</artifactId>
+					<version>${version.plugin.formatter}</version>
+					<configuration>
+						<overrideConfigCompilerVersion>true</overrideConfigCompilerVersion>
+						<compilerSource>${maven.compiler.source}</compilerSource>
+						<compilerCompliance>${maven.compiler.source}</compilerCompliance>
+						<compilerTargetPlatform>${maven.compiler.target}</compilerTargetPlatform>
+						<lineEnding>KEEP</lineEnding>
+						<encoding>${project.build.sourceEncoding}</encoding>
+						<configFile>checkstyle/eclipse/eclipse-formatter.xml</configFile>
+					</configuration>
+					<executions>
+						<execution>
+							<id>format sources</id>
+							<phase>process-sources</phase>
+							<goals>
+								<goal>format</goal>
+							</goals>
+						</execution>
+					</executions>
+					<dependencies>
+						<dependency>
+							<groupId>gov.nist.secauto</groupId>
+							<artifactId>oss-build-support</artifactId>
+							<version>15-SNAPSHOT</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-checkstyle-plugin</artifactId>
 					<version>${version.plugin.checkstyle}</version>
@@ -417,7 +459,7 @@
 					<executions>
 						<execution>
 							<id>validate</id>
-							<phase>validate</phase>
+							<phase>process-sources</phase>
 							<goals>
 								<goal>check</goal>
 							</goals>
@@ -433,26 +475,6 @@
 							<groupId>com.puppycrawl.tools</groupId>
 							<artifactId>checkstyle</artifactId>
 							<version>${checkstyleVersion}</version>
-						</dependency>
-					</dependencies>
-				</plugin>
-				<plugin>
-					<groupId>net.revelc.code.formatter</groupId>
-					<artifactId>formatter-maven-plugin</artifactId>
-					<version>${version.plugin.formatter}</version>
-					<configuration>
-						<compilerSource>${maven.compiler.source}</compilerSource>
-						<compilerCompliance>${maven.compiler.source}</compilerCompliance>
-						<compilerTargetPlatform>${maven.compiler.target}</compilerTargetPlatform>
-						<lineEnding>CRLF</lineEnding>
-						<encoding>${project.build.sourceEncoding}</encoding>
-						<configFile>checkstyle/eclipse/eclipse-formatter.xml</configFile>
-					</configuration>
-					<dependencies>
-						<dependency>
-							<groupId>gov.nist.secauto</groupId>
-							<artifactId>oss-build-support</artifactId>
-							<version>15-SNAPSHOT</version>
 						</dependency>
 					</dependencies>
 				</plugin>
@@ -491,6 +513,28 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>stage-for-scm-publish</id>
+						<phase>post-site</phase>
+						<goals>
+							<goal>stage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-scm-publish-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>scm-publish</id>
+						<phase>site-deploy</phase>
+						<goals>
+							<goal>publish-scm</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
