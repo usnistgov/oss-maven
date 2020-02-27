@@ -28,17 +28,6 @@ commands:
           paths:
             - ~/.m2
           key: maven-m2-v1-{{ .Branch }}-{{ checksum "pom.xml" }}
-  deploy:
-    steps:
-      - attach_workspace:
-          at: .
-      - restore-maven-cache
-      - configure-gpg
-      - run:
-          name: Deploy new version to Maven Central
-          command: |
-            mvn -s .circleci/maven-release-settings.xml -Prelease deploy
-      - save-maven-cache
 jobs:
   build-and-test:
     executor: maven-executor
@@ -65,15 +54,31 @@ jobs:
   deploy-release:
     executor: maven-executor
     steps:
-      - deploy
+      - attach_workspace:
+          at: .
+      - restore-maven-cache
+      - configure-gpg
       - run:
-          name: Release new version to Maven Central
+          name: Deploy new RELEASE to Maven Central
           command: |
+            mvn -s .circleci/maven-release-settings.xml -Prelease deploy
             mvn -s .circleci/maven-release-settings.xml -Prelease nexus-staging:close -DstagingDescription="closing to release"
+      - save-maven-cache
   deploy-snapshot:
     executor: maven-executor
     steps:
-      - deploy
+      - attach_workspace:
+          at: .
+      - restore-maven-cache
+      - configure-gpg
+      - run:
+          name: Deploy new SNAPSHOT to Maven Central
+          command: |
+            release_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+            if [[ $release_version == *-SNAPSHOT ]]; then
+              mvn -s .circleci/maven-release-settings.xml -Prelease deploy
+            fi
+      - save-maven-cache
 workflows:
   release:
     jobs:
