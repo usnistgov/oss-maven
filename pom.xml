@@ -196,9 +196,6 @@
 						<bootclasspath>${sun.boot.class.path}</bootclasspath>
 						<additionalJOption>-J-Xmx1024m</additionalJOption>
 						<maxmemory>${javadoc.maxmemory}</maxmemory>
-						<links>
-							<link>http://docs.oracle.com/javase/8/docs/api/</link>
-						</links>
 						<archive>
 							<manifest>
 								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
@@ -408,10 +405,10 @@
 					<executions>
 						<execution>
 							<id>check-license</id>
+							<phase>verify</phase>
 							<goals>
 								<goal>check</goal>
 							</goals>
-							<phase>verify</phase>
 						</execution>
 					</executions>
 				</plugin>
@@ -430,7 +427,7 @@
 					</configuration>
 					<executions>
 						<execution>
-							<id>format sources</id>
+							<id>default</id>
 							<phase>process-sources</phase>
 							<goals>
 								<goal>format</goal>
@@ -586,38 +583,6 @@
 			</plugin>
 		</plugins>
 	</build>
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-project-info-reports-plugin</artifactId>
-				<version>${version.plugin.maven-project-info-reports}</version>
-				<reportSets>
-					<reportSet>
-						<id>default</id>
-						<reports>
-							<report>index</report>
-							<report>dependency-info</report>
-							<report>team</report>
-							<report>mailing-lists</report>
-							<report>scm</report>
-						</reports>
-					</reportSet>
-					<!-- <reportSet> -->
-					<!-- <id>developer</id> -->
-					<!-- <reports> -->
-					<!-- <report>dependencies</report> -->
-					<!-- <report>dependency-convergence</report> -->
-					<!-- <report>dependency-management</report> -->
-					<!-- <report>ci-management</report> -->
-					<!-- <report>issue-management</report> -->
-					<!-- <report>licenses</report> -->
-					<!-- </reports> -->
-					<!-- </reportSet> -->
-				</reportSets>
-			</plugin>
-		</plugins>
-	</reporting>
 
 	<profiles>
 		<profile>
@@ -642,6 +607,41 @@
 					</plugin>
 				</plugins>
 			</build>
+		</profile>
+		<profile>
+			<id>reporting</id>
+			<reporting>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-project-info-reports-plugin</artifactId>
+						<version>${version.plugin.maven-project-info-reports}</version>
+						<reportSets>
+							<reportSet>
+								<id>default</id>
+								<reports>
+									<report>index</report>
+									<report>dependency-info</report>
+									<report>team</report>
+									<report>mailing-lists</report>
+									<report>scm</report>
+								</reports>
+							</reportSet>
+							<!-- <reportSet> -->
+							<!-- <id>developer</id> -->
+							<!-- <reports> -->
+							<!-- <report>dependencies</report> -->
+							<!-- <report>dependency-convergence</report> -->
+							<!-- <report>dependency-management</report> -->
+							<!-- <report>ci-management</report> -->
+							<!-- <report>issue-management</report> -->
+							<!-- <report>licenses</report> -->
+							<!-- </reports> -->
+							<!-- </reportSet> -->
+						</reportSets>
+					</plugin>
+				</plugins>
+			</reporting>
 		</profile>
 		<profile>
 			<id>gpg</id>
