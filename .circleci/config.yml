@@ -35,10 +35,9 @@ commands:
       - restore-maven-cache
       - configure-gpg
       - run:
-          name: Release new version to Maven Central
+          name: Deploy new version to Maven Central
           command: |
             mvn -s .circleci/maven-release-settings.xml -Prelease deploy
-            mvn -s .circleci/maven-release-settings.xml -Prelease nexus-staging:close -DstagingDescription="closing to release"
       - save-maven-cache
 jobs:
   build-and-test:
@@ -67,6 +66,10 @@ jobs:
     executor: maven-executor
     steps:
       - deploy
+      - run:
+          name: Release new version to Maven Central
+          command: |
+            mvn -s .circleci/maven-release-settings.xml -Prelease nexus-staging:close -DstagingDescription="closing to release"
   deploy-snapshot:
     executor: maven-executor
     steps:
