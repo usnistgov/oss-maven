@@ -60,7 +60,7 @@ jobs:
           name: Deploy new RELEASE to Maven Central
           command: |
             mvn -s .circleci/maven-release-settings.xml -Prelease deploy
-            mvn -s .circleci/maven-release-settings.xml -Prelease nexus-staging:close -DstagingDescription="closing to release"
+            # mvn -s .circleci/maven-release-settings.xml -Prelease nexus-staging:close -DstagingDescription="closing to release"
       - save-maven-cache
   deploy-snapshot:
     executor: maven-executor
@@ -92,9 +92,15 @@ jobs:
           fingerprints:
             - "b3:aa:a7:c5:bb:86:ad:14:bc:13:54:80:d1:79:18:1e"
       - run:
+          name: Create known hosts
+          command: |
+            ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - run:
           name: Run deploy script
           command: |
             touch target/staging/.nojekyll
+            mkdir target/staging/.circleci
+            cp .circleci/config.yml target/staging/.circleci
             bash .circleci/deploy.sh --push-only -v -m "Deploying website [ci deploy skip]"
 workflows:
   releases:
