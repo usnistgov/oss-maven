@@ -60,7 +60,7 @@ jobs:
           name: Deploy new RELEASE to Maven Central
           command: |
             mvn -s .circleci/maven-release-settings.xml -Prelease deploy
-            mvn -s .circleci/maven-release-settings.xml -Prelease nexus-staging:close -DstagingDescription="closing to release"
+            # mvn -s .circleci/maven-release-settings.xml -Prelease nexus-staging:close -DstagingDescription="closing to release"
       - save-maven-cache
   deploy-snapshot:
     executor: maven-executor
