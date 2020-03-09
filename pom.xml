@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>gov.nist.secauto</groupId>
 	<artifactId>oss-maven</artifactId>
@@ -70,7 +72,7 @@
 		<maven.compiler.release>8</maven.compiler.release>
 		<javac.debuglevel>lines,source,vars</javac.debuglevel>
 
-		<version.mavenReflowSkin>1.4.2</version.mavenReflowSkin>
+		<version.mavenReflowSkin>2.2.0</version.mavenReflowSkin>
 		<version.maven-velocity>1.7</version.maven-velocity>
 		<checkstyleVersion>8.29</checkstyleVersion>
 
@@ -237,6 +239,8 @@
 					<configuration>
 						<skipDeploy>true</skipDeploy>
 						<scmBranch>nist-pages</scmBranch>
+						<relativizeDecorationLinks>true</relativizeDecorationLinks>
+						<generateReports>true</generateReports>
 						<!-- <templateDirectory>${project.basedir}/target/site-files/site</templateDirectory> -->
 						<!-- <template>site.vm</template> -->
 					</configuration>
@@ -246,11 +250,15 @@
 							<artifactId>reflow-velocity-tools</artifactId>
 							<version>${version.mavenReflowSkin}</version>
 						</dependency>
-						<!-- Reflow skin requires velocity 1.7 -->
 						<dependency>
 							<groupId>org.apache.velocity</groupId>
 							<artifactId>velocity</artifactId>
 							<version>${version.maven-velocity}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.apache.maven.doxia</groupId>
+							<artifactId>doxia-module-markdown</artifactId>
+							<version>1.9.1</version>
 						</dependency>
 					</dependencies>
 				</plugin>
