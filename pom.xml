@@ -69,7 +69,7 @@
 		<!-- Java compiler properties -->
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<maven.compiler.release>8</maven.compiler.release>
+<!-- 		<maven.compiler.release>8</maven.compiler.release> -->
 		<javac.debuglevel>lines,source,vars</javac.debuglevel>
 
 		<version.mavenReflowSkin>2.2.0</version.mavenReflowSkin>
