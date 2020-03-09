@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>gov.nist.secauto</groupId>
 	<artifactId>oss-maven</artifactId>
-	<version>16</version>
+	<version>17-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Build Root</name>
@@ -77,7 +77,7 @@
 		<url>${scm.url}/tree/master</url>
 		<connection>scm:git:ssh://git@github.com/usnistgov/oss-maven.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/usnistgov/oss-maven.git</developerConnection>
-		<tag>v16</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<distributionManagement>
@@ -407,7 +407,7 @@
 						<dependency>
 							<groupId>gov.nist.secauto</groupId>
 							<artifactId>oss-build-support</artifactId>
-							<version>16</version>
+							<version>17-SNAPSHOT</version>
 						</dependency>
 					</dependencies>
 					<executions>
@@ -446,7 +446,7 @@
 						<dependency>
 							<groupId>gov.nist.secauto</groupId>
 							<artifactId>oss-build-support</artifactId>
-							<version>16</version>
+							<version>17-SNAPSHOT</version>
 						</dependency>
 					</dependencies>
 				</plugin>
@@ -474,7 +474,7 @@
 						<dependency>
 							<groupId>gov.nist.secauto</groupId>
 							<artifactId>oss-build-support</artifactId>
-							<version>16</version>
+							<version>17-SNAPSHOT</version>
 						</dependency>
 						<dependency>
 							<groupId>com.puppycrawl.tools</groupId>
