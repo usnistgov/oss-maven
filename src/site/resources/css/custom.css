@@ -1,50 +1,24 @@
-/* adjust for nist header */
-.navbar-fixed-top {
-    top: 45px;
-    position: absolute;
+.subfooter {
+    display: none;
 }
-/* reset back to bootswatch */
-body {
-    padding-top: 80px;
-    padding-bottom: 20px;
+#m-top-navbar.bg-primary {
+  background-color: #000 !important;
 }
-
 #nistheadergoeshere {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    background-color: #000;
+  display: inline;
 }
-
 #nist-header {
-    z-index: 3000;
-    margin-right: auto;
-    margin-left: auto;
+  display: inline;
 }
-
-@media ( min-width :768px) {
-    .nist-header {
-        width: 750px;
-    }
+#brandtext {
+  display: inline;
 }
-
-@media ( min-width :992px) {
-    .nist-header {
-        width: 970px;
-    }
+.nist-header__logo-link {
+  display: inline;
 }
-
-@media ( min-width :1200px) {
-    .nist-header {
-        width: 1170px;
-    }
+.nist-header__logo-icon {
+  display: inline;
 }
-
-/* Remove the drop shadow */
-.nist-header__nav-wrapper {
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
+.projectVersion {
+  padding-right: 0.5rem;
 }

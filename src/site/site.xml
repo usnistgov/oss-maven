@@ -1,144 +1,177 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/DECORATION/1.6.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/DECORATION/1.7.0 http://maven.apache.org/xsd/decoration-1.7.0.xsd"
-	name="NIST Open Source Maven Parent">
-	<bannerLeft>
-		<name><![CDATA[
-      <span class="color-highlight">Security Automation</span> Maven Project
+<project xmlns="http://maven.apache.org/DECORATION/1.8.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd"
+  name="NIST Open Source Maven Parent">
+  <bannerLeft>
+    <name><![CDATA[
+      Security Automation Maven Project
       ]]>
-		</name>
-		<href>http://pages.nist.gov/oss-maven/</href>
-	</bannerLeft>
+    </name>
+    <href>${this.site.url}</href>
+  </bannerLeft>
 
-	<publishDate position="bottom" format="yyyy-MM-dd" />
-	<version position="left" />
+  <body>
+    <head>
+      <![CDATA[
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <link rel="manifest" href="$resourcePath/site.webmanifest">
+      <link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
+      <link rel="stylesheet" href="$resourcePath/css/custom.css">
+      ]]>
+    </head>
+    <links>
+      <item name="GitHub Project" href="${this.scm.url}"/>
+    </links>
 
-	<skin>
-	
-<!--  		<groupId>io.github.devacfr.maven.skins</groupId> -->
-<!--         <artifactId>reflow-maven-skin</artifactId> -->
-<!--         <version>1.4.2</version> -->
-		<groupId>gov.nist.secauto</groupId>
-		<artifactId>reflow-maven-skin</artifactId>
-		<version>${project.version}</version>
-	</skin>
-	<custom>
-		<reflowSkin>
-			<!-- Make this to 'false' for local development, i.e. file:// URLs -->
-			<protocolRelativeURLs>false</protocolRelativeURLs>
-<!-- 			<absoluteResourceURL>https://pages.nist.gov/oss-maven/</absoluteResourceURL> -->
-			<smoothScroll>true</smoothScroll>
-			<theme>bootswatch-spacelab</theme>
-			<highlightJs>true</highlightJs>
-			<highlightJsTheme>github</highlightJsTheme>
-			<!-- <highlightJsVersion>9.12.0</highlightJsVersion> -->
-			<!-- <bootstrapVersion>3.3.7</bootstrapVersion> -->
-			<!-- <bootswatchVersion>3.3.7</bootswatchVersion> -->
-			<skinAttribution>false</skinAttribution>
-            <copyright>false</copyright>
-			<brand>
-				<name>
-            <![CDATA[
-            <span class="color-highlight">Security Automation</span> Maven Project
-            ]]>
-				</name>
-				<href>http://pages.nist.gov/oss-maven/</href>
-			</brand>
-			<slogan>Default Maven build settings for NIST Security Automation projects</slogan>
-			<titleTemplate>%2$s | %1$s</titleTemplate>
-			<tocTopMax>6</tocTopMax>
-			<!-- Include the documentation and tools in the top navigation (in addition 
-				to links) -->
-			<topNav>Documentation|Contribute|Maven Documentation</topNav>
-			<!-- Split menus in the bottom navigation -->
-			<bottomNav maxSpan="9">
-				<column>Main</column>
-				<column>Contribute</column>
-                <column>Modules</column>
-				<column>Maven Documentation</column>
-			</bottomNav>
-			<bottomDescription>
+    <breadcrumbs>
+      <item name="OSS Maven" href="./"/>
+    </breadcrumbs>
+    <menu name="Main" inherit="top">
+      <item name="Home" href="./"/>
+      <item name="GitHub project" href="${this.scm.url}"/>
+      <item name="Licenses" href="${this.scm.url}/LICENSE.md"/>
+    </menu>
+    <menu name="Contribute" inherit="bottom">
+      <item name="Contribute" href="${this.scm.url}/CONTRIBUTING.md"/>
+      <item name="Issues" href="${this.issueManagement.url}"/>
+      <item name="Fork on GitHub" href="${this.scm.url}"/>
+    </menu>
+    <menu name="Documentation" inherit="bottom">
+      <item name="Maven Usage" href="./oss-parent/usage.html"/>
+      <item name="Build Features" href="./oss-parent/features.html"/>
+      <item name="Eclipse Configuration" href="./oss-build-support/eclipse.html"/>
+    </menu>
+    <menu name="Modules" ref="modules"/>
+    <menu name="Maven Documentation" ref="reports" inherit="bottom"/>
+    <!-- Disable copyright footer -->
+    <footer/>
+  </body>
+
+  <custom>
+    <reflowSkin>
+      <brand>
+        <name>
+      	 <![CDATA[
+      	 <div id="nistheadergoeshere"></div> Security Automation Maven Support
+      	 ]]>
+      	</name>
+        <href>${project.site.url}</href>
+      </brand>
+      <slogan>Default Maven build settings for NIST Security Automation projects.</slogan>
+      <bottomDescription quote="false">
         <![CDATA[
-          <span class="color-highlight">OSS Maven</span> provides for a consistent look-and-feel for
+          <div>
+          <span class="text-info">OSS Maven</span> provides for a consistent look-and-feel for
                 project sites, and checks for serious coding issues, code style, and licenses in code.
+            <div class="m-1">
+              <a href="${this.scm.url}" class="p-1 text-secondary"><i class="fab fa-github"></i></a>
+              <a href="mailto:scap@nist.gov" class="p-1 text-secondary"><i class="fas fa-envelope"></i></a>
+              <a href="https://gitter.im/oss-maven/community" class="p-1 text-secondary" target="_blank"><i class="fab fa-gitter"></i></a>
+            </div>
+          </div>
         ]]>
-			</bottomDescription>
-            <markPageHeader>false</markPageHeader>
-            <endContent>
-			    <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript"></script>
-<!-- 			    <script async type="text/javascript" id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NIST&subagency=github&pua=UA-42404149-54&yt=true&exts=ppsx,pps,f90,sch,rtf,wrl,txz,m1v,xlsm,msi,xsd,f,tif,eps,mpg,xml,pl,xlt,c"></script> -->
-            </endContent>
-			<pages>
-                <index project="oss-maven">
-                    <shortTitle>Security Automation Build Support</shortTitle>
-                    <sections>
-                        <body />
-                    </sections>
-                </index>
-                <index project="oss-parent">
-                    <shortTitle>Parent POM for Security Automation Projects</shortTitle>
-                    <toc type="static">sidebar</toc>
-                    <sections>
-                        <body />
-                    </sections>
-                </index>
-                <usage project="oss-parent">
-                    <shortTitle>Use as a parent POM</shortTitle>
-                    <sections>
-                        <body />
-                    </sections>
-                </usage>
-                <features project="oss-parent">
-                    <shortTitle>Build features</shortTitle>
-                    <sections>
-                        <body />
-                    </sections>
-                </features>
-                <eclipse project="oss-build-support">
-                    <shortTitle>Eclipse Configuration</shortTitle>
-                    <sections>
-                        <body />
-                    </sections>
-                </eclipse>
-			</pages>
-		</reflowSkin>
-	</custom>
+      </bottomDescription>
+      <pages>
+        <index project="oss-maven">
+          <shortTitle>Security Automation Build Support</shortTitle>
+          <toc>false</toc>
+          <sections>
+            <body/>
+          </sections>
+        </index>
+        <index project="oss-parent">
+          <shortTitle>Parent POM for Security Automation Projects</shortTitle>
+          <toc>false</toc>
+          <sections>
+            <body/>
+          </sections>
+        </index>
+        <index project="oss-build-support">
+          <shortTitle>Supporting files for Maven Builds</shortTitle>
+          <toc>false</toc>
+          <sections>
+            <body/>
+          </sections>
+        </index>
+        <usage project="oss-parent">
+          <shortTitle>Use as a parent POM</shortTitle>
+          <toc>false</toc>
+          <sections>
+            <body/>
+          </sections>
+        </usage>
+        <features project="oss-parent">
+          <shortTitle>Build features</shortTitle>
+          <toc>false</toc>
+          <sections>
+            <body/>
+          </sections>
+        </features>
+      </pages>
 
-	<body>
-		<!-- Add a rel to Google profile for all pages -->
-		<head>
-		<![CDATA[
-            <link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
-            <link rel="stylesheet" href="$resourcePath/css/custom.css">
+
+      <navbar filterMenu="Documentation|Maven documentation"
+        cssClass="navbar-dark bg-primary border-bottom" center="false" alignMenu="right"/>
+      <!-- Split menus in the bottom navigation -->
+      <bottomNav maxSpan="9">
+        <column>Main</column>
+        <column>Contribute</column>
+        <column>Modules</column>
+		<column>Maven Documentation</column>
+      </bottomNav>
+
+      <absoluteResourceURL>${this.site.url}</absoluteResourceURL>
+      <localResources>false</localResources>
+      <skinAttribution>false</skinAttribution>
+      <smoothScroll>true</smoothScroll>
+      <theme>bootswatch-flatly</theme>
+      <highlightJs>true</highlightJs>
+      <highlightJsTheme>github</highlightJsTheme>
+      <highlightJsVersion>9.18.1</highlightJsVersion>
+      <breadcrumbs>true</breadcrumbs>
+      <endContent>
+        <script type="text/javascript">
+          <![CDATA[
+        document.querySelectorAll('div.source pre').forEach((block) => {
+          hljs.highlightBlock(block);
+        });
+        $(document).ready(function () {
+          $.ajax({
+            url: "https://pages.nist.gov/nist-header-footer/boilerplate-header.html",
+            cache: false,
+            dataType: "html",
+            success: function (data) { $('#nistheadergoeshere').append(data); }
+          });
+          $("body").append('<div id="nistfootergoeshere"></div>');
+          $.ajax({
+            url: "https://pages.nist.gov/nist-header-footer/boilerplate-footer.html",
+            cache: false,
+            dataType: "html",
+            success: function (data) { $('#nistfootergoeshere').append(data); }
+          });
+        });
         ]]>
-		</head>
+        </script>
+      </endContent>
+      <titleTemplate>%2$s | %1$s</titleTemplate>
+      <header enabled="true"/>
+      <!-- Use Table of Contents at the top of the page (max 6 elements) -->
+      <toc numberItems="6" cssClass="navbar-dark bg-dark border rounded">sidebar</toc>
+      <navside-menu cssClass="navside-light bg-light"/>
+      <footer theme="light"/>
+      <markPageHeader>false</markPageHeader>
+    </reflowSkin>
+  </custom>
 
-		<links>
-			<item name="GitHub project"
-				href="http://github.com/usnistgov/oss-maven/" />
-		</links>
+  <skin>
+    <groupId>io.github.devacfr.maven.skins</groupId>
+    <artifactId>reflow-maven-skin</artifactId>
+    <version>2.2.0</version>
+  </skin>
 
-		<breadcrumbs>
-			<item name="OSS Maven" href="./" />
-		</breadcrumbs>
-
-		<menu name="Main" inherit="top">
-			<item name="Home" href="./" />
-		</menu>
-        <menu name="Documentation" inherit="top">
-            <item name="Maven Usage" href="./oss-parent/usage.html"/>
-            <item name="Build Features" href="./oss-parent/features.html"/>
-            <item name="Eclipse Configuration" href="./oss-build-support/eclipse.html"/>
-        </menu>
-		<menu name="Contribute" inherit="bottom">
-			<item name="Issues"
-				href="http://github.com/usnistgov/oss-maven/issues" />
-			<item name="Fork on GitHub"
-				href="http://github.com/usnistgov/oss-maven/" />
-            <item name="License" href="http://github.com/usnistgov/oss-maven/blob/master/LICENSE.md" />
-		</menu>
-        <menu name="Modules" ref="modules"/>
-		<menu name="Maven Documentation" ref="reports" inherit="bottom" />
-	</body>
+  <googleAnalyticsAccountId>UA-42404149-54</googleAnalyticsAccountId>
+  <publishDate position="none" format="yyyy-MM-dd"/>
+  <version position="left"/>
+  <edit>${this.scm.url}</edit>
 </project>

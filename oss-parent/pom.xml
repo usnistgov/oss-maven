@@ -13,9 +13,6 @@
 	<name>Parent POM</name>
 	<description>A Common Maven Build Parent for NIST Open Source Projects, that provides for centralized management of plugin versions, code style, and other code quality checks.</description>
 
-	<properties>
-	</properties>
-
 	<build>
 		<plugins>
 			<plugin>

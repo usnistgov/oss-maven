@@ -3,7 +3,7 @@ version: 2.1
 executors:
   maven-executor:
     docker:
-      - image: circleci/openjdk:8u171-jdk
+      - image: circleci/openjdk:8-jdk
 commands:
   configure-gpg:
     steps:
@@ -21,7 +21,7 @@ commands:
       - run:
           name: Retrieve all Maven plugins and dependencies
           command: |
-            mvn  -s .circleci/maven-release-settings.xml -Prelease -Preporting --fail-never dependency:go-offline || true
+            mvn  -s .circleci/maven-release-settings.xml -Prelease -Preporting -Pallow-snapshots --fail-never dependency:go-offline || true
   save-maven-cache:
     steps:
       - save_cache:
@@ -36,6 +36,7 @@ jobs:
       - restore-maven-cache
       - configure-gpg
       - run:
+          name: Build and test Java code
           command: mvn -Prelease verify
       - save-maven-cache
       - persist_to_workspace:
@@ -48,9 +49,6 @@ jobs:
       - store_artifacts:
           path: oss-parent/target
           destination: artifacts/oss-parent
-      - store_artifacts:
-          path: reflow-maven-skin/target
-          destination: artifacts/reflow-maven-skin
   deploy-release:
     executor: maven-executor
     steps:
@@ -79,8 +77,27 @@ jobs:
               mvn -s .circleci/maven-release-settings.xml -Prelease deploy
             fi
       - save-maven-cache
+  deploy-site:
+    executor: maven-executor
+    steps:
+      - attach_workspace:
+          at: .
+      - restore-maven-cache
+      - run:
+          name: Build Site with Maven
+          command: |
+            mvn -Preporting -Prelease package site site:stage
+      - save-maven-cache
+      - add_ssh_keys:
+          fingerprints:
+            - "b3:aa:a7:c5:bb:86:ad:14:bc:13:54:80:d1:79:18:1e"
+      - run:
+          name: Run deploy script
+          command: |
+            touch target/staging/.nojekyll
+            bash .circleci/deploy.sh --push-only -v -m "Deploying website [ci deploy skip]"
 workflows:
-  release:
+  releases:
     jobs:
       - build-and-test:
           filters:
@@ -98,7 +115,16 @@ workflows:
             # only act on version tags
             tags:
               only: /v[0-9]+(\.[0-9]+)*.*/
-  snapshot:
+      - deploy-site:
+          requires:
+            - deploy-release
+          filters:
+            branches:
+              ignore: /.*/
+            # only act on version tags
+            tags:
+              only: /v[0-9]+(\.[0-9]+)*.*/
+  snapshots:
     jobs:
       - build-and-test:
           filters:
@@ -110,4 +136,3 @@ workflows:
           filters:
             branches:
               only: master
- 

@@ -9,58 +9,14 @@
 
 	<name>Build Root</name>
 	<description>A common build root for all NIST projects related to Security Automation.</description>
-	<url>https://github.com/usnistgov/oss-maven</url>
-
-	<issueManagement>
-		<url>https://github.com/usnistgov/oss-maven/issues</url>
-		<system>GitHub Issues</system>
-	</issueManagement>
-
-	<scm>
-		<url>https://github.com/usnistgov/oss-maven</url>
-		<connection>scm:git:ssh://git@github.com/usnistgov/oss-maven.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com/usnistgov/oss-maven.git</developerConnection>
-		<tag>HEAD</tag>
-	</scm>
-
-	<distributionManagement>
-		<snapshotRepository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
-		<repository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-		<site>
-			<id>site_scm</id>
-			<url>scm:git:ssh://git@github.com:usnistgov/oss-maven.git</url>
-		</site>
-
-	</distributionManagement>
-
-	<licenses>
-		<license>
-			<name>NIST License</name>
-			<url>https://www.nist.gov/director/licensing</url>
-			<distribution>repo</distribution>
-			<comments>NIST software License</comments>
-		</license>
-	</licenses>
-
-	<developers>
-		<developer>
-			<id>david.waltermire@nist.gov</id>
-			<name>David Waltermire</name>
-			<email>david.waltermire@nist.gov</email>
-			<organization>National Institute of Standards and Technology</organization>
-			<roles>
-				<role>maintainer</role>
-			</roles>
-		</developer>
-	</developers>
+	<url>${site.url}</url>
 
 	<properties>
+		<!-- shared site configuration -->
+		<site.url>https://pages.nist.gov/oss-maven</site.url>
+		<scm.url>https://github.com/usnistgov/oss-maven</scm.url>
+		<issueManagement.url>https://github.com/usnistgov/oss-maven/issues</issueManagement.url>
+
 		<!-- various encodings -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
@@ -113,6 +69,54 @@
 		<version.plugin.versions>2.7</version.plugin.versions>
 		<version.plugin.war>3.2.3</version.plugin.war>
 	</properties>
+
+	<issueManagement>
+		<url>${issueManagement.url}</url>
+		<system>GitHub Issues</system>
+	</issueManagement>
+
+	<scm>
+		<url>${scm.url}/tree/master</url>
+		<connection>scm:git:ssh://git@github.com/usnistgov/oss-maven.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/usnistgov/oss-maven.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+		<site>
+			<id>site_scm</id>
+			<url>${site.url}</url>
+		</site>
+	</distributionManagement>
+
+	<licenses>
+		<license>
+			<name>NIST License</name>
+			<url>https://www.nist.gov/director/licensing</url>
+			<distribution>repo</distribution>
+			<comments>NIST software License</comments>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>david.waltermire@nist.gov</id>
+			<name>David Waltermire</name>
+			<email>david.waltermire@nist.gov</email>
+			<organization>National Institute of Standards and Technology</organization>
+			<roles>
+				<role>maintainer</role>
+			</roles>
+		</developer>
+	</developers>
 
 	<dependencyManagement>
 		<dependencies>
@@ -681,6 +685,5 @@
 	<modules>
 		<module>oss-build-support</module>
 		<module>oss-parent</module>
-		<module>reflow-maven-skin</module>
 	</modules>
 </project>
