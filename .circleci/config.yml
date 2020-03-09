@@ -92,6 +92,10 @@ jobs:
           fingerprints:
             - "b3:aa:a7:c5:bb:86:ad:14:bc:13:54:80:d1:79:18:1e"
       - run:
+          name: Create known hosts
+          command: |
+            ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - run:
           name: Run deploy script
           command: |
             touch target/staging/.nojekyll
