@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>gov.nist.secauto</groupId>
 	<artifactId>oss-maven</artifactId>
@@ -23,12 +25,16 @@
 		<!-- Java compiler properties -->
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-<!-- 		<maven.compiler.release>8</maven.compiler.release> -->
+		<!-- <maven.compiler.release>8</maven.compiler.release> -->
 		<javac.debuglevel>lines,source,vars</javac.debuglevel>
 
 		<version.mavenReflowSkin>2.2.0</version.mavenReflowSkin>
 		<version.maven-velocity>1.7</version.maven-velocity>
-		<checkstyleVersion>8.29</checkstyleVersion>
+
+		<dependency.junit.version>4.13.1</dependency.junit.version>
+		<dependency.junit5.version>5.7.0</dependency.junit5.version>
+		<dependency.junit5-platform-launcher.version>1.7.0</dependency.junit5-platform-launcher.version>
+		<dependency.checkstyle.version>8.39</dependency.checkstyle.version>
 
 		<version.plugin.assembly>3.2.0</version.plugin.assembly>
 		<version.plugin.build-helper>3.0.0</version.plugin.build-helper>
@@ -48,7 +54,7 @@
 		<version.plugin.javadoc>3.1.1</version.plugin.javadoc>
 		<version.plugin.jdepend>2.0</version.plugin.jdepend>
 		<version.plugin.jxr>3.0.0</version.plugin.jxr>
-		<version.plugin.license>3.0</version.plugin.license>
+		<version.plugin.license>4.0.rc1</version.plugin.license>
 		<version.plugin.maven-project-info-reports>3.0.0</version.plugin.maven-project-info-reports>
 		<version.plugin.plugin>3.6.0</version.plugin.plugin>
 		<version.plugin.nexus-staging>1.6.8</version.plugin.nexus-staging>
@@ -121,9 +127,40 @@
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
-				<version>4.12</version>
+				<version>${dependency.junit.version}</version>
 				<scope>test</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-api</artifactId>
+				<version>${dependency.junit5.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-engine</artifactId>
+				<version>${dependency.junit5.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-params</artifactId>
+				<version>${dependency.junit5.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.vintage</groupId>
+				<artifactId>junit-vintage-engine</artifactId>
+				<version>${dependency.junit5.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-launcher</artifactId>
+				<version>${dependency.junit5-platform-launcher.version}</version>
+				<scope>test</scope>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -240,7 +277,7 @@
 					<version>${version.plugin.site}</version>
 					<configuration>
 						<skipDeploy>true</skipDeploy>
-						<scmBranch>nist-pages</scmBranch>
+						<!-- <scmBranch>nist-pages</scmBranch> -->
 						<relativizeDecorationLinks>true</relativizeDecorationLinks>
 						<generateReports>true</generateReports>
 						<!-- <templateDirectory>${project.basedir}/target/site-files/site</templateDirectory> -->
@@ -376,6 +413,11 @@
 						<failurePriority>2</failurePriority>
 						<failOnViolation>true</failOnViolation>
 						<analysisCache>true</analysisCache>
+						<printFailingErrors>true</printFailingErrors>
+						<includes>
+							<include>${project.build.sourceDirectory}/**/*.java</include>
+							<include>${project.build.testSourceDirectory}/**/*.java</include>
+						</includes>
 					</configuration>
 					<executions>
 						<execution>
@@ -383,6 +425,7 @@
 							<phase>verify</phase>
 							<goals>
 								<goal>check</goal>
+								<goal>cpd-check</goal>
 							</goals>
 						</execution>
 					</executions>
@@ -397,10 +440,15 @@
 					<artifactId>license-maven-plugin</artifactId>
 					<version>${version.plugin.license}</version>
 					<configuration>
-						<header>license/nist/license.txt</header>
-						<includes>
-							<include>**/*.java</include>
-						</includes>
+						<licenseSets>
+							<licenseSet>
+								<header>license/nist/license.txt</header>
+								<includes>
+									<include>${project.build.sourceDirectory}/**/*.java</include>
+									<include>${project.build.testSourceDirectory}/**/*.java</include>
+								</includes>
+							</licenseSet>
+						</licenseSets>
 						<failIfMissing>true</failIfMissing>
 					</configuration>
 					<dependencies>
@@ -425,7 +473,7 @@
 					<artifactId>formatter-maven-plugin</artifactId>
 					<version>${version.plugin.formatter}</version>
 					<configuration>
-						<overrideConfigCompilerVersion>true</overrideConfigCompilerVersion>
+						<!-- <overrideConfigCompilerVersion>true</overrideConfigCompilerVersion> -->
 						<compilerSource>${maven.compiler.source}</compilerSource>
 						<compilerCompliance>${maven.compiler.source}</compilerCompliance>
 						<compilerTargetPlatform>${maven.compiler.target}</compilerTargetPlatform>
@@ -479,7 +527,7 @@
 						<dependency>
 							<groupId>com.puppycrawl.tools</groupId>
 							<artifactId>checkstyle</artifactId>
-							<version>${checkstyleVersion}</version>
+							<version>${dependency.checkstyle.version}</version>
 						</dependency>
 					</dependencies>
 				</plugin>
@@ -622,6 +670,11 @@
 				<plugins>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-jxr-plugin</artifactId>
+						<version>${version.plugin.jxr}</version>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-project-info-reports-plugin</artifactId>
 						<version>${version.plugin.maven-project-info-reports}</version>
 						<reportSets>
@@ -647,6 +700,11 @@
 							<!-- </reports> -->
 							<!-- </reportSet> -->
 						</reportSets>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-pmd-plugin</artifactId>
+						<version>${version.plugin.pmd}</version>
 					</plugin>
 				</plugins>
 			</reporting>
