@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>gov.nist.secauto</groupId>
 	<artifactId>oss-maven</artifactId>
@@ -21,14 +23,19 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<!-- Java compiler properties -->
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-<!-- 		<maven.compiler.release>8</maven.compiler.release> -->
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.release>11</maven.compiler.release>
+
 		<javac.debuglevel>lines,source,vars</javac.debuglevel>
 
-		<version.mavenReflowSkin>2.2.0</version.mavenReflowSkin>
+		<version.mavenReflowSkin>2.3.0</version.mavenReflowSkin>
 		<version.maven-velocity>1.7</version.maven-velocity>
-		<checkstyleVersion>8.29</checkstyleVersion>
+
+		<dependency.junit.version>4.13.1</dependency.junit.version>
+		<dependency.junit5.version>5.7.0</dependency.junit5.version>
+		<dependency.junit5-platform-launcher.version>1.7.0</dependency.junit5-platform-launcher.version>
+		<dependency.checkstyle.version>8.39</dependency.checkstyle.version>
 
 		<version.plugin.assembly>3.2.0</version.plugin.assembly>
 		<version.plugin.build-helper>3.0.0</version.plugin.build-helper>
@@ -39,7 +46,7 @@
 		<version.plugin.dependency>3.1.1</version.plugin.dependency>
 		<version.plugin.deploy>3.0.0-M1</version.plugin.deploy>
 		<version.plugin.enforcer>3.0.0-M3</version.plugin.enforcer>
-		<version.plugin.failsafe>3.0.0-M4</version.plugin.failsafe>
+		<version.plugin.failsafe>3.0.0-M5</version.plugin.failsafe>
 		<version.plugin.formatter>2.11.0</version.plugin.formatter>
 		<version.plugin.gpg>1.6</version.plugin.gpg>
 		<version.plugin.install>3.0.0-M1</version.plugin.install>
@@ -48,19 +55,19 @@
 		<version.plugin.javadoc>3.1.1</version.plugin.javadoc>
 		<version.plugin.jdepend>2.0</version.plugin.jdepend>
 		<version.plugin.jxr>3.0.0</version.plugin.jxr>
-		<version.plugin.license>3.0</version.plugin.license>
+		<version.plugin.license>4.0.rc1</version.plugin.license>
 		<version.plugin.maven-project-info-reports>3.0.0</version.plugin.maven-project-info-reports>
 		<version.plugin.plugin>3.6.0</version.plugin.plugin>
 		<version.plugin.nexus-staging>1.6.8</version.plugin.nexus-staging>
-		<version.plugin.pmd>3.13.0</version.plugin.pmd>
+		<version.plugin.pmd>3.14.0</version.plugin.pmd>
 		<version.plugin.project-info-reports>2.9</version.plugin.project-info-reports>
 		<version.plugin.release>3.0.0-M1</version.plugin.release>
 		<version.plugin.replacer>1.5.2</version.plugin.replacer>
 		<version.plugin.resources>3.1.0</version.plugin.resources>
 		<version.plugin.scm>1.11.2</version.plugin.scm>
-		<version.plugin.scm-publish>3.0.0</version.plugin.scm-publish>
+		<version.plugin.scm-publish>3.1.0</version.plugin.scm-publish>
 		<version.plugin.shade>2.4.3</version.plugin.shade>
-		<version.plugin.site>3.8.2</version.plugin.site>
+		<version.plugin.site>3.9.1</version.plugin.site>
 		<version.plugin.source>3.2.1</version.plugin.source>
 		<version.plugin.surefire>3.0.0-M4</version.plugin.surefire>
 		<version.plugin.taglist>2.4</version.plugin.taglist>
@@ -121,9 +128,40 @@
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
-				<version>4.12</version>
+				<version>${dependency.junit.version}</version>
 				<scope>test</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-api</artifactId>
+				<version>${dependency.junit5.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-engine</artifactId>
+				<version>${dependency.junit5.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-params</artifactId>
+				<version>${dependency.junit5.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.vintage</groupId>
+				<artifactId>junit-vintage-engine</artifactId>
+				<version>${dependency.junit5.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-launcher</artifactId>
+				<version>${dependency.junit5-platform-launcher.version}</version>
+				<scope>test</scope>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -240,7 +278,7 @@
 					<version>${version.plugin.site}</version>
 					<configuration>
 						<skipDeploy>true</skipDeploy>
-						<scmBranch>nist-pages</scmBranch>
+						<!-- <scmBranch>nist-pages</scmBranch> -->
 						<relativizeDecorationLinks>true</relativizeDecorationLinks>
 						<generateReports>true</generateReports>
 						<!-- <templateDirectory>${project.basedir}/target/site-files/site</templateDirectory> -->
@@ -252,11 +290,11 @@
 							<artifactId>reflow-velocity-tools</artifactId>
 							<version>${version.mavenReflowSkin}</version>
 						</dependency>
-						<dependency>
-							<groupId>org.apache.velocity</groupId>
-							<artifactId>velocity</artifactId>
-							<version>${version.maven-velocity}</version>
-						</dependency>
+						<!-- <dependency> -->
+						<!-- <groupId>org.apache.velocity</groupId> -->
+						<!-- <artifactId>velocity</artifactId> -->
+						<!-- <version>${version.maven-velocity}</version> -->
+						<!-- </dependency> -->
 						<dependency>
 							<groupId>org.apache.maven.doxia</groupId>
 							<artifactId>doxia-module-markdown</artifactId>
@@ -305,11 +343,21 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>${version.plugin.surefire}</version>
+					<configuration>
+						<argLine>
+							--illegal-access=permit
+						</argLine>
+					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-failsafe-plugin</artifactId>
 					<version>${version.plugin.failsafe}</version>
+					<configuration>
+						<argLine>
+							--illegal-access=permit
+						</argLine>
+					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -374,8 +422,8 @@
 					<configuration>
 						<targetJdk>${maven.compiler.target}</targetJdk>
 						<failurePriority>2</failurePriority>
-						<failOnViolation>true</failOnViolation>
 						<analysisCache>true</analysisCache>
+						<printFailingErrors>true</printFailingErrors>
 					</configuration>
 					<executions>
 						<execution>
@@ -384,6 +432,27 @@
 							<goals>
 								<goal>check</goal>
 							</goals>
+							<configuration>
+								<failOnViolation>true</failOnViolation>
+								<includes>
+									<include>${project.build.sourceDirectory}/**/*.java</include>
+									<include>${project.build.testSourceDirectory}/**/*.java</include>
+								</includes>
+							</configuration>
+						</execution>
+						<execution>
+							<id>pmd-verify-cpd</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>cpd-check</goal>
+							</goals>
+							<configuration>
+								<failOnViolation>false</failOnViolation>
+								<includes>
+									<include>${project.build.sourceDirectory}/**/*.java</include>
+									<include>${project.build.testSourceDirectory}/**/*.java</include>
+								</includes>
+							</configuration>
 						</execution>
 					</executions>
 				</plugin>
@@ -397,10 +466,15 @@
 					<artifactId>license-maven-plugin</artifactId>
 					<version>${version.plugin.license}</version>
 					<configuration>
-						<header>license/nist/license.txt</header>
-						<includes>
-							<include>**/*.java</include>
-						</includes>
+						<licenseSets>
+							<licenseSet>
+								<header>license/nist/license.txt</header>
+								<includes>
+									<include>${project.build.sourceDirectory}/**/*.java</include>
+									<include>${project.build.testSourceDirectory}/**/*.java</include>
+								</includes>
+							</licenseSet>
+						</licenseSets>
 						<failIfMissing>true</failIfMissing>
 					</configuration>
 					<dependencies>
@@ -425,7 +499,7 @@
 					<artifactId>formatter-maven-plugin</artifactId>
 					<version>${version.plugin.formatter}</version>
 					<configuration>
-						<overrideConfigCompilerVersion>true</overrideConfigCompilerVersion>
+						<!-- <overrideConfigCompilerVersion>true</overrideConfigCompilerVersion> -->
 						<compilerSource>${maven.compiler.source}</compilerSource>
 						<compilerCompliance>${maven.compiler.source}</compilerCompliance>
 						<compilerTargetPlatform>${maven.compiler.target}</compilerTargetPlatform>
@@ -463,11 +537,19 @@
 					</configuration>
 					<executions>
 						<execution>
-							<id>validate</id>
+							<id>checkstyle-sources</id>
 							<phase>process-sources</phase>
 							<goals>
 								<goal>check</goal>
 							</goals>
+							<configuration>
+								<sourceDirectories>
+									<sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
+								</sourceDirectories>
+								<testSourceDirectories>
+									<sourceDirectory>${project.build.testSourceDirectory}</sourceDirectory>
+								</testSourceDirectories>
+							</configuration>
 						</execution>
 					</executions>
 					<dependencies>
@@ -479,7 +561,7 @@
 						<dependency>
 							<groupId>com.puppycrawl.tools</groupId>
 							<artifactId>checkstyle</artifactId>
-							<version>${checkstyleVersion}</version>
+							<version>${dependency.checkstyle.version}</version>
 						</dependency>
 					</dependencies>
 				</plugin>
@@ -622,6 +704,11 @@
 				<plugins>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-jxr-plugin</artifactId>
+						<version>${version.plugin.jxr}</version>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-project-info-reports-plugin</artifactId>
 						<version>${version.plugin.maven-project-info-reports}</version>
 						<reportSets>
@@ -647,6 +734,11 @@
 							<!-- </reports> -->
 							<!-- </reportSet> -->
 						</reportSets>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-pmd-plugin</artifactId>
+						<version>${version.plugin.pmd}</version>
 					</plugin>
 				</plugins>
 			</reporting>
