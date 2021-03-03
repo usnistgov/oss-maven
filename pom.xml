@@ -23,12 +23,13 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<!-- Java compiler properties -->
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<!-- <maven.compiler.release>8</maven.compiler.release> -->
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.release>11</maven.compiler.release>
+
 		<javac.debuglevel>lines,source,vars</javac.debuglevel>
 
-		<version.mavenReflowSkin>2.2.0</version.mavenReflowSkin>
+		<version.mavenReflowSkin>2.3.0</version.mavenReflowSkin>
 		<version.maven-velocity>1.7</version.maven-velocity>
 
 		<dependency.junit.version>4.13.1</dependency.junit.version>
@@ -45,7 +46,7 @@
 		<version.plugin.dependency>3.1.1</version.plugin.dependency>
 		<version.plugin.deploy>3.0.0-M1</version.plugin.deploy>
 		<version.plugin.enforcer>3.0.0-M3</version.plugin.enforcer>
-		<version.plugin.failsafe>3.0.0-M4</version.plugin.failsafe>
+		<version.plugin.failsafe>3.0.0-M5</version.plugin.failsafe>
 		<version.plugin.formatter>2.11.0</version.plugin.formatter>
 		<version.plugin.gpg>1.6</version.plugin.gpg>
 		<version.plugin.install>3.0.0-M1</version.plugin.install>
@@ -58,15 +59,15 @@
 		<version.plugin.maven-project-info-reports>3.0.0</version.plugin.maven-project-info-reports>
 		<version.plugin.plugin>3.6.0</version.plugin.plugin>
 		<version.plugin.nexus-staging>1.6.8</version.plugin.nexus-staging>
-		<version.plugin.pmd>3.13.0</version.plugin.pmd>
+		<version.plugin.pmd>3.14.0</version.plugin.pmd>
 		<version.plugin.project-info-reports>2.9</version.plugin.project-info-reports>
 		<version.plugin.release>3.0.0-M1</version.plugin.release>
 		<version.plugin.replacer>1.5.2</version.plugin.replacer>
 		<version.plugin.resources>3.1.0</version.plugin.resources>
 		<version.plugin.scm>1.11.2</version.plugin.scm>
-		<version.plugin.scm-publish>3.0.0</version.plugin.scm-publish>
+		<version.plugin.scm-publish>3.1.0</version.plugin.scm-publish>
 		<version.plugin.shade>2.4.3</version.plugin.shade>
-		<version.plugin.site>3.8.2</version.plugin.site>
+		<version.plugin.site>3.9.1</version.plugin.site>
 		<version.plugin.source>3.2.1</version.plugin.source>
 		<version.plugin.surefire>3.0.0-M4</version.plugin.surefire>
 		<version.plugin.taglist>2.4</version.plugin.taglist>
@@ -289,11 +290,11 @@
 							<artifactId>reflow-velocity-tools</artifactId>
 							<version>${version.mavenReflowSkin}</version>
 						</dependency>
-						<dependency>
-							<groupId>org.apache.velocity</groupId>
-							<artifactId>velocity</artifactId>
-							<version>${version.maven-velocity}</version>
-						</dependency>
+						<!-- <dependency> -->
+						<!-- <groupId>org.apache.velocity</groupId> -->
+						<!-- <artifactId>velocity</artifactId> -->
+						<!-- <version>${version.maven-velocity}</version> -->
+						<!-- </dependency> -->
 						<dependency>
 							<groupId>org.apache.maven.doxia</groupId>
 							<artifactId>doxia-module-markdown</artifactId>
@@ -342,11 +343,21 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>${version.plugin.surefire}</version>
+					<configuration>
+						<argLine>
+							--illegal-access=permit
+						</argLine>
+					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-failsafe-plugin</artifactId>
 					<version>${version.plugin.failsafe}</version>
+					<configuration>
+						<argLine>
+							--illegal-access=permit
+						</argLine>
+					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -411,13 +422,8 @@
 					<configuration>
 						<targetJdk>${maven.compiler.target}</targetJdk>
 						<failurePriority>2</failurePriority>
-						<failOnViolation>true</failOnViolation>
 						<analysisCache>true</analysisCache>
 						<printFailingErrors>true</printFailingErrors>
-						<includes>
-							<include>${project.build.sourceDirectory}/**/*.java</include>
-							<include>${project.build.testSourceDirectory}/**/*.java</include>
-						</includes>
 					</configuration>
 					<executions>
 						<execution>
@@ -425,8 +431,28 @@
 							<phase>verify</phase>
 							<goals>
 								<goal>check</goal>
+							</goals>
+							<configuration>
+								<failOnViolation>true</failOnViolation>
+								<includes>
+									<include>${project.build.sourceDirectory}/**/*.java</include>
+									<include>${project.build.testSourceDirectory}/**/*.java</include>
+								</includes>
+							</configuration>
+						</execution>
+						<execution>
+							<id>pmd-verify-cpd</id>
+							<phase>verify</phase>
+							<goals>
 								<goal>cpd-check</goal>
 							</goals>
+							<configuration>
+								<failOnViolation>false</failOnViolation>
+								<includes>
+									<include>${project.build.sourceDirectory}/**/*.java</include>
+									<include>${project.build.testSourceDirectory}/**/*.java</include>
+								</includes>
+							</configuration>
 						</execution>
 					</executions>
 				</plugin>
@@ -511,11 +537,19 @@
 					</configuration>
 					<executions>
 						<execution>
-							<id>validate</id>
+							<id>checkstyle-sources</id>
 							<phase>process-sources</phase>
 							<goals>
 								<goal>check</goal>
 							</goals>
+							<configuration>
+								<sourceDirectories>
+									<sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
+								</sourceDirectories>
+								<testSourceDirectories>
+									<sourceDirectory>${project.build.testSourceDirectory}</sourceDirectory>
+								</testSourceDirectories>
+							</configuration>
 						</execution>
 					</executions>
 					<dependencies>
