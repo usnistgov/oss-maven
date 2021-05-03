@@ -6,7 +6,7 @@
 <html  xml:lang="en" lang="en">
     <head>
     <meta charset="UTF-8" />
-    <title>Use as a parent POM | Parent POM</title>
+    <title>CPD Results | Common Build Files</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="" />
       <meta http-equiv="content-language" content="en" />
@@ -38,7 +38,7 @@
 
         </script>
   </head> <!-- end : head -->
-<body class="page-usage project-oss-parent anchorjs-enabled scrolltop-smooth-enabled">
+<body class="page-cpd project-oss-build-support anchorjs-enabled scrolltop-smooth-enabled m-toc-sidebar-enabled m-toc-sidebar-expanded m-toc-sidebar-autoexpandable toc-sidebar-fixed">
     <nav id="m-top-navbar" class="navbar navbar-expand-lg fixed-top navbar-light bg-light navbar-dark bg-primary border-bottom">
             <a class="navbar-brand mb-0 h1" href="..">
             <div id="nistheadergoeshere"></div> Security Automation Maven Support
@@ -49,12 +49,12 @@
             <div class="collapse navbar-collapse" id="top-navbar-collapse-1">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item " ><a  href="https://github.com/usnistgov/oss-maven/tree/master"  title="GitHub Project"   class="externalLink nav-link" >GitHub Project</a></li>
-                    <li class="nav-item dropdown active">
+                    <li class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Documentation <b class="caret"></b></a>
                         <div class="dropdown-menu">
-                            <a href="" title="Maven Usage"  class="dropdown-item active">Maven Usage</a>
-                            <a href="features.html" title="Build Features"  class="dropdown-item ">Build Features</a>
-                            <a href="../oss-build-support/index.html" title="Eclipse Configuration"  class="dropdown-item ">Eclipse Configuration</a>
+                            <a href="../oss-parent/usage.html" title="Maven Usage"  class="dropdown-item ">Maven Usage</a>
+                            <a href="../oss-parent/features.html" title="Build Features"  class="dropdown-item ">Build Features</a>
+                            <a href="index.html" title="Eclipse Configuration"  class="dropdown-item ">Eclipse Configuration</a>
                         </div>
                     </li>
                 </ul><!--/ul.navbar-nav -->
@@ -84,8 +84,8 @@
         <ol class="breadcrumb">
             <li class="projectVersion version-date">Version: 18</li>
             <li class="breadcrumb-item"><a  href=".."  title="OSS Maven"  class="" >OSS Maven</a></li>
-            <li class="breadcrumb-item"><a  href="index.html"  title="Parent POM"  class="" >Parent POM</a></li>
-            <li class="breadcrumb-item active">Use as a parent POM</li>
+            <li class="breadcrumb-item"><a  href="index.html"  title="Common Build Files"  class="" >Common Build Files</a></li>
+            <li class="breadcrumb-item active">CPD Results</li>
         </ol>
     </nav>
             </div>
@@ -95,31 +95,27 @@
         <div class="d-xs-none d-sm-none d-md-none d-lg-block col-lg-2">
         </div>
         <main class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-8" role="main">
-    <div class="row">
-
-      <div class="col-12">
-            <div class="body-content">
-        <h1>Usage</h1> 
-<p>To use this project as a Maven build parent for your project, add the following to your project’s POM:</p> 
-<div class="source"> 
- <div class="source"> 
-  <pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
-  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-  &lt;parent&gt;
-    &lt;groupId&gt;gov.nist.secauto&lt;/groupId&gt;
-    &lt;artifactId&gt;oss-parent&lt;/artifactId&gt;
-    &lt;version&gt;18&lt;/version&gt;
-  &lt;/parent&gt;
-
-  ... additional configuration
-&lt;/project&gt;
-</pre>
- </div>
-</div>        </div>
-        </main>
+        <section> 
+ <h2 id="cpd-results">CPD Results</h2> 
+ <p>The following document contains the results of PMD's <a class="externalLink" href="https://pmd.github.io/latest/pmd_userdocs_cpd.html">CPD</a> 6.29.0.</p> 
+</section> 
+<section> 
+ <h2 id="duplications1">Duplications</h2> 
+ <p>CPD found no problems in your source code.</p> 
+</section>        </main>
         <div class="d-none d-sm-none d-md-none d-lg-none d-xl-block col-xl-2">
+            <div id="m-toc-sidebar" class="d-print-none m-toc-sidebar-enabled m-toc-sidebar-expanded m-toc-sidebar-autoexpandable toc-sidebar-fixed">
+                <nav id="m-toc-sidebar-nav flex-column">
+                <ul class="m-nav--sidebar nav flex-column flex-nowrap">
+    <li class="h2">
+        <a class="nav-link" href="#cpd-results" title="CPD Results">CPD Results</a>
+    </li>
+        <li class="h2">
+        <a class="nav-link" href="#duplications1" title="Duplications">Duplications</a>
+    </li>
+                    </ul>
+                </nav>
+           </div>
         </div>
     </div> <!-- row: end -->
 </div> <!-- .main-body: end -->
@@ -160,7 +156,11 @@ Contribute
 Maven Documentation
                     </li>
                                 <li class="nav-item "><a  href="project-info.html"  title="Project Information"  class="nav-link" >Project Information <i class="fas fa-angle-right"></i></a></li>
-                                <li class="nav-item "><a  href="project-reports.html"  title="Project Reports"  class="nav-link" >Project Reports <i class="fas fa-angle-right"></i></a></li>
+                                <li class="nav-item active"><a  href="project-reports.html"  title="Project Reports"  class="nav-link" >Project Reports <i class="fas fa-angle-down"></i></a>        <ul class="nav flex-column nav-list">
+                    <li class="nav-item active"><a  href=""  title="CPD"  class="nav-link" >CPD</a></li>
+                    <li class="nav-item "><a  href="pmd.html"  title="PMD"  class="nav-link" >PMD</a></li>
+        </ul>
+</li>
                 </ul>
             </div>
             <div class="col bottom-description">
