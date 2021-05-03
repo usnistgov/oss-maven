@@ -1,10 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>gov.nist.secauto</groupId>
 	<artifactId>oss-maven</artifactId>
-	<version>18-SNAPSHOT</version>
+	<version>18</version>
 	<packaging>pom</packaging>
 
 	<name>Build Root</name>
@@ -84,7 +82,7 @@
 		<url>${scm.url}/tree/master</url>
 		<connection>scm:git:ssh://git@github.com/usnistgov/oss-maven.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/usnistgov/oss-maven.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>v18</tag>
 	</scm>
 
 	<distributionManagement>
@@ -481,7 +479,7 @@
 						<dependency>
 							<groupId>gov.nist.secauto</groupId>
 							<artifactId>oss-build-support</artifactId>
-							<version>18-SNAPSHOT</version>
+							<version>18</version>
 						</dependency>
 					</dependencies>
 					<executions>
@@ -520,7 +518,7 @@
 						<dependency>
 							<groupId>gov.nist.secauto</groupId>
 							<artifactId>oss-build-support</artifactId>
-							<version>18-SNAPSHOT</version>
+							<version>18</version>
 						</dependency>
 					</dependencies>
 				</plugin>
@@ -556,7 +554,7 @@
 						<dependency>
 							<groupId>gov.nist.secauto</groupId>
 							<artifactId>oss-build-support</artifactId>
-							<version>18-SNAPSHOT</version>
+							<version>18</version>
 						</dependency>
 						<dependency>
 							<groupId>com.puppycrawl.tools</groupId>
