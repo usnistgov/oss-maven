@@ -33,11 +33,11 @@
 		<dependency.junit.version>4.13.1</dependency.junit.version>
 		<dependency.junit5.version>5.7.0</dependency.junit5.version>
 		<dependency.junit5-platform-launcher.version>1.7.0</dependency.junit5-platform-launcher.version>
-		<dependency.checkstyle.version>8.39</dependency.checkstyle.version>
+		<dependency.checkstyle.version>8.43</dependency.checkstyle.version>
 
 		<version.plugin.assembly>3.2.0</version.plugin.assembly>
 		<version.plugin.build-helper>3.0.0</version.plugin.build-helper>
-		<version.plugin.checkstyle>3.1.1</version.plugin.checkstyle>
+		<version.plugin.checkstyle>3.1.2</version.plugin.checkstyle>
 		<version.plugin.clean>3.1.0</version.plugin.clean>
 		<version.plugin.cobertura>2.7</version.plugin.cobertura>
 		<version.plugin.compile>3.8.1</version.plugin.compile>
@@ -448,7 +448,7 @@
 								<failOnViolation>false</failOnViolation>
 								<includes>
 									<include>${project.build.sourceDirectory}/**/*.java</include>
-									<include>${project.build.testSourceDirectory}/**/*.java</include>
+<!-- 									<include>${project.build.testSourceDirectory}/**/*.java</include> -->
 								</includes>
 							</configuration>
 						</execution>
