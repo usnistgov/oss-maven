@@ -1,0 +1,36 @@
+<ruleset name="Custom Rules"
+	xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+
+	<description>Customizations of the built in rules</description>
+
+	<rule ref="category/java/errorprone.xml">
+		<!-- fix for: aktStatus is NULL: maximum Iterations exceeded -->
+		<exclude name="DataflowAnomalyAnalysis" />
+	</rule>
+	<rule ref="category/java/design.xml">
+		<exclude name="LawOfDemeter" />
+	</rule>
+	<rule ref="category/java/codestyle.xml">
+		<exclude name="LocalVariableCouldBeFinal" />
+		<exclude name="LongVariable" />
+	</rule>
+	<rule ref="category/java/errorprone.xml">
+		<exclude name="BeanMembersShouldSerialize" />
+	</rule>
+	<rule ref="category/java/documentation.xml">
+		<exclude name="CommentSize" />
+	</rule>
+	<rule ref="category/java/errorprone.xml/EmptyCatchBlock">
+		<properties>
+			<property name="allowCommentedBlocks" value="false" />
+		</properties>
+	</rule>
+	<rule ref="category/java/errorprone.xml/AvoidDuplicateLiterals">
+		<properties>
+			<property name="skipAnnotations" value="true" />
+		</properties>
+	</rule>
+
+</ruleset>
