@@ -77,7 +77,7 @@
 	</issueManagement>
 
 	<scm>
-		<url>${scm.url}/tree/master</url>
+		<url>${scm.url}/tree/main</url>
 		<connection>scm:git:ssh://git@github.com/usnistgov/oss-maven.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/usnistgov/oss-maven.git</developerConnection>
 		<tag>HEAD</tag>
@@ -416,16 +416,8 @@
 						<printFailingErrors>true</printFailingErrors>
 						<failOnViolation>false</failOnViolation>
 						<rulesets>
-							<!-- the rule set that comes bundled with PMD -->
-							<ruleset>/category/java/bestpractices.xml</ruleset>
-							<ruleset>/category/java/codestyle.xml</ruleset>
-							<ruleset>/category/java/design.xml</ruleset>
-							<ruleset>/category/java/errorprone.xml</ruleset>
-							<ruleset>/category/java/multithreading.xml</ruleset>
-							<ruleset>/category/java/performance.xml</ruleset>
-							<ruleset>/category/java/security.xml</ruleset>
 							<!-- Custom rule set -->
-							<ruleset>/pmd/category/java/custom.xml</ruleset>
+							<ruleset>pmd/category/java/custom.xml</ruleset>
 						</rulesets>
 					</configuration>
 					<executions>

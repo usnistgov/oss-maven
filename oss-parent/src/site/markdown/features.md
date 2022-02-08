@@ -34,7 +34,7 @@ the parent](features.html) of another project. Some features are automatic, whil
     a report of all comments marked "TODO" or "FIXME".
 
 *   The Maven [Checkstyle Plugin](https://maven.apache.org/plugins/maven-checkstyle-plugin/) is
-    used to check code for code style issues. The style checked is configured to use the [checkstyle rules](https://github.com/usnistgov/oss-maven/blob/master/build-support/src/main/resources/license/nist/license.txt)
+    used to check code for code style issues. The style checked is configured to use the [checkstyle rules](https://github.com/usnistgov/oss-maven/blob/main/build-support/src/main/resources/license/nist/license.txt)
     provided by the [oss-build-support](../oss-build-support/) project.
 
 *   Building of Javadoc documentation will occur if the profile "release" is chosen using:
@@ -44,7 +44,7 @@ the parent](features.html) of another project. Some features are automatic, whil
     ```
 
 *   The [license Maven Plugin](http://code.mycila.com/license-maven-plugin/) is used to check that
-    the appropriate NIST software license is used. All source files are checked to ensure that the [required license content](https://github.com/usnistgov/oss-maven/blob/master/build-support/src/main/resources/license/nist/license.txt),
+    the appropriate NIST software license is used. All source files are checked to ensure that the [required license content](https://github.com/usnistgov/oss-maven/blob/main/build-support/src/main/resources/license/nist/license.txt),
     provided by the [oss-build-support](../oss-build-support/) project, is included in all java source files.
     The build is failed if a license is missing.
     

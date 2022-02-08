@@ -5,26 +5,44 @@
 
 	<description>Customizations of the built in rules</description>
 
-	<rule ref="category/java/errorprone.xml">
-		<!-- fix for: aktStatus is NULL: maximum Iterations exceeded -->
-		<exclude name="DataflowAnomalyAnalysis" />
-	</rule>
-	<rule ref="category/java/design.xml">
-		<exclude name="LawOfDemeter" />
-	</rule>
+	<rule ref="category/java/bestpractices.xml" />
 	<rule ref="category/java/codestyle.xml">
 		<exclude name="LocalVariableCouldBeFinal" />
 		<exclude name="LongVariable" />
+		<exclude name="AtLeastOneConstructor" />
+		<exclude name="CommentDefaultAccessModifier" />
+		<exclude name="CallSuperInConstructor" />
+		<exclude name="GenericsNaming" />
+		<!-- Not needed since parameter reassignment is not allowed -->
+		<exclude name="MethodArgumentCouldBeFinal" />
+		<!-- Addressed by codestyle instead -->
+		<exclude name="ShortVariable" />
 	</rule>
-	<rule ref="category/java/errorprone.xml">
-		<exclude name="BeanMembersShouldSerialize" />
+	<rule ref="category/java/design.xml">
+		<exclude name="LawOfDemeter" />
+		
+		<!-- the following are addressed by the god class check -->
+		<exclude name="TooManyMethods" />
+		<exclude name="ExcessiveImports" />
 	</rule>
 	<rule ref="category/java/documentation.xml">
 		<exclude name="CommentSize" />
+		<!-- Addressed by codestyle instead -->
+		<exclude name="CommentRequired" />
 	</rule>
+	<rule ref="category/java/errorprone.xml">
+		<!-- fix for: aktStatus is NULL: maximum Iterations exceeded -->
+		<exclude name="DataflowAnomalyAnalysis" />
+		<exclude name="BeanMembersShouldSerialize" />
+		<exclude name="AssignmentInOperand" />
+		<exclude name="AvoidLiteralsInIfCondition" />
+	</rule>
+	<rule ref="category/java/multithreading.xml" />
+	<rule ref="category/java/performance.xml" />
+
 	<rule ref="category/java/errorprone.xml/EmptyCatchBlock">
 		<properties>
-			<property name="allowCommentedBlocks" value="false" />
+			<property name="allowCommentedBlocks" value="true" />
 		</properties>
 	</rule>
 	<rule ref="category/java/errorprone.xml/AvoidDuplicateLiterals">
@@ -32,5 +50,4 @@
 			<property name="skipAnnotations" value="true" />
 		</properties>
 	</rule>
-
 </ruleset>
