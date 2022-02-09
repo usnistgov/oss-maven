@@ -38,16 +38,8 @@ jobs:
         path: ~/.m2/repository
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2-
-    - name: Initialize CodeQL
-      if: github.event_name == 'push'
-      uses: github/codeql-action/init@v1
-      with:
-        languages: java
     # -------------------------
     # Maven Build
     - name: Build and run tests
       run: |
         mvn -Prelease -Preporting verify
-    - name: Perform CodeQL Analysis
-      if: github.event_name == 'push'
-      uses: github/codeql-action/analyze@v1          
