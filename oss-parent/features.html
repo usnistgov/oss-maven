@@ -48,7 +48,7 @@
             </button>
             <div class="collapse navbar-collapse" id="top-navbar-collapse-1">
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item " ><a  href="https://github.com/usnistgov/oss-maven/tree/master"  title="GitHub Project"   class="externalLink nav-link" >GitHub Project</a></li>
+                    <li class="nav-item " ><a  href="https://github.com/usnistgov/oss-maven/tree/main"  title="GitHub Project"   class="externalLink nav-link" >GitHub Project</a></li>
                     <li class="nav-item dropdown active">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Documentation <b class="caret"></b></a>
                         <div class="dropdown-menu">
@@ -82,7 +82,7 @@
       </div>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="projectVersion version-date">Version: 19</li>
+            <li class="projectVersion version-date">Version: 20</li>
             <li class="breadcrumb-item"><a  href=".."  title="OSS Maven"  class="" >OSS Maven</a></li>
             <li class="breadcrumb-item"><a  href="index.html"  title="Parent POM"  class="" >Parent POM</a></li>
             <li class="breadcrumb-item active">Build features</li>
@@ -104,42 +104,32 @@
 <ul> 
  <li> <p>Use of the <a class="externalLink" href="http://maven.apache.org/maven-release/maven-release-plugin/">Maven Release Plugin</a> supporting automated releases of project revisions. Use of this feature requires configuration of the &lt;scm&gt;/&lt;developerConnection&gt; element in the project POM. A release can be performed using the command:</p> 
   <div class="source"> 
-   <div class="source"> 
-    <pre>mvn -Prelease release:clean release:prepare release:perform
-</pre>
-   </div>
+   <pre><code class="language-console">mvn -Prelease release:clean release:prepare release:perform
+</code></pre>
   </div> <p>The profile “release” triggers building javadoc documentation, which is omitted during the regular build process to save build time.</p> </li> 
  <li> <p>Configuration of the site plugin with Markdown support to produce Bootstrap documentation pages like this one. The site can be built using the Maven command:</p> 
   <div class="source"> 
-   <div class="source"> 
-    <pre>mvn -Prelease site site:deploy
-</pre>
-   </div>
+   <pre><code class="language-console">mvn -Prelease site site:deploy
+</code></pre>
   </div> </li> 
  <li> <p><a class="externalLink" href="http://www.eclemma.org/jacoco/trunk/doc/maven.html">Jacoco</a> is used to perform code coverage analysis based on JUnit tests. A site report will be produced containing coverage information.</p> </li> 
  <li> <p>Use of the <a class="externalLink" href="https://maven.apache.org/plugins/maven-pmd-plugin/">Maven PMD Plugin</a> to perform code analysis. Issues found at [levels 1 and 2] (<a class="externalLink" href="https://pmd.github.io/pmd-5.3.3/customizing/rule-guidelines.html">https://pmd.github.io/pmd-5.3.3/customizing/rule-guidelines.html</a>) will fail the build.</p> </li> 
  <li> <p>The <a class="externalLink" href="http://www.mojohaus.org/taglist-maven-plugin/">Tag List Maven plugin</a> is used to generate a report of all comments marked “TODO” or “FIXME”.</p> </li> 
- <li> <p>The Maven <a class="externalLink" href="https://maven.apache.org/plugins/maven-checkstyle-plugin/">Checkstyle Plugin</a> is used to check code for code style issues. The style checked is configured to use the <a class="externalLink" href="https://github.com/usnistgov/oss-maven/blob/master/build-support/src/main/resources/license/nist/license.txt">checkstyle rules</a> provided by the <a href="../oss-build-support/">oss-build-support</a> project.</p> </li> 
+ <li> <p>The Maven <a class="externalLink" href="https://maven.apache.org/plugins/maven-checkstyle-plugin/">Checkstyle Plugin</a> is used to check code for code style issues. The style checked is configured to use the <a class="externalLink" href="https://github.com/usnistgov/oss-maven/blob/main/build-support/src/main/resources/license/nist/license.txt">checkstyle rules</a> provided by the <a href="../oss-build-support/">oss-build-support</a> project.</p> </li> 
  <li> <p>Building of Javadoc documentation will occur if the profile “release” is chosen using:</p> 
   <div class="source"> 
-   <div class="source"> 
-    <pre>mvn -Prelease install
-</pre>
-   </div>
+   <pre><code class="language-console">mvn -Prelease install
+</code></pre>
   </div> </li> 
- <li> <p>The <a class="externalLink" href="http://code.mycila.com/license-maven-plugin/">license Maven Plugin</a> is used to check that the appropriate NIST software license is used. All source files are checked to ensure that the <a class="externalLink" href="https://github.com/usnistgov/oss-maven/blob/master/build-support/src/main/resources/license/nist/license.txt">required license content</a>, provided by the <a href="../oss-build-support/">oss-build-support</a> project, is included in all java source files. The build is failed if a license is missing.</p> <p>To apply licenses to all source files use:</p> 
+ <li> <p>The <a class="externalLink" href="http://code.mycila.com/license-maven-plugin/">license Maven Plugin</a> is used to check that the appropriate NIST software license is used. All source files are checked to ensure that the <a class="externalLink" href="https://github.com/usnistgov/oss-maven/blob/main/build-support/src/main/resources/license/nist/license.txt">required license content</a>, provided by the <a href="../oss-build-support/">oss-build-support</a> project, is included in all java source files. The build is failed if a license is missing.</p> <p>To apply licenses to all source files use:</p> 
   <div class="source"> 
-   <div class="source"> 
-    <pre>mvn license:format
-</pre>
-   </div>
+   <pre><code class="language-console">mvn license:format
+</code></pre>
   </div> </li> 
  <li> <p>The <a class="externalLink" href="https://code.revelc.net/formatter-maven-plugin/">Formatter Maven Plugin</a> is used to check that all Java sources are formatted according the projects formatting policies, provided by the <a href="../oss-build-support/">oss-build-support</a> project. The build is failed if source is not properly formatted.</p> <p>To reformat all source files use:</p> 
   <div class="source"> 
-   <div class="source"> 
-    <pre>mvn formatter:format
-</pre>
-   </div>
+   <pre><code class="language-console">mvn formatter:format
+</code></pre>
   </div> </li> 
  <li> <p>The <a class="externalLink" href="http://maven.apache.org/enforcer/maven-enforcer-plugin/">Maven enforcer Plugin</a> is used to check that Java 1.8 or later is used, that the Maven version is 3.0 or higher, and that plugins are properly versioned.</p> </li> 
 </ul>        </div>
@@ -161,8 +151,8 @@
 Main
                     </li>
                     <li class="nav-item "><a  href=".."  title="Home"  class="nav-link" >Home</a></li>
-                    <li class="nav-item "><a  href="https://github.com/usnistgov/oss-maven/tree/master"  title="GitHub project"   class="externalLink nav-link" >GitHub project</a></li>
-                    <li class="nav-item "><a  href="https://github.com/usnistgov/oss-maven/tree/master/LICENSE.md"  title="Licenses"   class="externalLink nav-link" >Licenses</a></li>
+                    <li class="nav-item "><a  href="https://github.com/usnistgov/oss-maven/tree/main"  title="GitHub project"   class="externalLink nav-link" >GitHub project</a></li>
+                    <li class="nav-item "><a  href="https://github.com/usnistgov/oss-maven/tree/main/LICENSE.md"  title="Licenses"   class="externalLink nav-link" >Licenses</a></li>
                 </ul>
             </div>
             <div class="col bottom-nav">
@@ -170,9 +160,9 @@ Main
                     <li class="nav-header">
 Contribute
                     </li>
-                    <li class="nav-item "><a  href="https://github.com/usnistgov/oss-maven/tree/master/CONTRIBUTING.md"  title="Contribute"   class="externalLink nav-link" >Contribute</a></li>
+                    <li class="nav-item "><a  href="https://github.com/usnistgov/oss-maven/tree/main/CONTRIBUTING.md"  title="Contribute"   class="externalLink nav-link" >Contribute</a></li>
                     <li class="nav-item "><a  href="https://github.com/usnistgov/oss-maven/issues"  title="Issues"   class="externalLink nav-link" >Issues</a></li>
-                    <li class="nav-item "><a  href="https://github.com/usnistgov/oss-maven/tree/master"  title="Fork on GitHub"   class="externalLink nav-link" >Fork on GitHub</a></li>
+                    <li class="nav-item "><a  href="https://github.com/usnistgov/oss-maven/tree/main"  title="Fork on GitHub"   class="externalLink nav-link" >Fork on GitHub</a></li>
                 </ul>
             </div>
             <div class="col bottom-nav">
@@ -193,7 +183,7 @@ Maven Documentation
           <span class="text-info">OSS Maven</span> provides for a consistent look-and-feel for
                 project sites, and checks for serious coding issues, code style, and licenses in code.
             <div class="m-1">
-              <a href="https://github.com/usnistgov/oss-maven/tree/master" class="p-1 text-secondary"><i class="fab fa-github"></i></a>
+              <a href="https://github.com/usnistgov/oss-maven/tree/main" class="p-1 text-secondary"><i class="fab fa-github"></i></a>
               <a href="mailto:scap@nist.gov" class="p-1 text-secondary"><i class="fas fa-envelope"></i></a>
               <a href="https://gitter.im/oss-maven/community" class="p-1 text-secondary"><i class="fab fa-gitter"></i></a>
             </div>
