@@ -27,7 +27,7 @@
 
 		<javac.debuglevel>lines,source,vars</javac.debuglevel>
 
-		<version.mavenReflowSkin>2.3.0</version.mavenReflowSkin>
+        <version.mavenReflowSkin>2.3.0</version.mavenReflowSkin>
 		<version.maven-velocity>1.7</version.maven-velocity>
 
 		<dependency.asm.version>9.2</dependency.asm.version>
@@ -121,6 +121,11 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>gov.nist.secauto</groupId>
+				<artifactId>oss-build-support</artifactId>
+				<version>21-SNAPSHOT</version>
+			</dependency>
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>

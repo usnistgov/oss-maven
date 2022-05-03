@@ -290,6 +290,7 @@
 						<artifactId>maven-javadoc-plugin</artifactId>
 						<reportSets>
 							<reportSet>
+								<id>default</id>
 								<reports>
 									<report>javadoc-no-fork</report>
 								</reports>

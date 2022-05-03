@@ -5,7 +5,9 @@
 
 	<description>Customizations of the built in rules</description>
 
-	<rule ref="category/java/bestpractices.xml" />
+	<rule ref="category/java/bestpractices.xml">
+		<exclude name="JUnitTestContainsTooManyAsserts" />
+	</rule>
 	<rule ref="category/java/codestyle.xml">
 		<exclude name="LocalVariableCouldBeFinal" />
 		<exclude name="LongVariable" />
@@ -20,6 +22,7 @@
 	</rule>
 	<rule ref="category/java/design.xml">
 		<exclude name="LawOfDemeter" />
+		<exclude name="LoosePackageCoupling" />
 		
 		<!-- the following are addressed by the god class check -->
 		<exclude name="TooManyMethods" />
