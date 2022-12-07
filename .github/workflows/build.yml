@@ -31,11 +31,6 @@ jobs:
         java-version: 11
         distribution: 'temurin'
         cache: 'maven'
-    - name: Initialize CodeQL
-      if: github.event_name == 'push'
-      uses: github/codeql-action/init@ec3cf9c605b848da5f1e41e8452719eb1ccfb9a6
-      with:
-        languages: java
     # -------------------------
     # Maven Build
     - name: Build and run tests (develop)
@@ -47,9 +42,6 @@ jobs:
       if: steps.maven-build-develop.conclusion == 'skipped'
       run: |
         mvn -Prelease -Preporting verify
-    - name: Perform CodeQL Analysis
-      if: github.event_name == 'push'
-      uses: github/codeql-action/analyze@ec3cf9c605b848da5f1e41e8452719eb1ccfb9a6
   deploy-snapshot:
     name: Deploy SNAPSHOT Release
     if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name == 'develop'
