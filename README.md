@@ -9,7 +9,7 @@ This project implements the following features:
 
 * Provides dependency management for the JUnit test framework.
 * Provides Maven SCM Git support through the use of the [maven-scm-provider-gitexe](https://maven.apache.org/scm/maven-scm-providers/maven-scm-providers-git/maven-scm-provider-gitexe/).
-* Configures java source and compile targets to 1.8
+* Configures java source and compile targets to 11.
 * Manages Maven Plugin versions for a large number of common Plugins to provide a stable build experience.
 * Sets up Maven site building using NIST templates
 * Configures Javadoc generation, with linking to Java 8 Javadocs
@@ -19,7 +19,7 @@ This project implements the following features:
 
 ## System Requirements
 
-* An Oracle Java 1.8 or higher compatible runtime environment
+* An Oracle Java 11 or higher compatible runtime environment
 * An [installation](https://maven.apache.org/install.html) of Apache Maven version 3.0 or higher.
 * Install the maven-formatter-plugin [m2e connector](https://github.com/velo/maven-formatter-plugin) using the update site.
 
