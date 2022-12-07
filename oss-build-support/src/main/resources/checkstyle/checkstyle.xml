@@ -17,9 +17,13 @@
 
 	<property name="fileExtensions" value="java, properties, xml" />
 
-	<property name="tabWidth" value="2"/>
+	<property name="tabWidth" value="2" />
 
-	<module name="SuppressWarningsFilter"/>
+	<module name="BeforeExecutionExclusionFileFilter">
+		<property name="fileNamePattern" value="module\-info\.java$" />
+	</module>
+
+	<module name="SuppressWarningsFilter" />
 	<!-- Checks for whitespace -->
 	<!-- See http://checkstyle.sf.net/config_whitespace.html -->
 	<module name="FileTabCharacter">
@@ -32,7 +36,7 @@
 			value="^package.*|^import.*|a href|href|http://|https://|ftp://|^ *\* *\{[^}]+\}$" />
 	</module>
 	<module name="TreeWalker">
-		<module name="SuppressWarningsHolder"/>
+		<module name="SuppressWarningsHolder" />
 		<module name="OuterTypeFilename" />
 		<module name="IllegalTokenText">
 			<property name="tokens" value="STRING_LITERAL, CHAR_LITERAL" />
@@ -167,7 +171,8 @@
 		<module name="OverloadMethodsDeclarationOrder" />
 		<module name="VariableDeclarationUsageDistance" />
 		<module name="ImportOrder">
-			<property name="groups" value="com,gov,net,org,/^java\./,javax" />
+			<property name="groups"
+				value="com,gov,net,org,/^java\./,javax" />
 			<property name="ordered" value="true" />
 			<property name="separated" value="true" />
 			<property name="option" value="top" />
@@ -207,14 +212,14 @@
 		</module>
 		<module name="MissingJavadocMethod">
 			<property name="scope" value="protected" />
-<!-- 			<property name="minLineCount" value="2" /> -->
+			<!-- <property name="minLineCount" value="2" /> -->
 		</module>
 		<module name="JavadocMethod">
 			<property name="severity" value="warning" />
 			<property name="accessModifiers" value="protected" />
-<!-- 			<property name="allowMissingParamTags" value="true" /> -->
+			<!-- <property name="allowMissingParamTags" value="true" /> -->
 			<property name="validateThrows" value="true" />
-<!-- 			<property name="allowMissingReturnTag" value="true" /> -->
+			<!-- <property name="allowMissingReturnTag" value="true" /> -->
 			<property name="allowedAnnotations" value="Override, Test" />
 		</module>
 		<module name="MethodName">
