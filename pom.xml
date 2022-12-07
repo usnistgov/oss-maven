@@ -4,85 +4,75 @@
 	<artifactId>oss-maven</artifactId>
 	<version>22-SNAPSHOT</version>
 	<packaging>pom</packaging>
-
 	<name>Build Root</name>
 	<description>A common build root for all NIST projects related to Security Automation.</description>
 	<url>${site.url}</url>
-
 	<properties>
 		<!-- shared site configuration -->
 		<site.url>https://pages.nist.gov/oss-maven</site.url>
 		<scm.url>https://github.com/usnistgov/oss-maven</scm.url>
 		<issueManagement.url>https://github.com/usnistgov/oss-maven/issues</issueManagement.url>
-
 		<!-- various encodings -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
 		<!-- Java compiler properties -->
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.release>11</maven.compiler.release>
-
 		<javac.debuglevel>lines,source,vars</javac.debuglevel>
-
-        <version.mavenReflowSkin>2.3.0</version.mavenReflowSkin>
+		<version.mavenReflowSkin>2.3.0</version.mavenReflowSkin>
 		<version.maven-velocity>1.7</version.maven-velocity>
-
 		<dependency.asm.version>9.2</dependency.asm.version>
-		<dependency.checkstyle.version>9.3</dependency.checkstyle.version>
-		<dependency.junit.version>4.13.1</dependency.junit.version>
-		<dependency.junit5.version>5.7.0</dependency.junit5.version>
-		<dependency.junit5-platform-launcher.version>1.7.0</dependency.junit5-platform-launcher.version>
-		<dependency.pmd.version>6.49.0</dependency.pmd.version>
-
-		<plugin.assembly.version>3.3.0</plugin.assembly.version>
+		<dependency.checkstyle.version>10.5.0</dependency.checkstyle.version>
+		<dependency.junit.version>4.13.2</dependency.junit.version>
+		<dependency.junit5.version>5.9.1</dependency.junit5.version>
+		<dependency.junit5-platform-launcher.version>1.9.1</dependency.junit5-platform-launcher.version>
+		<dependency.pmd.version>6.52.0</dependency.pmd.version>
+		<plugin.assembly.version>3.4.2</plugin.assembly.version>
 		<plugin.build-helper.version>3.3.0</plugin.build-helper.version>
-		<plugin.checkstyle.version>3.1.2</plugin.checkstyle.version>
-		<plugin.clean.version>3.1.0</plugin.clean.version>
-		<plugin.compile.version>3.9.0</plugin.compile.version>
-		<plugin.dependency.version>3.2.0</plugin.dependency.version>
-		<plugin.deploy.version>3.0.0-M2</plugin.deploy.version>
-		<plugin.enforcer.version>3.0.0</plugin.enforcer.version>
-		<plugin.failsafe.version>3.0.0-M5</plugin.failsafe.version>
-		<plugin.formatter.version>2.17.1</plugin.formatter.version>
+		<plugin.checkstyle.version>3.2.0</plugin.checkstyle.version>
+		<plugin.clean.version>3.2.0</plugin.clean.version>
+		<plugin.compile.version>3.10.1</plugin.compile.version>
+		<plugin.dependency.version>3.4.0</plugin.dependency.version>
+		<plugin.deploy.version>3.0.0</plugin.deploy.version>
+		<plugin.enforcer.version>3.1.0</plugin.enforcer.version>
+		<plugin.failsafe.version>3.0.0-M7</plugin.failsafe.version>
+		<plugin.formatter.version>2.21.0</plugin.formatter.version>
 		<plugin.gpg.version>3.0.1</plugin.gpg.version>
-		<plugin.install.version>3.0.0-M1</plugin.install.version>
-		<plugin.jacoco.version>0.8.7</plugin.jacoco.version>
-		<plugin.jar.version>3.2.2</plugin.jar.version>
-		<plugin.javadoc.version>3.3.1</plugin.javadoc.version>
+		<plugin.install.version>3.1.0</plugin.install.version>
+		<plugin.jacoco.version>0.8.8</plugin.jacoco.version>
+		<plugin.jar.version>3.3.0</plugin.jar.version>
+		<plugin.javadoc.version>3.4.1</plugin.javadoc.version>
 		<plugin.jdepend.version>2.0</plugin.jdepend.version>
-		<plugin.jxr.version>3.1.1</plugin.jxr.version>
-		<plugin.license.version>4.1</plugin.license.version>
-		<plugin.plugin.version>3.6.4</plugin.plugin.version>
-		<plugin.nexus-staging.version>1.6.8</plugin.nexus-staging.version>
+		<plugin.jxr.version>3.3.0</plugin.jxr.version>
+		<plugin.license.version>4.2.rc3</plugin.license.version>
+		<plugin.plugin.version>3.7.0</plugin.plugin.version>
+		<plugin.project-info-reports.version>3.4.1</plugin.project-info-reports.version>
+		<plugin.nexus-staging.version>1.6.13</plugin.nexus-staging.version>
 		<plugin.pmd.version>3.19.0</plugin.pmd.version>
-		<plugin.maven-project-info-reports.version>3.2.1</plugin.maven-project-info-reports.version>
-		<plugin.release.version>3.0.0-M5</plugin.release.version>
-		<plugin.resources.version>3.2.0</plugin.resources.version>
-		<plugin.scm.version>1.12.2</plugin.scm.version>
+		<plugin.release.version>3.0.0-M7</plugin.release.version>
+		<plugin.resources.version>3.3.0</plugin.resources.version>
+		<plugin.scm.version>2.0.0-M3</plugin.scm.version>
 		<plugin.scm-publish.version>3.1.0</plugin.scm-publish.version>
-		<plugin.site.version>3.10.0</plugin.site.version>
+		<plugin.site.version>4.0.0-M4</plugin.site.version>
 		<plugin.source.version>3.2.1</plugin.source.version>
-		<plugin.surefire.version>3.0.0-M5</plugin.surefire.version>
+		<plugin.spotbugs.version>4.7.1.1</plugin.spotbugs.version>
+		<plugin.surefire.version>3.0.0-M7</plugin.surefire.version>
 		<plugin.taglist.version>3.0.0</plugin.taglist.version>
-		<plugin.versions.version>2.9.0</plugin.versions.version>
+		<plugin.versions.version>2.13.0</plugin.versions.version>
 		<plugin.war.version>3.3.2</plugin.war.version>
 	</properties>
-
 	<issueManagement>
 		<url>${issueManagement.url}</url>
 		<system>GitHub Issues</system>
 	</issueManagement>
-
 	<scm>
 		<url>${scm.url}/tree/main</url>
 		<connection>scm:git:ssh://git@github.com/usnistgov/oss-maven.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/usnistgov/oss-maven.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
-
 	<distributionManagement>
 		<snapshotRepository>
 			<id>ossrh</id>
@@ -97,7 +87,6 @@
 			<url>${site.url}</url>
 		</site>
 	</distributionManagement>
-
 	<licenses>
 		<license>
 			<name>NIST License</name>
@@ -106,7 +95,6 @@
 			<comments>NIST software License</comments>
 		</license>
 	</licenses>
-
 	<developers>
 		<developer>
 			<id>david.waltermire@nist.gov</id>
@@ -118,7 +106,6 @@
 			</roles>
 		</developer>
 	</developers>
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -162,10 +149,15 @@
 				<version>${dependency.junit5-platform-launcher.version}</version>
 				<scope>test</scope>
 			</dependency>
-
+			<dependency>
+				<groupId>com.github.spotbugs</groupId>
+				<artifactId>spotbugs-annotations</artifactId>
+				<version>${dependency.spotbugs-annotations.version}</version>
+				<scope>provided</scope>
+				<optional>true</optional>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
 	<build>
 		<extensions>
 			<extension>
@@ -271,7 +263,6 @@
 						<tagNameFormat>v@{project.version}</tagNameFormat>
 					</configuration>
 				</plugin>
-
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-site-plugin</artifactId>
@@ -310,13 +301,12 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-project-info-reports-plugin</artifactId>
-					<version>${plugin.maven-project-info-reports.version}</version>
+					<version>${plugin.project-info-reports.version}</version>
 				</plugin>
 				<plugin>
 					<artifactId>maven-resources-plugin</artifactId>
 					<version>${plugin.resources.version}</version>
 				</plugin>
-
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-gpg-plugin</artifactId>
@@ -386,25 +376,21 @@
 					<artifactId>build-helper-maven-plugin</artifactId>
 					<version>${plugin.build-helper.version}</version>
 				</plugin>
-
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jxr-plugin</artifactId>
 					<version>${plugin.jxr.version}</version>
 				</plugin>
-
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>jdepend-maven-plugin</artifactId>
 					<version>${plugin.jdepend.version}</version>
 				</plugin>
-
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-report-plugin</artifactId>
 					<version>${plugin.surefire.version}</version>
 				</plugin>
-
 				<plugin>
 					<groupId>org.jacoco</groupId>
 					<artifactId>jacoco-maven-plugin</artifactId>
@@ -425,22 +411,6 @@
 							<ruleset>pmd/category/java/custom.xml</ruleset>
 						</rulesets>
 					</configuration>
-					<executions>
-						<execution>
-							<id>pmd-verify</id>
-							<phase>verify</phase>
-							<goals>
-								<goal>check</goal>
-							</goals>
-						</execution>
-						<execution>
-							<id>pmd-verify-cpd</id>
-							<phase>verify</phase>
-							<goals>
-								<goal>cpd-check</goal>
-							</goals>
-						</execution>
-					</executions>
 					<dependencies>
 						<dependency>
 							<groupId>net.sourceforge.pmd</groupId>
@@ -474,6 +444,16 @@
 							<version>22-SNAPSHOT</version>
 						</dependency>
 					</dependencies>
+				</plugin>
+				<plugin>
+					<groupId>com.github.spotbugs</groupId>
+					<artifactId>spotbugs-maven-plugin</artifactId>
+					<version>${plugin.spotbugs.version}</version>
+					<configuration>
+						<effort>Max</effort>
+						<threshold>Normal</threshold>
+						<xmlOutput>true</xmlOutput>
+					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
@@ -553,6 +533,7 @@
 						<consoleOutput>true</consoleOutput>
 						<failsOnError>true</failsOnError>
 						<linkXRef>false</linkXRef>
+						<excludes>module\-info\.java$</excludes>
 					</configuration>
 					<executions>
 						<execution>
@@ -591,7 +572,6 @@
 					<artifactId>maven-war-plugin</artifactId>
 					<version>${plugin.war.version}</version>
 				</plugin>
-
 				<plugin>
 					<groupId>org.sonatype.plugins</groupId>
 					<artifactId>nexus-staging-maven-plugin</artifactId>
@@ -694,7 +674,6 @@
 			</plugin>
 		</plugins>
 	</build>
-
 	<profiles>
 		<profile>
 			<id>release</id>

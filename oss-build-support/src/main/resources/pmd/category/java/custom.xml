@@ -39,7 +39,6 @@
 	<rule ref="category/java/errorprone.xml">
 		<!-- fix for: aktStatus is NULL: maximum Iterations exceeded -->
 		<exclude name="DataflowAnomalyAnalysis" />
-		<exclude name="BeanMembersShouldSerialize" />
 		<exclude name="AssignmentInOperand" />
 		<exclude name="AvoidLiteralsInIfCondition" />
 		<!-- Annoying errors -->
