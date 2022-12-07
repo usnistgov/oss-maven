@@ -19,6 +19,9 @@
 		<exclude name="MethodArgumentCouldBeFinal" />
 		<!-- Addressed by codestyle instead -->
 		<exclude name="ShortVariable" />
+		<exclude name="UnnecessaryImport" />
+		<!-- Annoying errors -->
+		<exclude name="EmptyMethodInAbstractClassShouldBeAbstract" />
 	</rule>
 	<rule ref="category/java/design.xml">
 		<exclude name="LawOfDemeter" />
@@ -39,6 +42,10 @@
 		<exclude name="BeanMembersShouldSerialize" />
 		<exclude name="AssignmentInOperand" />
 		<exclude name="AvoidLiteralsInIfCondition" />
+		<!-- Annoying errors -->
+		<exclude name="AvoidFieldNameMatchingMethodName" />
+		<exclude name="AvoidFieldNameMatchingTypeName" />
+		<exclude name="AvoidDuplicateLiterals" />
 	</rule>
 	<rule ref="category/java/multithreading.xml" />
 	<rule ref="category/java/performance.xml" />
@@ -48,9 +55,11 @@
 			<property name="allowCommentedBlocks" value="true" />
 		</properties>
 	</rule>
+<!--
 	<rule ref="category/java/errorprone.xml/AvoidDuplicateLiterals">
 		<properties>
 			<property name="skipAnnotations" value="true" />
 		</properties>
 	</rule>
+-->
 </ruleset>

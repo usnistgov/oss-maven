@@ -35,7 +35,7 @@
 		<dependency.junit.version>4.13.1</dependency.junit.version>
 		<dependency.junit5.version>5.7.0</dependency.junit5.version>
 		<dependency.junit5-platform-launcher.version>1.7.0</dependency.junit5-platform-launcher.version>
-		<dependency.pmd.version>6.42.0</dependency.pmd.version>
+		<dependency.pmd.version>6.49.0</dependency.pmd.version>
 
 		<plugin.assembly.version>3.3.0</plugin.assembly.version>
 		<plugin.build-helper.version>3.3.0</plugin.build-helper.version>
@@ -57,7 +57,7 @@
 		<plugin.license.version>4.1</plugin.license.version>
 		<plugin.plugin.version>3.6.4</plugin.plugin.version>
 		<plugin.nexus-staging.version>1.6.8</plugin.nexus-staging.version>
-		<plugin.pmd.version>3.15.0</plugin.pmd.version>
+		<plugin.pmd.version>3.19.0</plugin.pmd.version>
 		<plugin.maven-project-info-reports.version>3.2.1</plugin.maven-project-info-reports.version>
 		<plugin.release.version>3.0.0-M5</plugin.release.version>
 		<plugin.resources.version>3.2.0</plugin.resources.version>
