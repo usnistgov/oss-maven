@@ -170,7 +170,7 @@
     <version>2.2.0</version>
   </skin>
 
-  <googleAnalyticsAccountId>UA-42404149-54</googleAnalyticsAccountId>
+  <googleAnalyticsAccountId>UA-66610693-1</googleAnalyticsAccountId>
   <publishDate position="none" format="yyyy-MM-dd"/>
   <version position="left"/>
   <edit>${this.scm.url}</edit>
