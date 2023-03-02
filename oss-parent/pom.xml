@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>gov.nist.secauto</groupId>
 		<artifactId>oss-maven</artifactId>
-		<version>23-SNAPSHOT</version>
+		<version>23</version>
 	</parent>
 	<artifactId>oss-parent</artifactId>
 	<packaging>pom</packaging>
