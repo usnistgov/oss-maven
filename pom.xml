@@ -21,8 +21,8 @@
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.release>11</maven.compiler.release>
 		<javac.debuglevel>lines,source,vars</javac.debuglevel>
-		<version.mavenReflowSkin>2.3.0</version.mavenReflowSkin>
-		<version.maven-velocity>1.7</version.maven-velocity>
+		<version.mavenReflowSkin>2.3.3</version.mavenReflowSkin>
+		<version.maven-velocity>2.3</version.maven-velocity>
 		<dependency.asm.version>9.2</dependency.asm.version>
 		<dependency.checkstyle.version>10.5.0</dependency.checkstyle.version>
 		<dependency.junit.version>4.13.2</dependency.junit.version>
@@ -281,16 +281,18 @@
 							<artifactId>reflow-velocity-tools</artifactId>
 							<version>${version.mavenReflowSkin}</version>
 						</dependency>
-						<!-- <dependency> -->
-						<!-- <groupId>org.apache.velocity</groupId> -->
-						<!-- <artifactId>velocity</artifactId> -->
-						<!-- <version>${version.maven-velocity}</version> -->
-						<!-- </dependency> -->
+						<!--
+						<dependency>
+							<groupId>org.apache.velocity</groupId>
+							<artifactId>velocity-engine-core</artifactId>
+							<version>${version.maven-velocity}</version>
+						</dependency>
 						<dependency>
 							<groupId>org.apache.maven.doxia</groupId>
 							<artifactId>doxia-module-markdown</artifactId>
 							<version>1.11.1</version>
 						</dependency>
+					-->
 					</dependencies>
 				</plugin>
 				<plugin>

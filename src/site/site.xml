@@ -18,6 +18,7 @@
       <link rel="manifest" href="$resourcePath/site.webmanifest">
       <link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
       <link rel="stylesheet" href="$resourcePath/css/custom.css">
+      <script async type=text/javascript id=_fed_an_ua_tag src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NIST&subagency=github&pua=UA-66610693-1&yt=true&exts=ppsx,pps,f90,sch,rtf,wrl,txz,m1v,xlsm,msi,xsd,f,tif,eps,mpg,xml,pl,xlt,c"></script>
       ]]>
     </head>
     <links>
@@ -50,14 +51,6 @@
 
   <custom>
     <reflowSkin>
-      <brand>
-        <name>
-      	 <![CDATA[
-      	 <div id="nistheadergoeshere"></div> Security Automation Maven Support
-      	 ]]>
-      	</name>
-        <href>${project.site.url}</href>
-      </brand>
       <slogan>Default Maven build settings for NIST Security Automation projects.</slogan>
       <bottomDescription quote="false">
         <![CDATA[
@@ -110,9 +103,16 @@
         </features>
       </pages>
 
-
+      <brand>
+        <name>
+         <![CDATA[
+         <div id="nistheadergoeshere"></div> Security Automation Maven Support
+         ]]>
+        </name>
+      </brand>
       <navbar filterMenu="Documentation|Maven documentation"
-        cssClass="navbar-dark bg-primary border-bottom" center="false" alignMenu="right"/>
+        cssClass="navbar-dark bg-primary border-bottom" center="false" alignMenu="right">
+      </navbar>  
       <!-- Split menus in the bottom navigation -->
       <bottomNav maxSpan="9">
         <column>Main</column>
@@ -167,10 +167,9 @@
   <skin>
     <groupId>io.github.devacfr.maven.skins</groupId>
     <artifactId>reflow-maven-skin</artifactId>
-    <version>2.2.0</version>
+    <version>2.3.3</version>
   </skin>
 
-  <googleAnalyticsAccountId>UA-66610693-1</googleAnalyticsAccountId>
   <publishDate position="none" format="yyyy-MM-dd"/>
   <version position="left"/>
   <edit>${this.scm.url}</edit>
