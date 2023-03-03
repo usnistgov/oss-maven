@@ -50,7 +50,7 @@
 		<plugin.plugin.version>3.8.1</plugin.plugin.version>
 		<plugin.project-info-reports.version>3.4.1</plugin.project-info-reports.version>
 		<plugin.nexus-staging.version>1.6.13</plugin.nexus-staging.version>
-		<plugin.pmd.version>3.19.0</plugin.pmd.version>
+		<plugin.pmd.version>3.20.0</plugin.pmd.version>
 		<plugin.release.version>3.0.0-M7</plugin.release.version>
 		<plugin.resources.version>3.3.0</plugin.resources.version>
 		<plugin.scm.version>2.0.0-M3</plugin.scm.version>
