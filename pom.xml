@@ -27,7 +27,7 @@
 		<dependency.checkstyle.version>10.5.0</dependency.checkstyle.version>
 		<dependency.junit.version>4.13.2</dependency.junit.version>
 		<dependency.junit5.version>5.9.1</dependency.junit5.version>
-		<dependency.junit5-platform-launcher.version>1.9.1</dependency.junit5-platform-launcher.version>
+		<dependency.junit5-platform-launcher.version>1.9.2</dependency.junit5-platform-launcher.version>
 		<dependency.pmd.version>6.55.0</dependency.pmd.version>
 		<plugin.assembly.version>3.4.2</plugin.assembly.version>
 		<plugin.build-helper.version>3.3.0</plugin.build-helper.version>
