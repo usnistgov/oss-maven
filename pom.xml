@@ -37,7 +37,7 @@
 		<plugin.dependency.version>3.4.0</plugin.dependency.version>
 		<plugin.deploy.version>3.0.0</plugin.deploy.version>
 		<plugin.enforcer.version>3.1.0</plugin.enforcer.version>
-		<plugin.failsafe.version>3.0.0-M7</plugin.failsafe.version>
+		<plugin.failsafe.version>3.1.0</plugin.failsafe.version>
 		<plugin.formatter.version>2.21.0</plugin.formatter.version>
 		<plugin.gpg.version>3.0.1</plugin.gpg.version>
 		<plugin.install.version>3.1.0</plugin.install.version>
