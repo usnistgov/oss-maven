@@ -34,7 +34,7 @@
 		<plugin.checkstyle.version>3.2.1</plugin.checkstyle.version>
 		<plugin.clean.version>3.2.0</plugin.clean.version>
 		<plugin.compile.version>3.11.0</plugin.compile.version>
-		<plugin.dependency.version>3.4.0</plugin.dependency.version>
+		<plugin.dependency.version>3.6.0</plugin.dependency.version>
 		<plugin.deploy.version>3.0.0</plugin.deploy.version>
 		<plugin.enforcer.version>3.1.0</plugin.enforcer.version>
 		<plugin.failsafe.version>3.0.0-M7</plugin.failsafe.version>
