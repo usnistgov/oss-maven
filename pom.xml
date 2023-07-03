@@ -43,7 +43,7 @@
 		<plugin.install.version>3.1.0</plugin.install.version>
 		<plugin.jacoco.version>0.8.8</plugin.jacoco.version>
 		<plugin.jar.version>3.3.0</plugin.jar.version>
-		<plugin.javadoc.version>3.4.1</plugin.javadoc.version>
+		<plugin.javadoc.version>3.5.0</plugin.javadoc.version>
 		<plugin.jdepend.version>2.0</plugin.jdepend.version>
 		<plugin.jxr.version>3.3.0</plugin.jxr.version>
 		<plugin.license.version>4.2.rc3</plugin.license.version>

@@ -1,5 +1,6 @@
 
+# Common Build Support
+
 This module provides the [checkstyle configuration](${project.parent.scm.url}/oss-build-support/src/main/resources/checkstyle/checkstyle.xml) used by builds [configured](../oss-parent/usage.html) with the OSS Maven build parent.
 
 Additionally, Eclipse formatter and import organization configurations are [provided](${project.parent.scm.url}/oss-build-support/src/main/resources/checkstyle/eclipse/).
-
