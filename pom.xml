@@ -21,14 +21,18 @@
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.release>11</maven.compiler.release>
 		<javac.debuglevel>lines,source,vars</javac.debuglevel>
+
 		<version.mavenReflowSkin>2.3.3</version.mavenReflowSkin>
 		<version.maven-velocity>2.3</version.maven-velocity>
+
 		<dependency.asm.version>9.2</dependency.asm.version>
 		<dependency.checkstyle.version>10.5.0</dependency.checkstyle.version>
 		<dependency.junit.version>4.13.2</dependency.junit.version>
 		<dependency.junit5.version>5.9.2</dependency.junit5.version>
 		<dependency.junit5-platform-launcher.version>1.9.3</dependency.junit5-platform-launcher.version>
 		<dependency.pmd.version>6.55.0</dependency.pmd.version>
+		<dependency.spotbugs-annotations.version>4.7.3</dependency.spotbugs-annotations.version>
+
 		<plugin.assembly.version>3.4.2</plugin.assembly.version>
 		<plugin.build-helper.version>3.3.0</plugin.build-helper.version>
 		<plugin.checkstyle.version>3.2.1</plugin.checkstyle.version>
