@@ -26,18 +26,18 @@
 		<dependency.asm.version>9.2</dependency.asm.version>
 		<dependency.checkstyle.version>10.5.0</dependency.checkstyle.version>
 		<dependency.junit.version>4.13.2</dependency.junit.version>
-		<dependency.junit5.version>5.9.1</dependency.junit5.version>
-		<dependency.junit5-platform-launcher.version>1.9.1</dependency.junit5-platform-launcher.version>
+		<dependency.junit5.version>5.9.2</dependency.junit5.version>
+		<dependency.junit5-platform-launcher.version>1.9.3</dependency.junit5-platform-launcher.version>
 		<dependency.pmd.version>6.55.0</dependency.pmd.version>
 		<plugin.assembly.version>3.4.2</plugin.assembly.version>
 		<plugin.build-helper.version>3.3.0</plugin.build-helper.version>
 		<plugin.checkstyle.version>3.2.1</plugin.checkstyle.version>
 		<plugin.clean.version>3.2.0</plugin.clean.version>
 		<plugin.compile.version>3.11.0</plugin.compile.version>
-		<plugin.dependency.version>3.4.0</plugin.dependency.version>
+		<plugin.dependency.version>3.6.0</plugin.dependency.version>
 		<plugin.deploy.version>3.0.0</plugin.deploy.version>
 		<plugin.enforcer.version>3.1.0</plugin.enforcer.version>
-		<plugin.failsafe.version>3.0.0-M7</plugin.failsafe.version>
+		<plugin.failsafe.version>3.1.0</plugin.failsafe.version>
 		<plugin.formatter.version>2.21.0</plugin.formatter.version>
 		<plugin.gpg.version>3.0.1</plugin.gpg.version>
 		<plugin.install.version>3.1.0</plugin.install.version>
@@ -50,15 +50,15 @@
 		<plugin.plugin.version>3.8.1</plugin.plugin.version>
 		<plugin.project-info-reports.version>3.4.1</plugin.project-info-reports.version>
 		<plugin.nexus-staging.version>1.6.13</plugin.nexus-staging.version>
-		<plugin.pmd.version>3.19.0</plugin.pmd.version>
+		<plugin.pmd.version>3.21.0</plugin.pmd.version>
 		<plugin.release.version>3.0.0-M7</plugin.release.version>
 		<plugin.resources.version>3.3.0</plugin.resources.version>
 		<plugin.scm.version>2.0.0-M3</plugin.scm.version>
 		<plugin.scm-publish.version>3.1.0</plugin.scm-publish.version>
-		<plugin.site.version>4.0.0-M4</plugin.site.version>
+		<plugin.site.version>4.0.0-M8</plugin.site.version>
 		<plugin.source.version>3.2.1</plugin.source.version>
-		<plugin.spotbugs.version>4.7.1.1</plugin.spotbugs.version>
-		<plugin.surefire.version>3.0.0-M7</plugin.surefire.version>
+		<plugin.spotbugs.version>4.7.3.4</plugin.spotbugs.version>
+		<plugin.surefire.version>3.1.2</plugin.surefire.version>
 		<plugin.taglist.version>3.0.0</plugin.taglist.version>
 		<plugin.versions.version>2.15.0</plugin.versions.version>
 		<plugin.war.version>3.3.2</plugin.war.version>
