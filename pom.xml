@@ -25,16 +25,17 @@
 		<maven.compiler.release>11</maven.compiler.release>
 		<javac.debuglevel>lines,source,vars</javac.debuglevel>
 
-		<version.mavenReflowSkin>2.3.3</version.mavenReflowSkin>
-		<version.maven-velocity>2.3</version.maven-velocity>
-
 		<dependency.asm.version>9.2</dependency.asm.version>
 		<dependency.checkstyle.version>10.5.0</dependency.checkstyle.version>
+		<!-- the doxia version relates directly to the maven-site-plugin version -->
+		<dependency.doxia.version>2.0.0-M4</dependency.doxia.version>
 		<dependency.junit.version>4.13.2</dependency.junit.version>
 		<dependency.junit5.version>5.9.2</dependency.junit5.version>
 		<dependency.junit5-platform-launcher.version>1.9.3</dependency.junit5-platform-launcher.version>
 		<dependency.maven-plugin-tools.version>3.8.1</dependency.maven-plugin-tools.version>
+		<dependency.maven-velocity.version>2.3</dependency.maven-velocity.version>
 		<dependency.pmd.version>6.55.0</dependency.pmd.version>
+		<dependency.reflowSkin.version>2.3.3</dependency.reflowSkin.version>
 		<dependency.spotbugs-annotations.version>4.7.3</dependency.spotbugs-annotations.version>
 
 		<plugin.maven-assembly.version>3.4.2</plugin.maven-assembly.version>
@@ -56,14 +57,14 @@
 		<plugin.maven-resources.version>3.3.0</plugin.maven-resources.version>
 		<plugin.maven-scm.version>2.0.0-M3</plugin.maven-scm.version>
 		<plugin.maven-scm-publish.version>3.1.0</plugin.maven-scm-publish.version>
-		<plugin.maven-site.version>4.0.0-M8</plugin.maven-site.version>
+		<plugin.maven-site.version>4.0.0-M4</plugin.maven-site.version>
 		<plugin.maven-source.version>3.2.1</plugin.maven-source.version>
 		<plugin.maven-surefire.version>3.1.2</plugin.maven-surefire.version>
 		<plugin.maven-war.version>3.3.2</plugin.maven-war.version>
 
 		<plugin.build-helper.version>3.3.0</plugin.build-helper.version>
 		<plugin.failsafe.version>3.1.0</plugin.failsafe.version>
-		<plugin.formatter.version>2.21.0</plugin.formatter.version>
+		<plugin.formatter.version>2.23.0</plugin.formatter.version>
 		<plugin.jacoco.version>0.8.8</plugin.jacoco.version>
 		<plugin.jdepend.version>2.0</plugin.jdepend.version>
 		<plugin.license.version>4.2.rc3</plugin.license.version>
@@ -227,8 +228,7 @@
 								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
 							</manifest>
 							<manifestEntries>
-								<Implementation-Build-Date>
-									${maven.build.timestamp}</Implementation-Build-Date>
+								<Implementation-Build-Date>${maven.build.timestamp}</Implementation-Build-Date>
 								<X-Compile-Source-JDK>${maven.compiler.source}</X-Compile-Source-JDK>
 								<X-Compile-Target-JDK>${maven.compiler.target}</X-Compile-Target-JDK>
 							</manifestEntries>
@@ -285,7 +285,7 @@
 					<configuration>
 						<skipDeploy>true</skipDeploy>
 						<!-- <scmBranch>nist-pages</scmBranch> -->
-<!--						<relativizeDecorationLinks>true</relativizeDecorationLinks>-->
+						<relativizeDecorationLinks>true</relativizeDecorationLinks>
 						<generateReports>true</generateReports>
 						<!--
 						<templateDirectory>${project.basedir}/target/site-files/site</templateDirectory> -->
@@ -295,20 +295,25 @@
 						<dependency>
 							<groupId>io.github.devacfr.maven.skins</groupId>
 							<artifactId>reflow-velocity-tools</artifactId>
-							<version>${version.mavenReflowSkin}</version>
+							<version>${dependency.reflowSkin.version}</version>
 						</dependency>
-						<!--
 						<dependency>
-							<groupId>org.apache.velocity</groupId>
-							<artifactId>velocity-engine-core</artifactId>
-							<version>${version.maven-velocity}</version>
+							<groupId>org.apache.maven.doxia</groupId>
+							<artifactId>doxia-core</artifactId>
+							<version>${dependency.doxia.version}</version>
 						</dependency>
 						<dependency>
 							<groupId>org.apache.maven.doxia</groupId>
 							<artifactId>doxia-module-markdown</artifactId>
-							<version>1.11.1</version>
+							<version>${dependency.doxia.version}</version>
 						</dependency>
-					-->
+<!--
+						<dependency>
+							<groupId>org.apache.velocity</groupId>
+							<artifactId>velocity-engine-core</artifactId>
+							<version>${dependency.maven-velocity.version}</version>
+						</dependency>
+-->
 					</dependencies>
 				</plugin>
 				<plugin>
@@ -644,8 +649,7 @@
 							<goal>publish-scm</goal>
 						</goals>
 						<configuration>
-							<pubScmUrl>
-								${project.distributionManagement.scm.connection}</pubScmUrl>
+							<pubScmUrl>${project.distributionManagement.scm.connection}</pubScmUrl>
 							<scmBranch>nist-pages</scmBranch>
 						</configuration>
 					</execution>

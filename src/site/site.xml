@@ -3,6 +3,17 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd"
   name="NIST Open Source Maven Parent">
+
+  <skin>
+    <groupId>io.github.devacfr.maven.skins</groupId>
+    <artifactId>reflow-maven-skin</artifactId>
+    <version>${this.dependency.reflowSkin.version}</version>
+  </skin>
+
+  <publishDate position="none" format="yyyy-MM-dd"/>
+  <version position="left"/>
+  <edit>${this.scm.url}</edit>
+
   <bannerLeft>
     <name><![CDATA[
       Security Automation Maven Project
@@ -118,11 +129,10 @@
         <column>Main</column>
         <column>Contribute</column>
         <column>Modules</column>
-		<column>Maven Documentation</column>
+		    <column>Maven Documentation</column>
       </bottomNav>
 
       <absoluteResourceURL>${this.site.url}</absoluteResourceURL>
-      <localResources>false</localResources>
       <skinAttribution>false</skinAttribution>
       <smoothScroll>true</smoothScroll>
       <theme>bootswatch-flatly</theme>
@@ -163,14 +173,4 @@
       <markPageHeader>false</markPageHeader>
     </reflowSkin>
   </custom>
-
-  <skin>
-    <groupId>io.github.devacfr.maven.skins</groupId>
-    <artifactId>reflow-maven-skin</artifactId>
-    <version>2.3.3</version>
-  </skin>
-
-  <publishDate position="none" format="yyyy-MM-dd"/>
-  <version position="left"/>
-  <edit>${this.scm.url}</edit>
 </project>
