@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>gov.nist.secauto</groupId>
 	<artifactId>oss-maven</artifactId>
-	<version>24</version>
+	<version>25-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Build Root</name>
 	<description>A common build root for all NIST projects related to Security
@@ -80,7 +80,7 @@
 		<connection>scm:git:ssh://git@github.com/usnistgov/oss-maven.git</connection>
 		<developerConnection>
 			scm:git:ssh://git@github.com/usnistgov/oss-maven.git</developerConnection>
-		<tag>v24</tag>
+		<tag>HEAD</tag>
 	</scm>
 	<distributionManagement>
 		<snapshotRepository>
@@ -120,7 +120,7 @@
 			<dependency>
 				<groupId>gov.nist.secauto</groupId>
 				<artifactId>oss-build-support</artifactId>
-				<version>24</version>
+				<version>25-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>junit</groupId>
@@ -463,7 +463,7 @@
 						<dependency>
 							<groupId>gov.nist.secauto</groupId>
 							<artifactId>oss-build-support</artifactId>
-							<version>24</version>
+							<version>25-SNAPSHOT</version>
 						</dependency>
 					</dependencies>
 				</plugin>
@@ -504,7 +504,7 @@
 						<dependency>
 							<groupId>gov.nist.secauto</groupId>
 							<artifactId>oss-build-support</artifactId>
-							<version>24</version>
+							<version>25-SNAPSHOT</version>
 						</dependency>
 					</dependencies>
 					<executions>
@@ -544,7 +544,7 @@
 						<dependency>
 							<groupId>gov.nist.secauto</groupId>
 							<artifactId>oss-build-support</artifactId>
-							<version>24</version>
+							<version>25-SNAPSHOT</version>
 						</dependency>
 					</dependencies>
 				</plugin>
@@ -583,7 +583,7 @@
 						<dependency>
 							<groupId>gov.nist.secauto</groupId>
 							<artifactId>oss-build-support</artifactId>
-							<version>24</version>
+							<version>25-SNAPSHOT</version>
 						</dependency>
 						<dependency>
 							<groupId>com.puppycrawl.tools</groupId>
