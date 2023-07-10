@@ -43,7 +43,7 @@ mvn checkstyle:check
 To perform a release on `develop` or a release branch:
 
 ```bash
-mvn -Prelease release:clean release:prepare
+mvn -Prelease -Preporting release:clean release:prepare
 ```
 
 No need to include the `release:perform` goal, since this is handled by the GitHub actions CI/CD.
