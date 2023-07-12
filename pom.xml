@@ -246,20 +246,7 @@
 						<bootclasspath>${sun.boot.class.path}</bootclasspath>
 						<additionalJOption>-J-Xmx1024m</additionalJOption>
 						<maxmemory>${javadoc.maxmemory}</maxmemory>
-<!--
-						<archive>
-							<manifest>
-								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-							</manifest>
-							<manifestEntries>
-								<Implementation-Build-Date>
-									${maven.build.timestamp}</Implementation-Build-Date>
-								<X-Compile-Source-JDK>${maven.compiler.source}</X-Compile-Source-JDK>
-								<X-Compile-Target-JDK>${maven.compiler.target}</X-Compile-Target-JDK>
-							</manifestEntries>
-						</archive>
--->
+						<linksource>false</linksource>
 					</configuration>
 				</plugin>
 				<plugin>

@@ -228,6 +228,7 @@
 							</reportSet>
 						</reportSets>
 					</plugin>
+<!--
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-jxr-plugin</artifactId>
@@ -235,6 +236,7 @@
 							<linkJavadoc>true</linkJavadoc>
 						</configuration>
 					</plugin>
+-->
 					<!-- <plugin> -->
 					<!-- <groupId>org.codehaus.mojo</groupId> -->
 					<!-- <artifactId>jdepend-maven-plugin</artifactId> -->
@@ -320,6 +322,9 @@
 								<reports>
 									<report>javadoc-no-fork</report>
 								</reports>
+								<configuration>
+									<linksource>false</linksource>
+								</configuration>
 							</reportSet>
 						</reportSets>
 					</plugin>
