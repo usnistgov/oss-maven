@@ -34,7 +34,7 @@ jobs:
     # -------------------------
     - name: Build Website
       run: |
-          mvn -B -Preporting -Prelease package site site:stage
+          mvn -B -e -Prelease -Preporting package site site:stage
       working-directory: ${{ env.REPO_PATH }}
     - name: Run deploy script
       run: |
@@ -45,7 +45,7 @@ jobs:
     # -------------------------
     - name: Deploy Maven Artifacts
       run: |
-        mvn -B -Pgpg -Prelease -Preporting deploy
+        mvn -B -e -Pgpg -Prelease -Preporting deploy
         # mvn -Pgpg -Prelease nexus-staging:close -DstagingDescription="closing to release"
       env:
         MAVEN_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
