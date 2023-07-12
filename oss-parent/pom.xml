@@ -34,10 +34,10 @@
 			<!-- </execution> -->
 			<!-- </executions> -->
 			<!-- </plugin> -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-scm-plugin</artifactId>
-			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>org.apache.maven.plugins</groupId>-->
+<!--				<artifactId>maven-scm-plugin</artifactId>-->
+<!--			</plugin>-->
 			<plugin>
 				<groupId>com.mycila</groupId>
 				<artifactId>license-maven-plugin</artifactId>
@@ -45,13 +45,10 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
-				<configuration>
-					<mavenExecutorId>forked-path</mavenExecutorId>
-					<useReleaseProfile>false</useReleaseProfile>
-					<arguments>-Prelease</arguments>
-					<tagNameFormat>v@{project.version}</tagNameFormat>
-					<autoVersionSubmodules>false</autoVersionSubmodules>
-				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -97,8 +94,37 @@
 		<profile>
 			<id>release</id>
 			<build>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-checkstyle-plugin</artifactId>
+							<configuration>
+								<!-- fail on validation for release -->
+								<failOnViolation>true</failOnViolation>
+							</configuration>
+						</plugin>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-pmd-plugin</artifactId>
+							<configuration>
+								<!-- fail on validation for release -->
+								<failOnViolation>true</failOnViolation>
+							</configuration>
+						</plugin>
+						<plugin>
+							<groupId>com.github.spotbugs</groupId>
+							<artifactId>spotbugs-maven-plugin</artifactId>
+							<configuration>
+								<!-- fail on validation for release -->
+								<failOnError>true</failOnError>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
 				<plugins>
 					<plugin>
+						<!-- build source JAR for release -->
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-source-plugin</artifactId>
 						<executions>
@@ -111,6 +137,7 @@
 						</executions>
 					</plugin>
 					<plugin>
+						<!-- build javadoc JAR for release -->
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-javadoc-plugin</artifactId>
 						<executions>
@@ -122,25 +149,6 @@
 							</execution>
 						</executions>
 					</plugin>
-					<plugin>
-						<groupId>net.revelc.code.formatter</groupId>
-						<artifactId>formatter-maven-plugin</artifactId>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-checkstyle-plugin</artifactId>
-						<configuration>
-							<!-- fail on validation for release -->
-							<failOnViolation>true</failOnViolation>
-						</configuration>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-pmd-plugin</artifactId>
-						<configuration>
-							<failOnViolation>true</failOnViolation>
-						</configuration>
-					</plugin>
 				</plugins>
 			</build>
 		</profile>
@@ -148,6 +156,10 @@
 			<id>reporting</id>
 			<build>
 				<plugins>
+					<plugin>
+						<groupId>net.revelc.code.formatter</groupId>
+						<artifactId>formatter-maven-plugin</artifactId>
+					</plugin>
 					<plugin>
 						<groupId>org.jacoco</groupId>
 						<artifactId>jacoco-maven-plugin</artifactId>
@@ -250,12 +262,6 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-pmd-plugin</artifactId>
-						<configuration>
-							<linkXref>true</linkXref>
-							<minimumTokens>100</minimumTokens>
-							<targetJdk>${maven.compiler.target}</targetJdk>
-							<analysisCache>true</analysisCache>
-						</configuration>
 					</plugin>
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
@@ -283,10 +289,12 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-checkstyle-plugin</artifactId>
+<!--
 						<configuration>
 							<configLocation>checkstyle/checkstyle.xml</configLocation>
 							<skip>false</skip>
 						</configuration>
+-->
 						<reportSets>
 							<reportSet>
 								<reports>
@@ -330,6 +338,9 @@
 					<plugins>
 						<!-- for the m2e peeps -->
 						<plugin>
+			                <!--This plugin's configuration is used to store
+							Eclipse m2e settings only. It has no influence
+							on the Maven build itself. -->
 							<groupId>org.eclipse.m2e</groupId>
 							<artifactId>lifecycle-mapping</artifactId>
 							<version>1.0.0</version>

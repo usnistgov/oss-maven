@@ -37,13 +37,13 @@ jobs:
     # -------------------------
     - name: Build and run tests
       run: |
-        mvn -Prelease -Preporting verify
+        mvn -B -Prelease -Preporting verify
     # -------------------------
     # Maven Site
     # -------------------------
     - name: Build Website
       run: |
-          mvn -Preporting -Prelease package site site:stage
+          mvn -B -Preporting -Prelease package site site:stage
   deploy-snapshot:
     name: Deploy SNAPSHOT Release
     if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name == 'develop'
@@ -74,7 +74,7 @@ jobs:
     # -------------------------
     - name: Deploy Maven Artifact SNAPSHOTs
       run: |
-        mvn -e -Pgpg -Preporting deploy
+        mvn -B -e -Pgpg -Preporting deploy -Dmaven.deploy.skip=releases
       env:
         MAVEN_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
         MAVEN_CENTRAL_TOKEN: ${{ secrets.SONATYPE_PASSWORD }}
