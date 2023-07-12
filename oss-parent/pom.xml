@@ -264,6 +264,14 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-pmd-plugin</artifactId>
+						<reportSets>
+							<reportSet>
+								<reports>
+									<report>pmd</report>
+									<report>cpd</report>
+								</reports>
+							</reportSet>
+						</reportSets>
 					</plugin>
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
@@ -322,9 +330,6 @@
 								<reports>
 									<report>javadoc-no-fork</report>
 								</reports>
-								<configuration>
-									<linksource>false</linksource>
-								</configuration>
 							</reportSet>
 						</reportSets>
 					</plugin>

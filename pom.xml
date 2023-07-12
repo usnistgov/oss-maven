@@ -703,6 +703,7 @@
 			</build>
 			<reporting>
 				<plugins>
+<!--
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-jxr-plugin</artifactId>
@@ -710,7 +711,7 @@
 							<linkJavadoc>true</linkJavadoc>
 						</configuration>
 					</plugin>
-
+-->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-project-info-reports-plugin</artifactId>
