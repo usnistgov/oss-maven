@@ -57,7 +57,7 @@ jobs:
     - name: Build and Test Code, and Test Website
       id: maven-build-develop
       run: |
-        mvn -B -e -Prelease -Preporting package site site:stage
+        mvn -B -e -Prelease -Preporting install site site:stage
     # -------------------------
     # Maven Deploy
     # -------------------------

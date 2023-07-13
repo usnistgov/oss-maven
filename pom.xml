@@ -37,7 +37,9 @@
 		<dependency.pmd.version>6.55.0</dependency.pmd.version>
 		<dependency.reflowSkin.version>2.3.3</dependency.reflowSkin.version>
 		<dependency.spotbugs-annotations.version>4.7.3</dependency.spotbugs-annotations.version>
+		<dependency.xmlbeans.version>5.1.1</dependency.xmlbeans.version>
 
+		<plugin.maven-antrun.version>3.1.0</plugin.maven-antrun.version>
 		<plugin.maven-assembly.version>3.4.2</plugin.maven-assembly.version>
 		<plugin.maven-checkstyle.version>3.2.1</plugin.maven-checkstyle.version>
 		<plugin.maven-clean.version>3.2.0</plugin.maven-clean.version>
@@ -45,6 +47,7 @@
 		<plugin.maven-dependency.version>3.6.0</plugin.maven-dependency.version>
 		<plugin.maven-deploy.version>3.0.0</plugin.maven-deploy.version>
 		<plugin.maven-enforcer.version>3.1.0</plugin.maven-enforcer.version>
+		<plugin.maven-exec.version>3.1.0</plugin.maven-exec.version>
 		<plugin.maven-gpg.version>3.0.1</plugin.maven-gpg.version>
 		<plugin.maven-install.version>3.1.0</plugin.maven-install.version>
 		<plugin.maven-jar.version>3.3.0</plugin.maven-jar.version>
@@ -65,7 +68,7 @@
 		<plugin.build-helper.version>3.3.0</plugin.build-helper.version>
 		<plugin.failsafe.version>3.1.0</plugin.failsafe.version>
 		<plugin.formatter.version>2.23.0</plugin.formatter.version>
-		<plugin.jacoco.version>0.8.8</plugin.jacoco.version>
+		<plugin.jacoco.version>0.8.10</plugin.jacoco.version>
 		<plugin.jdepend.version>2.0</plugin.jdepend.version>
 		<plugin.license.version>4.2.rc3</plugin.license.version>
 		<plugin.nexus-staging.version>1.6.13</plugin.nexus-staging.version>
@@ -123,6 +126,11 @@
 				<groupId>gov.nist.secauto</groupId>
 				<artifactId>oss-build-support</artifactId>
 				<version>25-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlbeans</groupId>
+				<artifactId>xmlbeans</artifactId>
+				<version>${dependency.xmlbeans.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>junit</groupId>
@@ -197,58 +205,146 @@
 					<artifactId>maven-clean-plugin</artifactId>
 					<version>${plugin.maven-clean.version}</version>
 				</plugin>
+				<!-- ========================= -->
+				<!-- validate                  -->
+				<!-- ========================= -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-enforcer-plugin</artifactId>
+					<version>${plugin.maven-enforcer.version}</version>
+                        <executions>
+							<execution>
+								<id>enforce-java</id>
+								<phase>validate</phase>
+								<goals>
+									<goal>enforce</goal>
+								</goals>
+								<configuration>
+									<fail>true</fail>
+									<rules>
+										<requireJavaVersion>
+											<version>[11,)</version>
+											<message>[ERROR] The currently minimally
+												supported version of Java is 11 or
+												higher</message>
+										</requireJavaVersion>
+										<requireMavenVersion>
+											<version>[3.9.0,)</version>
+											<message>[ERROR] The currently supported
+												version of Maven is 3.9.0 or higher</message>
+										</requireMavenVersion>
+										<requirePluginVersions>
+											<banLatest>true</banLatest>
+											<banRelease>true</banRelease>
+											<banSnapshots>true</banSnapshots>
+											<phases>clean,install,deploy,site</phases>
+											<message>[ERROR] Best Practice is to always
+												define plugin versions!</message>
+											<unCheckedPluginList>gov.nist.secauto:oss-build-support</unCheckedPluginList>
+										</requirePluginVersions>
+									</rules>
+								</configuration>
+							</execution>
+                            <execution>
+                                <id>enforce-dependencies</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>enforce</goal>
+                                </goals>
+                                <configuration>
+                                    <fail>false</fail>
+                                    <rules>
+                                        <requireUpperBoundDeps>
+                                            <excludes>
+                                                <exclude>
+                                                    org.jetbrains:annotations</exclude>
+                                            </excludes>
+                                        </requireUpperBoundDeps>
+                                        <dependencyConvergence>
+                                            <uniqueVersions>true</uniqueVersions>
+                                        </dependencyConvergence>
+                                    </rules>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>enforce-classes</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>enforce</goal>
+                                </goals>
+                                <configuration>
+                                    <fail>true</fail>
+                                    <rules>
+                                        <!-- <reactorModuleConvergence>
+                                        <ignoreModuleDependencies>true</ignoreModuleDependencies>
+                                        </reactorModuleConvergence> -->
+                                        <banDuplicateClasses>
+                                            <scopes>
+                                                <scope>compile</scope>
+                                                <scope>provided</scope>
+                                            </scopes>
+                                            <findAllDuplicates>true</findAllDuplicates>
+                                            <ignoreWhenIdentical>true</ignoreWhenIdentical>
+                                        </banDuplicateClasses>
+                                    </rules>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.codehaus.mojo</groupId>
+                                <artifactId>extra-enforcer-rules</artifactId>
+                                <version>1.6.1</version>
+                            </dependency>
+                        </dependencies>
+				</plugin>
+				<!-- ========================= -->
+				<!-- initialize                -->
+				<!-- ========================= -->
+				<!-- ========================= -->
+				<!-- generate-sources          -->
+				<!-- ========================= -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>${plugin.build-helper.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-plugin-plugin</artifactId>
+					<version>${plugin.maven-plugin.version}</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.maven.plugin-tools</groupId>
+							<artifactId>maven-plugin-annotations</artifactId>
+							<version>${dependency.maven-plugin-tools.version}</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+				<!-- ========================= -->
+				<!-- process-sources           -->
+				<!-- ========================= -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-dependency-plugin</artifactId>
 					<version>${plugin.maven-dependency.version}</version>
 				</plugin>
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-install-plugin</artifactId>
-					<version>${plugin.maven-install.version}</version>
+					<groupId>net.revelc.code.formatter</groupId>
+					<artifactId>formatter-maven-plugin</artifactId>
+					<version>${plugin.formatter.version}</version>
 				</plugin>
+				<!-- ========================= -->
+				<!-- process-resources         -->
+				<!-- ========================= -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-deploy-plugin</artifactId>
-					<version>${plugin.maven-deploy.version}</version>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${plugin.maven-resources.version}</version>
 				</plugin>
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>versions-maven-plugin</artifactId>
-					<version>${plugin.versions.version}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-source-plugin</artifactId>
-					<version>${plugin.maven-source.version}</version>
-<!--
-					<configuration>
-						<archive>
-							<manifest>
-								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-							</manifest>
-							<manifestEntries>
-								<Implementation-Build-Date>
-									${maven.build.timestamp}</Implementation-Build-Date>
-								<X-Compile-Source-JDK>${maven.compiler.source}</X-Compile-Source-JDK>
-								<X-Compile-Target-JDK>${maven.compiler.target}</X-Compile-Target-JDK>
-							</manifestEntries>
-						</archive>
-					</configuration>
--->
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>${plugin.maven-javadoc.version}</version>
-					<configuration>
-						<bootclasspath>${sun.boot.class.path}</bootclasspath>
-						<additionalJOption>-J-Xmx1024m</additionalJOption>
-						<maxmemory>${javadoc.maxmemory}</maxmemory>
-						<linksource>false</linksource>
-					</configuration>
-				</plugin>
+				<!-- ========================= -->
+				<!-- compile                   -->
+				<!-- ========================= -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
@@ -259,23 +355,157 @@
 						<debuglevel>${javac.debuglevel}</debuglevel>
 					</configuration>
 				</plugin>
+				<!-- ========================= -->
+				<!-- process-test-resources    -->
+				<!-- ========================= -->
+				<!-- ========================= -->
+				<!-- test-compile              -->
+				<!-- ========================= -->
+				<!-- ========================= -->
+				<!-- test                      -->
+				<!-- ========================= -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-release-plugin</artifactId>
-					<version>${plugin.maven-release.version}</version>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${plugin.maven-surefire.version}</version>
+				</plugin>
+				<!-- ========================= -->
+				<!-- prepare-package           -->
+				<!-- ========================= -->
+				<!-- ========================= -->
+				<!-- package                   -->
+				<!-- ========================= -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>${plugin.maven-source.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>${plugin.maven-javadoc.version}</version>
 					<configuration>
-						<mavenExecutorId>forked-path</mavenExecutorId>
-						<useReleaseProfile>false</useReleaseProfile>
-						<arguments>-Prelease</arguments>
-						<tagNameFormat>v@{project.version}</tagNameFormat>
-						<autoVersionSubmodules>true</autoVersionSubmodules>
+						<bootclasspath>${sun.boot.class.path}</bootclasspath>
+						<additionalJOption>-J-Xmx1024m</additionalJOption>
+						<maxmemory>${javadoc.maxmemory}</maxmemory>
+						<!-- don't link sources by default -->
+						<linksource>false</linksource>
 					</configuration>
 				</plugin>
+				<!-- ========================= -->
+				<!-- pre-integration-test      -->
+				<!-- ========================= -->
+				<!-- ========================= -->
+				<!-- integration-test          -->
+				<!-- ========================= -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-failsafe-plugin</artifactId>
+					<version>${plugin.failsafe.version}</version>
+				</plugin>
+				<!-- ========================= -->
+				<!-- post-integration-test     -->
+				<!-- ========================= -->
+				<!-- ========================= -->
+				<!-- prepare-package           -->
+				<!-- ========================= -->
+				<!-- ========================= -->
+				<!-- package                   -->
+				<!-- ========================= -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>${plugin.maven-jar.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>${plugin.maven-assembly.version}</version>
+				</plugin>
+				<!-- ========================= -->
+				<!-- verify                    -->
+				<!-- ========================= -->
+				<plugin>
+					<groupId>com.mycila</groupId>
+					<artifactId>license-maven-plugin</artifactId>
+					<version>${plugin.license.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-checkstyle-plugin</artifactId>
+					<version>${plugin.maven-checkstyle.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-pmd-plugin</artifactId>
+					<version>${plugin.maven-pmd.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>com.github.spotbugs</groupId>
+					<artifactId>spotbugs-maven-plugin</artifactId>
+					<version>${plugin.spotbugs.version}</version>
+					<configuration>
+						<!-- fail on error for all builds -->
+						<failOnError>true</failOnError>
+						<effort>Max</effort>
+						<threshold>Normal</threshold>
+						<xmlOutput>true</xmlOutput>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>${plugin.maven-gpg.version}</version>
+					<executions>
+						<execution>
+							<id>sign-artifacts</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>sign</goal>
+							</goals>
+							<configuration>
+								<!-- don't sign by default -->
+								<skip>true</skip>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<!-- ========================= -->
+				<!-- install                   -->
+				<!-- ========================= -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>${plugin.maven-install.version}</version>
+				</plugin>
+				<!-- ========================= -->
+				<!-- deploy                    -->
+				<!-- ========================= -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>${plugin.maven-deploy.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.sonatype.plugins</groupId>
+					<artifactId>nexus-staging-maven-plugin</artifactId>
+					<version>${plugin.nexus-staging.version}</version>
+					<extensions>true</extensions>
+					<configuration>
+						<serverId>ossrh</serverId>
+						<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+						<autoReleaseAfterClose>true</autoReleaseAfterClose>
+					</configuration>
+				</plugin>
+				<!-- ######################### -->
+				<!-- site lifecycle            -->
+				<!-- ######################### -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-site-plugin</artifactId>
 					<version>${plugin.maven-site.version}</version>
 					<configuration>
+						<!-- deploy is handled by the scm plugin -->
 						<skipDeploy>true</skipDeploy>
 						<!-- <scmBranch>nist-pages</scmBranch> -->
 						<relativizeDecorationLinks>true</relativizeDecorationLinks>
@@ -311,70 +541,82 @@
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-scm-publish-plugin</artifactId>
-					<version>${plugin.maven-scm-publish.version}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-project-info-reports-plugin</artifactId>
 					<version>${plugin.maven-project-info-reports.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-resources-plugin</artifactId>
-					<version>${plugin.maven-resources.version}</version>
+					<artifactId>maven-jxr-plugin</artifactId>
+					<version>${plugin.maven-jxr.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-gpg-plugin</artifactId>
-					<version>${plugin.maven-gpg.version}</version>
-					<executions>
-						<execution>
-							<id>sign-artifacts</id>
-							<phase>verify</phase>
-							<goals>
-								<goal>sign</goal>
-							</goals>
-							<configuration>
-								<skip>true</skip>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-enforcer-plugin</artifactId>
-					<version>${plugin.maven-enforcer.version}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-surefire-plugin</artifactId>
+					<artifactId>maven-surefire-report-plugin</artifactId>
 					<version>${plugin.maven-surefire.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>${plugin.jacoco.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>taglist-maven-plugin</artifactId>
+					<version>${plugin.taglist.version}</version>
+				</plugin>
+				<!-- ========================= -->
+				<!-- pre-site                  -->
+				<!-- ========================= -->
+				<!-- ========================= -->
+				<!-- site                      -->
+				<!-- ========================= -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>jdepend-maven-plugin</artifactId>
+					<version>${plugin.jdepend.version}</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.maven.reporting</groupId>
+							<artifactId>maven-reporting-api</artifactId>
+							<version>4.0.0-M3</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+				<!-- ========================= -->
+				<!-- post-site                 -->
+				<!-- ========================= -->
+				<!-- ========================= -->
+				<!-- site-deploy               -->
+				<!-- ========================= -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-scm-publish-plugin</artifactId>
+					<version>${plugin.maven-scm-publish.version}</version>
+				</plugin>
+				<!-- ========================= -->
+				<!-- other                     -->
+				<!-- ========================= -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>versions-maven-plugin</artifactId>
+					<version>${plugin.versions.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>${plugin.maven-release.version}</version>
 					<configuration>
-						<argLine>
-							--illegal-access=permit
-						</argLine>
+						<mavenExecutorId>forked-path</mavenExecutorId>
+						<useReleaseProfile>false</useReleaseProfile>
+						<arguments>-Prelease</arguments>
+						<tagNameFormat>v@{project.version}</tagNameFormat>
+						<autoVersionSubmodules>true</autoVersionSubmodules>
 					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-failsafe-plugin</artifactId>
-					<version>${plugin.failsafe.version}</version>
-					<configuration>
-						<argLine>
-							--illegal-access=permit
-						</argLine>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>${plugin.maven-jar.version}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-assembly-plugin</artifactId>
-					<version>${plugin.maven-assembly.version}</version>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>${plugin.maven-war.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -390,271 +632,24 @@
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>build-helper-maven-plugin</artifactId>
-					<version>${plugin.build-helper.version}</version>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>${plugin.maven-exec.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jxr-plugin</artifactId>
-					<version>${plugin.maven-jxr.version}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>jdepend-maven-plugin</artifactId>
-					<version>${plugin.jdepend.version}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-surefire-report-plugin</artifactId>
-					<version>${plugin.maven-surefire.version}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.jacoco</groupId>
-					<artifactId>jacoco-maven-plugin</artifactId>
-					<version>${plugin.jacoco.version}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-pmd-plugin</artifactId>
-					<version>${plugin.maven-pmd.version}</version>
-					<configuration>
-						<targetJdk>${maven.compiler.target}</targetJdk>
-						<failurePriority>2</failurePriority>
-						<analysisCache>true</analysisCache>
-						<printFailingErrors>true</printFailingErrors>
-						<failOnViolation>false</failOnViolation>
-						<rulesets>
-							<!-- Custom rule set -->
-							<ruleset>pmd/category/java/custom.xml</ruleset>
-						</rulesets>
-					</configuration>
-					<dependencies>
-						<dependency>
-							<groupId>net.sourceforge.pmd</groupId>
-							<artifactId>pmd-core</artifactId>
-							<version>${dependency.pmd.version}</version>
-						</dependency>
-						<dependency>
-							<groupId>net.sourceforge.pmd</groupId>
-							<artifactId>pmd-java</artifactId>
-							<version>${dependency.pmd.version}</version>
-						</dependency>
-						<dependency>
-							<groupId>net.sourceforge.pmd</groupId>
-							<artifactId>pmd-javascript</artifactId>
-							<version>${dependency.pmd.version}</version>
-						</dependency>
-						<dependency>
-							<groupId>net.sourceforge.pmd</groupId>
-							<artifactId>pmd-jsp</artifactId>
-							<version>${dependency.pmd.version}</version>
-						</dependency>
-						<!-- fix for inconsistent asm classes -->
-						<dependency>
-							<groupId>org.ow2.asm</groupId>
-							<artifactId>asm</artifactId>
-							<version>${dependency.asm.version}</version>
-						</dependency>
-						<dependency>
-							<groupId>gov.nist.secauto</groupId>
-							<artifactId>oss-build-support</artifactId>
-							<version>25-SNAPSHOT</version>
-						</dependency>
-					</dependencies>
-				</plugin>
-				<plugin>
-					<groupId>com.github.spotbugs</groupId>
-					<artifactId>spotbugs-maven-plugin</artifactId>
-					<version>${plugin.spotbugs.version}</version>
-					<configuration>
-						<failOnError>false</failOnError>
-						<effort>Max</effort>
-						<threshold>Normal</threshold>
-						<xmlOutput>true</xmlOutput>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>taglist-maven-plugin</artifactId>
-					<version>${plugin.taglist.version}</version>
-				</plugin>
-				<plugin>
-					<groupId>com.mycila</groupId>
-					<artifactId>license-maven-plugin</artifactId>
-					<version>${plugin.license.version}</version>
-					<configuration>
-						<licenseSets>
-							<licenseSet>
-								<header>license/nist/license.txt</header>
-								<includes>
-									<include>
-										${project.build.sourceDirectory}/**/*.java</include>
-									<include>
-										${project.build.testSourceDirectory}/**/*.java</include>
-								</includes>
-							</licenseSet>
-						</licenseSets>
-						<failIfMissing>true</failIfMissing>
-					</configuration>
-					<dependencies>
-						<dependency>
-							<groupId>gov.nist.secauto</groupId>
-							<artifactId>oss-build-support</artifactId>
-							<version>25-SNAPSHOT</version>
-						</dependency>
-					</dependencies>
-					<executions>
-						<execution>
-							<id>check-license</id>
-							<phase>verify</phase>
-							<goals>
-								<goal>check</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-				<plugin>
-					<groupId>net.revelc.code.formatter</groupId>
-					<artifactId>formatter-maven-plugin</artifactId>
-					<version>${plugin.formatter.version}</version>
-					<configuration>
-						<!--
-						<overrideConfigCompilerVersion>true</overrideConfigCompilerVersion> -->
-						<compilerSource>${maven.compiler.source}</compilerSource>
-						<compilerCompliance>${maven.compiler.source}</compilerCompliance>
-						<compilerTargetPlatform>${maven.compiler.target}</compilerTargetPlatform>
-						<lineEnding>KEEP</lineEnding>
-						<encoding>${project.build.sourceEncoding}</encoding>
-						<configFile>checkstyle/eclipse/eclipse-formatter.xml</configFile>
-					</configuration>
-					<executions>
-						<execution>
-							<id>default</id>
-							<phase>process-sources</phase>
-							<goals>
-								<goal>format</goal>
-							</goals>
-						</execution>
-					</executions>
-					<dependencies>
-						<dependency>
-							<groupId>gov.nist.secauto</groupId>
-							<artifactId>oss-build-support</artifactId>
-							<version>25-SNAPSHOT</version>
-						</dependency>
-					</dependencies>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-checkstyle-plugin</artifactId>
-					<version>${plugin.maven-checkstyle.version}</version>
-					<configuration>
-						<configLocation>checkstyle/checkstyle.xml</configLocation>
-						<consoleOutput>true</consoleOutput>
-						<failsOnError>true</failsOnError>
-						<failOnViolation>false</failOnViolation>
-						<linkXRef>true</linkXRef>
-						<excludes>module\-info\.java$</excludes>
-					</configuration>
-					<executions>
-						<execution>
-							<id>checkstyle-sources</id>
-							<phase>process-sources</phase>
-							<goals>
-								<goal>check</goal>
-							</goals>
-							<!--
-							<configuration>
-								<sourceDirectories>
-									<sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
-								</sourceDirectories>
-								<testSourceDirectories>
-									<sourceDirectory>${project.build.testSourceDirectory}</sourceDirectory>
-								</testSourceDirectories>
-							</configuration>
--->
-						</execution>
-					</executions>
-					<dependencies>
-						<dependency>
-							<groupId>gov.nist.secauto</groupId>
-							<artifactId>oss-build-support</artifactId>
-							<version>25-SNAPSHOT</version>
-						</dependency>
-						<dependency>
-							<groupId>com.puppycrawl.tools</groupId>
-							<artifactId>checkstyle</artifactId>
-							<version>${dependency.checkstyle.version}</version>
-						</dependency>
-					</dependencies>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-war-plugin</artifactId>
-					<version>${plugin.maven-war.version}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.sonatype.plugins</groupId>
-					<artifactId>nexus-staging-maven-plugin</artifactId>
-					<version>${plugin.nexus-staging.version}</version>
-					<extensions>true</extensions>
-					<configuration>
-						<serverId>ossrh</serverId>
-						<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-						<autoReleaseAfterClose>true</autoReleaseAfterClose>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-plugin-plugin</artifactId>
-					<version>${plugin.maven-plugin.version}</version>
-					<dependencies>
-						<dependency>
-							<groupId>org.apache.maven.plugin-tools</groupId>
-							<artifactId>maven-plugin-annotations</artifactId>
-							<version>${dependency.maven-plugin-tools.version}</version>
-						</dependency>
-					</dependencies>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>${plugin.maven-antrun.version}</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
 			<plugin>
+				<groupId>net.revelc.code.formatter</groupId>
+				<artifactId>formatter-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>enforce-java</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>enforce</goal>
-						</goals>
-						<configuration>
-							<fail>true</fail>
-							<rules>
-								<requireJavaVersion>
-									<version>[11,)</version>
-									<message>[ERROR] The currently minimally
-										supported version of Java is 11 or
-										higher</message>
-								</requireJavaVersion>
-								<requireMavenVersion>
-									<version>[3.9.0,)</version>
-									<message>[ERROR] The currently supported
-										version of Maven is 3.9.0 or higher</message>
-								</requireMavenVersion>
-								<requirePluginVersions>
-									<banLatest>true</banLatest>
-									<banRelease>true</banRelease>
-									<banSnapshots>true</banSnapshots>
-									<phases>clean,install,deploy,site</phases>
-									<message>[ERROR] Best Practice is to always
-										define plugin versions!</message>
-								</requirePluginVersions>
-							</rules>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -691,27 +686,16 @@
 									<goal>publish-scm</goal>
 								</goals>
 								<configuration>
-									<pubScmUrl>
-										${project.distributionManagement.scm.connection}</pubScmUrl>
+									<pubScmUrl>${project.distributionManagement.scm.connection}</pubScmUrl>
 									<scmBranch>nist-pages</scmBranch>
 								</configuration>
 							</execution>
 						</executions>
 					</plugin>
-
 				</plugins>
 			</build>
 			<reporting>
 				<plugins>
-<!--
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-jxr-plugin</artifactId>
-						<configuration>
-							<linkJavadoc>true</linkJavadoc>
-						</configuration>
-					</plugin>
--->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-project-info-reports-plugin</artifactId>
@@ -724,6 +708,13 @@
 									<report>team</report>
 									<report>mailing-lists</report>
 									<report>scm</report>
+									<report>licenses</report>
+									<report>modules</report>
+									<report>issue-management</report>
+									<report>dependencies</report>
+									<report>dependency-convergence</report>
+									<report>dependency-management</report>
+									<report>plugins</report>
 								</reports>
 							</reportSet>
 							<!-- <reportSet> -->
@@ -737,6 +728,17 @@
 							<!-- <report>licenses</report> -->
 							<!-- </reports> -->
 							<!-- </reportSet> -->
+						</reportSets>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-report-plugin</artifactId>
+						<reportSets>
+							<reportSet>
+								<reports>
+									<report>report-only</report>
+								</reports>
+							</reportSet>
 						</reportSets>
 					</plugin>
 				</plugins>
@@ -757,6 +759,7 @@
 									<goal>sign</goal>
 								</goals>
 								<configuration>
+									<!-- enable, since the default is skip -->
 									<skip>false</skip>
 									<gpgArguments>
 										<arg>--pinentry-mode</arg>

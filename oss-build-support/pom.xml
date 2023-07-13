@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>gov.nist.secauto</groupId>
@@ -10,6 +12,38 @@
 
 	<packaging>jar</packaging>
 
-    <name>Common Build Files</name>
-    <description>A shared resource providing common build dependencies used in maven builds for code style, and other code quality checks.</description>
+	<name>Common Build Files</name>
+	<description>A shared resource providing common build dependencies used in
+		maven builds for code style, and other code quality checks.</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.xmlbeans</groupId>
+			<artifactId>xmlbeans</artifactId>
+		</dependency>
+		<dependency>
+			<!-- fix for missing runtime dependency -->
+			<groupId>com.github.javaparser</groupId>
+		    <artifactId>javaparser-symbol-solver-core</artifactId>
+			<version>3.24.4</version>
+		</dependency>
+		<dependency>
+			<!-- fix for missing runtime dependency -->
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.20.0</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>src/main/maven</directory>
+				<targetPath>META-INF/maven</targetPath>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
 </project>
