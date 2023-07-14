@@ -70,7 +70,7 @@
 		<plugin.formatter.version>2.23.0</plugin.formatter.version>
 		<plugin.jacoco.version>0.8.10</plugin.jacoco.version>
 		<plugin.jdepend.version>2.0</plugin.jdepend.version>
-		<plugin.license.version>4.2.rc3</plugin.license.version>
+		<plugin.license.version>4.2</plugin.license.version>
 		<plugin.nexus-staging.version>1.6.13</plugin.nexus-staging.version>
 		<plugin.spotbugs.version>4.7.3.4</plugin.spotbugs.version>
 		<plugin.taglist.version>3.0.0</plugin.taglist.version>
@@ -667,14 +667,15 @@
 						<artifactId>maven-site-plugin</artifactId>
 						<executions>
 							<execution>
-								<id>stage-for-scm-publish</id>
-								<phase>post-site</phase>
+								<id>stage-for-publish</id>
+								<phase>site</phase>
 								<goals>
 									<goal>stage</goal>
 								</goals>
 							</execution>
 						</executions>
 					</plugin>
+<!--
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-scm-publish-plugin</artifactId>
@@ -692,6 +693,7 @@
 							</execution>
 						</executions>
 					</plugin>
+-->
 				</plugins>
 			</build>
 			<reporting>

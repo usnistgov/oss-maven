@@ -55,3 +55,17 @@ To build the website:
 ```bash
 mvn -Preporting site site:stage
 ```
+
+## Build Management
+
+To look at the build plan:
+
+```bash
+mvn -Prelease -Preporting  fr.jcgay.maven.plugins:buildplan-maven-plugin:list-phase -Dbuildplan.tasks="deploy,site"
+```
+
+To look at the effective POM:
+
+```bash
+mvn -Prelease -Preporting help:effective-pom
+```

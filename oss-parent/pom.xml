@@ -45,36 +45,6 @@
 				<plugin>
 					<groupId>com.mycila</groupId>
 					<artifactId>license-maven-plugin</artifactId>
-					<configuration>
-						<licenseSets>
-							<licenseSet>
-								<header>license/nist/license.txt</header>
-								<includes>
-									<include>
-										${project.build.sourceDirectory}/**/*.java</include>
-									<include>
-										${project.build.testSourceDirectory}/**/*.java</include>
-								</includes>
-							</licenseSet>
-						</licenseSets>
-						<failIfMissing>true</failIfMissing>
-					</configuration>
-					<dependencies>
-						<dependency>
-							<groupId>gov.nist.secauto</groupId>
-							<artifactId>oss-build-support</artifactId>
-							<version>25-SNAPSHOT</version>
-						</dependency>
-					</dependencies>
-					<executions>
-						<execution>
-							<id>check-license</id>
-							<phase>verify</phase>
-							<goals>
-								<goal>check</goal>
-							</goals>
-						</execution>
-					</executions>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -221,6 +191,52 @@
 			<plugin>
 				<groupId>com.mycila</groupId>
 				<artifactId>license-maven-plugin</artifactId>
+				<configuration>
+					<licenseSets>
+						<licenseSet>
+							<header>license/nist/license.txt</header>
+							<includes>
+								<include>src/main/java/**/*.java</include>
+								<include>src/test/java/**/*.java</include>
+								<include>target/generated-sources/**/*.java</include>
+								<include>target/generated-test-sources/**/*.java</include>
+							</includes>
+						</licenseSet>
+					</licenseSets>
+				</configuration>
+				<executions>
+					<execution>
+						<id>format-license</id>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>format</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>format-license-tests</id>
+						<phase>process-test-sources</phase>
+						<goals>
+							<goal>format</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-cli</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<configuration>
+							<failIfMissing>true</failIfMissing>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>gov.nist.secauto</groupId>
+						<artifactId>oss-build-support</artifactId>
+						<version>25-SNAPSHOT</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -478,6 +494,18 @@
 								<configuration>
 									<linksource>true</linksource>
 								</configuration>
+							</reportSet>
+						</reportSets>
+					</plugin>
+					<plugin>
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+						<reportSets>
+							<reportSet>
+								<id>default-report</id>
+								<reports>
+									<report>report</report>
+								</reports>
 							</reportSet>
 						</reportSets>
 					</plugin>
