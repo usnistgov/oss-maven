@@ -233,6 +233,18 @@
 											<message>[ERROR] The currently supported
 												version of Maven is 3.9.0 or higher</message>
 										</requireMavenVersion>
+									</rules>
+								</configuration>
+							</execution>
+                            <execution>
+                                <id>enforce-plugins</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>enforce</goal>
+                                </goals>
+                                <configuration>
+                                    <fail>false</fail>
+                                    <rules>
 										<requirePluginVersions>
 											<banLatest>true</banLatest>
 											<banRelease>true</banRelease>
