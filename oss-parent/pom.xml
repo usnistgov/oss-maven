@@ -45,6 +45,51 @@
 				<plugin>
 					<groupId>com.mycila</groupId>
 					<artifactId>license-maven-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>format-license</id>
+							<phase>process-sources</phase>
+							<goals>
+								<goal>format</goal>
+							</goals>
+							<configuration>
+								<licenseSets>
+									<licenseSet>
+										<header>license/nist/license.txt</header>
+										<includes>
+											<include>src/main/java/**/*.java</include>
+											<include>target/generated-sources/**/*.java</include>
+										</includes>
+									</licenseSet>
+								</licenseSets>
+							</configuration>
+						</execution>
+						<execution>
+							<id>format-license-tests</id>
+							<phase>process-test-sources</phase>
+							<goals>
+								<goal>format</goal>
+							</goals>
+							<configuration>
+								<licenseSets>
+									<licenseSet>
+										<header>license/nist/license.txt</header>
+										<includes>
+											<include>src/test/java/**/*.java</include>
+											<include>target/generated-test-sources/**/*.java</include>
+										</includes>
+									</licenseSet>
+								</licenseSets>
+							</configuration>
+						</execution>
+					</executions>
+					<dependencies>
+						<dependency>
+							<groupId>gov.nist.secauto</groupId>
+							<artifactId>oss-build-support</artifactId>
+							<version>25-SNAPSHOT</version>
+						</dependency>
+					</dependencies>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -158,6 +203,18 @@
 						</dependency>
 					</dependencies>
 				</plugin>
+				<plugin>
+					<groupId>com.github.spotbugs</groupId>
+					<artifactId>spotbugs-maven-plugin</artifactId>
+					<executions>
+						<execution>
+							<phase>verify</phase>
+							<goals>
+								<goal>check</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -176,52 +233,6 @@
 			<plugin>
 				<groupId>com.mycila</groupId>
 				<artifactId>license-maven-plugin</artifactId>
-				<configuration>
-					<licenseSets>
-						<licenseSet>
-							<header>license/nist/license.txt</header>
-							<includes>
-								<include>src/main/java/**/*.java</include>
-								<include>src/test/java/**/*.java</include>
-								<include>target/generated-sources/**/*.java</include>
-								<include>target/generated-test-sources/**/*.java</include>
-							</includes>
-						</licenseSet>
-					</licenseSets>
-				</configuration>
-				<executions>
-					<execution>
-						<id>format-license</id>
-						<phase>process-sources</phase>
-						<goals>
-							<goal>format</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>format-license-tests</id>
-						<phase>process-test-sources</phase>
-						<goals>
-							<goal>format</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>default-cli</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>check</goal>
-						</goals>
-						<configuration>
-							<failIfMissing>true</failIfMissing>
-						</configuration>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>gov.nist.secauto</groupId>
-						<artifactId>oss-build-support</artifactId>
-						<version>25-SNAPSHOT</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -238,14 +249,6 @@
 			<plugin>
 				<groupId>com.github.spotbugs</groupId>
 				<artifactId>spotbugs-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>verify</phase>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
@@ -263,34 +266,42 @@
 								<failOnViolation>true</failOnViolation>
 							</configuration>
 						</plugin>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-source-plugin</artifactId>
+							<executions>
+								<execution>
+									<!-- build source JAR for release -->
+									<id>attach-sources</id>
+									<goals>
+										<goal>jar-no-fork</goal>
+									</goals>
+								</execution>
+							</executions>
+						</plugin>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-javadoc-plugin</artifactId>
+							<executions>
+								<execution>
+									<!-- build javadoc JAR for release -->
+									<id>attach-javadocs</id>
+									<goals>
+										<goal>jar</goal>
+									</goals>
+								</execution>
+							</executions>
+						</plugin>
 					</plugins>
 				</pluginManagement>
 				<plugins>
 					<plugin>
-						<!-- build source JAR for release -->
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-source-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>attach-sources</id>
-								<goals>
-									<goal>jar-no-fork</goal>
-								</goals>
-							</execution>
-						</executions>
 					</plugin>
 					<plugin>
-						<!-- build javadoc JAR for release -->
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-javadoc-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>attach-javadocs</id>
-								<goals>
-									<goal>jar</goal>
-								</goals>
-							</execution>
-						</executions>
 					</plugin>
 				</plugins>
 			</build>
@@ -298,45 +309,53 @@
 		<profile>
 			<id>reporting</id>
 			<build>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.jacoco</groupId>
+							<artifactId>jacoco-maven-plugin</artifactId>
+							<executions>
+								<execution>
+									<id>default-prepare-agent</id>
+									<goals>
+										<goal>prepare-agent</goal>
+									</goals>
+								</execution>
+								<execution>
+									<id>default-report</id>
+									<goals>
+										<goal>report</goal>
+									</goals>
+								</execution>
+								<execution>
+									<id>default-check</id>
+									<goals>
+										<goal>check</goal>
+									</goals>
+									<configuration>
+										<haltOnFailure>false</haltOnFailure>
+										<rules>
+											<rule>
+												<element>BUNDLE</element>
+												<limits>
+													<limit>
+														<counter>COMPLEXITY</counter>
+														<value>COVEREDRATIO</value>
+														<minimum>0.60</minimum>
+													</limit>
+												</limits>
+											</rule>
+										</rules>
+									</configuration>
+								</execution>
+							</executions>
+						</plugin>
+					</plugins>
+				</pluginManagement>
 				<plugins>
 					<plugin>
 						<groupId>org.jacoco</groupId>
 						<artifactId>jacoco-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>default-prepare-agent</id>
-								<goals>
-									<goal>prepare-agent</goal>
-								</goals>
-							</execution>
-							<execution>
-								<id>default-report</id>
-								<goals>
-									<goal>report</goal>
-								</goals>
-							</execution>
-							<execution>
-								<id>default-check</id>
-								<goals>
-									<goal>check</goal>
-								</goals>
-								<configuration>
-									<haltOnFailure>false</haltOnFailure>
-									<rules>
-										<rule>
-											<element>BUNDLE</element>
-											<limits>
-												<limit>
-													<counter>COMPLEXITY</counter>
-													<value>COVEREDRATIO</value>
-													<minimum>0.60</minimum>
-												</limit>
-											</limits>
-										</rule>
-									</rules>
-								</configuration>
-							</execution>
-						</executions>
 					</plugin>
 				</plugins>
 			</build>
