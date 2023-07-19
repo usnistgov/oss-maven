@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<licensePluginReport goal="FORMAT" timestamp="1689521680362">
-    <module artifactId="oss-parent" groupId="gov.nist.secauto" version="25"/>
+<licensePluginReport goal="FORMAT" timestamp="1689771074380">
+    <module artifactId="oss-parent" groupId="gov.nist.secauto" version="26"/>
     <files/>
 </licensePluginReport>
