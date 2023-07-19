@@ -1,3 +1,34 @@
+# Maven build support for NIST Security Automation Java projects
+
+This project provides support for building Sercurity Automation Java projects using [Apache Maven](https://maven.apache.org/).
+
+This project contains the following sub-modules:
+
+* [oss-parent](oss-parent/): Provides a parent POM for use as the build parent for other projects.
+* [build-support](oss-build-support/): Provides a set of common build support files that are made available on the
+classpath for all builds.
+
+Please refer to each sub-module for usage instructions.
+
+# Usage
+
+To use this project as a Maven build parent for your project, add the following to your project's
+POM:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>${project.groupId}</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>${project.version}</version>
+  </parent>
+
+  <!-- additional dependencies and build configuration -->
+</project>
+```
 
 # Build Features
 
@@ -20,15 +51,15 @@ the parent](features.html) of another project. Some features are automatic, whil
     site can be built using the Maven command:
   
     ```console
-    mvn -Prelease site site:deploy
+    mvn -Prelease -Preporting site site:deploy
     ```
 
 *   [Jacoco](http://www.eclemma.org/jacoco/trunk/doc/maven.html) is used to perform code coverage analysis based on JUnit tests. A site report will be
     produced containing coverage information.
 
 *   Use of the [Maven PMD Plugin](https://maven.apache.org/plugins/maven-pmd-plugin/) to perform
-    code analysis. Issues found at [levels 1 and 2]
-    (https://pmd.github.io/pmd-5.3.3/customizing/rule-guidelines.html) will fail the build.
+    code analysis. Issues found at [priority 1 and 2]
+    (https://docs.pmd-code.org/latest/pmd_userdocs_configuring_rules.html) will fail the build.
 
 *   The [Tag List Maven plugin](http://www.mojohaus.org/taglist-maven-plugin/) is used to generate
     a report of all comments marked "TODO" or "FIXME".
@@ -37,10 +68,10 @@ the parent](features.html) of another project. Some features are automatic, whil
     used to check code for code style issues. The style checked is configured to use the [checkstyle rules](https://github.com/usnistgov/oss-maven/blob/main/build-support/src/main/resources/license/nist/license.txt)
     provided by the [oss-build-support](../oss-build-support/) project.
 
-*   Building of Javadoc documentation will occur if the profile "release" is chosen using:
+*   Building of Javadoc documentation will occur if the profile `reporting` is chosen using:
 
     ```console
-    mvn -Prelease install
+    mvn -Prelease -Preporting install
     ```
 
 *   The [license Maven Plugin](http://code.mycila.com/license-maven-plugin/) is used to check that
@@ -68,4 +99,3 @@ the parent](features.html) of another project. Some features are automatic, whil
 *   The [Maven enforcer Plugin](http://maven.apache.org/enforcer/maven-enforcer-plugin/) is used to
     check that Java 1.8 or later is used, that the Maven version is 3.0 or higher, and that plugins
     are properly versioned.
-    
