@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>gov.nist.secauto</groupId>
 	<artifactId>oss-maven</artifactId>
@@ -138,12 +140,6 @@
 			</dependency>
 			<dependency>
 				<groupId>org.junit.jupiter</groupId>
-				<artifactId>junit-jupiter-api</artifactId>
-				<version>${dependency.junit5.version}</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.junit.jupiter</groupId>
 				<artifactId>junit-jupiter-engine</artifactId>
 				<version>${dependency.junit5.version}</version>
 				<scope>test</scope>
@@ -158,12 +154,6 @@
 				<groupId>org.junit.vintage</groupId>
 				<artifactId>junit-vintage-engine</artifactId>
 				<version>${dependency.junit5.version}</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.junit.platform</groupId>
-				<artifactId>junit-platform-launcher</artifactId>
-				<version>${dependency.junit5-platform-launcher.version}</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
@@ -210,114 +200,110 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-enforcer-plugin</artifactId>
 					<version>${plugin.maven-enforcer.version}</version>
-                        <executions>
-							<execution>
-								<id>enforce-java</id>
-								<phase>validate</phase>
-								<goals>
-									<goal>enforce</goal>
-								</goals>
-								<configuration>
-									<fail>true</fail>
-									<rules>
-										<requireJavaVersion>
-											<version>[11,)</version>
-											<message>[ERROR] The currently minimally
-												supported version of Java is 11 or
-												higher</message>
-										</requireJavaVersion>
-										<requireMavenVersion>
-											<version>[3.9.0,)</version>
-											<message>[ERROR] The currently supported
-												version of Maven is 3.9.0 or higher</message>
-										</requireMavenVersion>
-									</rules>
-								</configuration>
-							</execution>
-                            <execution>
-                                <id>enforce-plugins</id>
-                                <phase>validate</phase>
-                                <goals>
-                                    <goal>enforce</goal>
-                                </goals>
-                                <configuration>
-                                    <fail>false</fail>
-                                    <rules>
-										<requirePluginVersions>
-											<banLatest>true</banLatest>
-											<banRelease>true</banRelease>
-											<banSnapshots>true</banSnapshots>
-											<phases>clean,install,deploy,site</phases>
-											<message>[ERROR] Best Practice is to always
-												define plugin versions!</message>
-											<unCheckedPluginList>gov.nist.secauto:oss-build-support</unCheckedPluginList>
-										</requirePluginVersions>
-									</rules>
-								</configuration>
-							</execution>
-                            <execution>
-                                <id>enforce-dependencies</id>
-                                <phase>validate</phase>
-                                <goals>
-                                    <goal>enforce</goal>
-                                </goals>
-                                <configuration>
-                                    <fail>false</fail>
-                                    <rules>
-                                        <dependencyConvergence>
-                                            <uniqueVersions>true</uniqueVersions>
-                                        </dependencyConvergence>
-                                    </rules>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>enforce-dependency-upper-bounds</id>
-                                <phase>validate</phase>
-                                <goals>
-                                    <goal>enforce</goal>
-                                </goals>
-                                <configuration>
-                                    <fail>true</fail>
-                                    <rules>
-                                        <requireUpperBoundDeps>
-                                            <excludes>
-                                                <exclude>org.jetbrains:annotations</exclude>
-                                            </excludes>
-                                        </requireUpperBoundDeps>
-                                    </rules>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>enforce-classes</id>
-                                <phase>validate</phase>
-                                <goals>
-                                    <goal>enforce</goal>
-                                </goals>
-                                <configuration>
-                                    <fail>true</fail>
-                                    <rules>
-                                        <!-- <reactorModuleConvergence>
+					<executions>
+						<execution>
+							<id>enforce-java</id>
+							<phase>validate</phase>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<configuration>
+								<fail>true</fail>
+								<rules>
+									<requireJavaVersion>
+										<version>[11,)</version>
+										<message>[ERROR] The currently minimally supported version of Java is 11 or higher</message>
+									</requireJavaVersion>
+									<requireMavenVersion>
+										<version>[3.9.0,)</version>
+										<message>[ERROR] The currently supported version of Maven is 3.9.0 or higher</message>
+									</requireMavenVersion>
+								</rules>
+							</configuration>
+						</execution>
+						<execution>
+							<id>enforce-plugins</id>
+							<phase>validate</phase>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<configuration>
+								<fail>false</fail>
+								<rules>
+									<requirePluginVersions>
+										<banLatest>true</banLatest>
+										<banRelease>true</banRelease>
+										<banSnapshots>true</banSnapshots>
+										<phases>clean,install,deploy,site</phases>
+										<message>[ERROR] Best Practice is to always define plugin versions!</message>
+										<unCheckedPluginList>gov.nist.secauto:oss-build-support</unCheckedPluginList>
+									</requirePluginVersions>
+								</rules>
+							</configuration>
+						</execution>
+						<execution>
+							<id>enforce-dependencies</id>
+							<phase>validate</phase>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<configuration>
+								<fail>false</fail>
+								<rules>
+									<dependencyConvergence>
+										<uniqueVersions>true</uniqueVersions>
+									</dependencyConvergence>
+								</rules>
+							</configuration>
+						</execution>
+						<execution>
+							<id>enforce-dependency-upper-bounds</id>
+							<phase>validate</phase>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<configuration>
+								<fail>true</fail>
+								<rules>
+									<requireUpperBoundDeps>
+										<excludes>
+											<exclude>org.jetbrains:annotations</exclude>
+										</excludes>
+									</requireUpperBoundDeps>
+								</rules>
+							</configuration>
+						</execution>
+						<execution>
+							<id>enforce-classes</id>
+							<phase>validate</phase>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<configuration>
+								<fail>true</fail>
+								<rules>
+									<!-- <reactorModuleConvergence>
                                         <ignoreModuleDependencies>true</ignoreModuleDependencies>
                                         </reactorModuleConvergence> -->
-                                        <banDuplicateClasses>
-                                            <scopes>
-                                                <scope>compile</scope>
-                                                <scope>provided</scope>
-                                            </scopes>
-                                            <findAllDuplicates>true</findAllDuplicates>
-                                            <ignoreWhenIdentical>true</ignoreWhenIdentical>
-                                        </banDuplicateClasses>
-                                    </rules>
-                                </configuration>
-                            </execution>
-                        </executions>
-                        <dependencies>
-                            <dependency>
-                                <groupId>org.codehaus.mojo</groupId>
-                                <artifactId>extra-enforcer-rules</artifactId>
-                                <version>1.6.1</version>
-                            </dependency>
-                        </dependencies>
+									<banDuplicateClasses>
+										<scopes>
+											<scope>compile</scope>
+											<scope>provided</scope>
+										</scopes>
+										<findAllDuplicates>true</findAllDuplicates>
+										<ignoreWhenIdentical>true</ignoreWhenIdentical>
+									</banDuplicateClasses>
+								</rules>
+							</configuration>
+						</execution>
+					</executions>
+					<dependencies>
+						<dependency>
+							<groupId>org.codehaus.mojo</groupId>
+							<artifactId>extra-enforcer-rules</artifactId>
+							<version>1.6.1</version>
+						</dependency>
+					</dependencies>
 				</plugin>
 				<!-- ========================= -->
 				<!-- initialize                -->
@@ -699,7 +685,7 @@
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-site-plugin</artifactId>
 					</plugin>
-<!--
+					<!--
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-scm-publish-plugin</artifactId>
