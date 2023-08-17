@@ -31,7 +31,6 @@
 		<dependency.doxia.version>2.0.0-M4</dependency.doxia.version>
 		<dependency.junit.version>4.13.2</dependency.junit.version>
 		<dependency.junit5.version>5.9.2</dependency.junit5.version>
-		<dependency.junit5-platform-launcher.version>1.9.3</dependency.junit5-platform-launcher.version>
 		<dependency.maven-plugin-tools.version>3.8.1</dependency.maven-plugin-tools.version>
 		<dependency.maven-velocity.version>2.3</dependency.maven-velocity.version>
 		<dependency.pmd.version>6.55.0</dependency.pmd.version>
@@ -136,6 +135,18 @@
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>${dependency.junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter</artifactId>
+				<version>${dependency.junit5.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-api</artifactId>
+				<version>${dependency.junit5.version}</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
