@@ -42,7 +42,7 @@
 		<plugin.maven-clean.version>3.2.0</plugin.maven-clean.version>
 		<plugin.maven-compile.version>3.11.0</plugin.maven-compile.version>
 		<plugin.maven-dependency.version>3.6.0</plugin.maven-dependency.version>
-		<plugin.maven-deploy.version>3.0.0</plugin.maven-deploy.version>
+		<plugin.maven-deploy.version>3.1.1</plugin.maven-deploy.version>
 		<plugin.maven-enforcer.version>3.1.0</plugin.maven-enforcer.version>
 		<plugin.maven-exec.version>3.1.0</plugin.maven-exec.version>
 		<plugin.maven-gpg.version>3.0.1</plugin.maven-gpg.version>
