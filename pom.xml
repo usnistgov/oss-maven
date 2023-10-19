@@ -26,13 +26,13 @@
 		<dependency.asm.version>9.2</dependency.asm.version>
 		<dependency.checkstyle.version>10.5.0</dependency.checkstyle.version>
 		<!-- the doxia version relates directly to the maven-site-plugin version -->
-		<dependency.doxia.version>2.0.0-M4</dependency.doxia.version>
+		<dependency.doxia.version>2.0.0-M7</dependency.doxia.version>
 		<dependency.junit.version>4.13.2</dependency.junit.version>
 		<dependency.junit5.version>5.9.2</dependency.junit5.version>
 		<dependency.maven-plugin-tools.version>3.8.1</dependency.maven-plugin-tools.version>
 		<dependency.maven-velocity.version>2.3</dependency.maven-velocity.version>
 		<dependency.pmd.version>6.55.0</dependency.pmd.version>
-		<dependency.reflowSkin.version>2.3.3</dependency.reflowSkin.version>
+		<dependency.reflowSkin.version>2.3.4</dependency.reflowSkin.version>
 		<dependency.spotbugs-annotations.version>4.7.3</dependency.spotbugs-annotations.version>
 		<dependency.xmlbeans.version>5.1.1</dependency.xmlbeans.version>
 
@@ -51,13 +51,13 @@
 		<plugin.maven-javadoc.version>3.5.0</plugin.maven-javadoc.version>
 		<plugin.maven-jxr.version>3.3.0</plugin.maven-jxr.version>
 		<plugin.maven-plugin.version>${dependency.maven-plugin-tools.version}</plugin.maven-plugin.version>
-		<plugin.maven-project-info-reports.version>3.4.1</plugin.maven-project-info-reports.version>
+		<plugin.maven-project-info-reports.version>3.4.5</plugin.maven-project-info-reports.version>
 		<plugin.maven-pmd.version>3.21.0</plugin.maven-pmd.version>
 		<plugin.maven-release.version>3.0.0-M7</plugin.maven-release.version>
 		<plugin.maven-resources.version>3.3.0</plugin.maven-resources.version>
 		<plugin.maven-scm.version>2.0.0-M3</plugin.maven-scm.version>
 		<plugin.maven-scm-publish.version>3.1.0</plugin.maven-scm-publish.version>
-		<plugin.maven-site.version>4.0.0-M4</plugin.maven-site.version>
+		<plugin.maven-site.version>4.0.0-M9</plugin.maven-site.version>
 		<plugin.maven-source.version>3.2.1</plugin.maven-source.version>
 		<plugin.maven-surefire.version>3.1.2</plugin.maven-surefire.version>
 		<plugin.maven-surefire-report.version>3.1.2</plugin.maven-surefire-report.version>
@@ -530,7 +530,7 @@
 						<!-- deploy is handled by the scm plugin -->
 						<skipDeploy>true</skipDeploy>
 						<!-- <scmBranch>nist-pages</scmBranch> -->
-						<relativizeDecorationLinks>true</relativizeDecorationLinks>
+						<relativizeSiteLinks>true</relativizeSiteLinks>
 						<generateReports>true</generateReports>
 						<!--
 						<templateDirectory>${project.basedir}/target/site-files/site</templateDirectory> -->
